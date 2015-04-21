@@ -2,11 +2,14 @@
 Obj
 Debug
 Release
+ipch
 *.sdf
 *.suo
 *.opensdf
 *.pdb
 *.ilk
+*.aps
+*.user
 
 # Compiled Object files
 *.slo
