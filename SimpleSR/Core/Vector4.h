@@ -23,6 +23,9 @@ public:
 	Vector4(const Vector3& v);
 public:
 	static float Dot(const Vector4& lhs, const Vector4& rhs);
+public:
+	static Vector4 one;
+	static Vector4 zero;
 };
 
 Vector4 operator+(const Vector4& lhs, const Vector4& rhs);

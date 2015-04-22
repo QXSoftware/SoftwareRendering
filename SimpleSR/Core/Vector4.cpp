@@ -2,6 +2,9 @@
 #include "Vector2.h"
 #include "Vector3.h"
 
+Vector4 Vector4::one(1, 1, 1, 1);
+Vector4 Vector4::zero(0, 0, 0, 0);
+
 Vector4::Vector4(const Vector2& v)
 	:z(0), w(0)
 {

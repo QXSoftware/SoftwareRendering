@@ -22,6 +22,9 @@ public:
 public:
 	static Vector3 Cross(const Vector3& lhs, const Vector3& rhs);
 	static float Dot(const Vector3& lhs, const Vector3& rhs);
+public:
+	static Vector3 one;
+	static Vector3 zero;
 };
 
 Vector3 operator+(const Vector3& lhs, const Vector3& rhs);
