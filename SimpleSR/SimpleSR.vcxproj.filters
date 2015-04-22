@@ -42,9 +42,6 @@
     <ClInclude Include="Core\Camera.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Vertex.h">
-      <Filter>Core</Filter>
-    </ClInclude>
     <ClInclude Include="Core\Color.h">
       <Filter>Core</Filter>
     </ClInclude>
@@ -69,9 +66,6 @@
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="Core\Camera.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\Vertex.cpp">
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="Core\Color.cpp">
