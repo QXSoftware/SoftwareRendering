@@ -45,9 +45,6 @@
     <ClInclude Include="Core\Vertex.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Triangle.h">
-      <Filter>Core</Filter>
-    </ClInclude>
     <ClInclude Include="Core\Color.h">
       <Filter>Core</Filter>
     </ClInclude>
@@ -74,16 +71,13 @@
     <ClCompile Include="Core\Vertex.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Triangle.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
     <ClCompile Include="Core\Color.cpp">
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="Tool\DrawingTool.h">
       <Filter>Tool</Filter>
     </ClCompile>
-    <ClCompile Include="Core\DrawingTool.cpp">
+    <ClCompile Include="Tool\DrawingTool.cpp">
       <Filter>Tool</Filter>
     </ClCompile>
   </ItemGroup>
