@@ -11,7 +11,7 @@
 #include <tchar.h>
 #include "Resource.h"
 #include "Mathf.h"
-#include "Matrix.h"
+#include "Matrix4x4.h"
 #include "Vector2.h"
 #include "Vector3.h"
 #include "Vector4.h"
