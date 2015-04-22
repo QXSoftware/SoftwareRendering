@@ -15,6 +15,8 @@ public:
 		:x(x), y(y){}
 	Vector2(const Vector3& v);
 	Vector2(const Vector4& v);
+public:
+	static float Dot(const Vector2& lhs, const Vector2& rhs);
 };
 
 #endif // Vector2_h__

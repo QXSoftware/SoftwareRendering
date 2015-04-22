@@ -19,6 +19,9 @@ public:
 
 	Vector3(const Vector2& v);
 	Vector3(const Vector4& v);
+public:
+	static Vector3 Cross(const Vector3& lhs, const Vector3& rhs);
+	static float Dot(const Vector3& lhs, const Vector3& rhs);
 };
 
 #endif // Vector3_h__

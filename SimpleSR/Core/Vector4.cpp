@@ -16,3 +16,8 @@ Vector4::Vector4(const Vector3& v)
 	y = v.y;
 	z = v.z;
 }
+
+float Vector4::Dot(const Vector4& lhs, const Vector4& rhs)
+{
+	return lhs.x * rhs.x + lhs.y * rhs.y + lhs.z * rhs.z + lhs.w * rhs.w;
+}
