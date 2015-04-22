@@ -1,6 +1,8 @@
 #ifndef Mathf_h__
 #define Mathf_h__
 
+#include <math.h>
+
 class Mathf
 {
 public:
@@ -12,85 +14,85 @@ public:
 	// Returns the sine of angle f in radians.
 	static float Sin(float f)
 	{
-		return 0;
+		return sin(f);
 	}
 
 	// Returns the cosine of angle f in radians.
 	static float Cos(float f)
 	{
-		return 0;
+		return cos(f);
 	}
 
 	// Returns the tangent of angle f in radians.
 	static float Tan(float f)
 	{
-		return 0;
+		return tan(f);
 	}
 
 	// Clamps a value between a minimum float and maximum float value.
 	static float Clamp(float value, float min, float max)
 	{
-		return 0;
+		if (value < min)
+			return min;
+		if (value > max)
+			return max;
+		return value;
 	}
 
 	// Clamps a value between a minimum int and maximum int value.
 	static int Clamp(int value, int min, int max)
 	{
-		return 0;
+		if (value < min)
+			return min;
+		if (value > max)
+			return max;
+		return value;
 	}
 
 	// Clamps value between 0 and 1 and returns value.
 	static float Clamp01(float value)
 	{
-		return 0;
+		if (value < 0)
+			return 0;
+		if (value > 1.0f)
+			return 1.0f;
+		return value;
 	}
 
 	// Returns the smallest integer greater to or equal to f.
 	static float Ceil(float f)
 	{
-		return 0;
+		return ceil(f);
 	}
 
 	// Returns the smallest integer greater to or equal to f.
 	static int CeilToInt(float f)
 	{
-		return 0;
-	}
-
-	// Returns f raised to power p.
-	static float Pow(float f, float p)
-	{
-		return 0;
-	}
-
-	// Returns f rounded to the nearest integer.
-	static float Round(float f)
-	{
-		return 0;
-	}
-
-	// Returns f rounded to the nearest integer.
-	static int RoundToInt(float f)
-	{
-		return 0;
-	}
-
-	// Returns square root of f.
-	static float Sqrt(float f)
-	{
-		return 0;
-	}
-	
-	// Interpolates between a and b by t. t is clamped between 0 and 1.
-	static float Lerp(float from, float to, float t)
-	{
-		return 0;
+		return (int)ceil(f);
 	}
 
 	// Returns the largest integer smaller to or equal to f.
 	static float Floor(float f)
 	{
-		return 0;
+		return floor(f);
+	}
+
+	// Returns f raised to power p.
+	static float Pow(float f, float p)
+	{
+		return pow(f, p);
+	}
+
+	// Returns square root of f.
+	static float Sqrt(float f)
+	{
+		return sqrt(f);
+	}
+
+	// Interpolates between a and b by t. t is clamped between 0 and 1.
+	static float Lerp(float from, float to, float t)
+	{
+		return (to - from) * t;
 	}
 };
 
