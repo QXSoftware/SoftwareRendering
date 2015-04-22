@@ -75,19 +75,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Core\Camera.h" />
     <ClInclude Include="Core\Matrix4x4.h" />
+    <ClInclude Include="Core\Triangle.h" />
     <ClInclude Include="Core\Vector2.h" />
     <ClInclude Include="Core\Vector3.h" />
     <ClInclude Include="Core\Vector4.h" />
+    <ClInclude Include="Core\Vertex.h" />
     <ClInclude Include="Main\Main.h" />
     <ClInclude Include="Resources\Resource.h" />
     <ClInclude Include="Resources\targetver.h" />
     <ClInclude Include="Tool\Mathf.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Core\Camera.cpp" />
+    <ClCompile Include="Core\Triangle.cpp" />
     <ClCompile Include="Core\Vector2.cpp" />
     <ClCompile Include="Core\Vector3.cpp" />
     <ClCompile Include="Core\Vector4.cpp" />
+    <ClCompile Include="Core\Vertex.cpp" />
     <ClCompile Include="Main\Main.cpp" />
     <ClCompile Include="Matrix4x4.cpp" />
   </ItemGroup>
