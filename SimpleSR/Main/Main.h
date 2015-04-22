@@ -10,5 +10,10 @@
 #include <memory.h>
 #include <tchar.h>
 #include "Resource.h"
+#include "Mathf.h"
+#include "Matrix.h"
+#include "Vector2.h"
+#include "Vector3.h"
+#include "Vector4.h"
 
 #endif // Main_h__

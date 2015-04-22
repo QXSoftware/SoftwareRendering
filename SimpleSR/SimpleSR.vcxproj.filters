@@ -24,19 +24,34 @@
     <ClInclude Include="Resources\targetver.h">
       <Filter>Resources</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Vector.h">
-      <Filter>Core</Filter>
-    </ClInclude>
     <ClInclude Include="Core\Matrix.h">
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="Tool\Mathf.h">
       <Filter>Tool</Filter>
     </ClInclude>
+    <ClInclude Include="Core\Vector2.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Vector3.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Vector4.h">
+      <Filter>Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main\Main.cpp">
       <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Vector2.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Vector3.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Vector4.cpp">
+      <Filter>Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,7 +1,9 @@
 #ifndef Matrix_h__
 #define Matrix_h__
 
-#include "Vector.h"
+#include "Vector2.h"
+#include "Vector3.h"
+#include "Vector4.h"
 
 class Matrix4x4
 {
