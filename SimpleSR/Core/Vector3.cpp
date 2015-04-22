@@ -29,3 +29,48 @@ float Vector3::Dot(const Vector3& lhs, const Vector3& rhs)
 {
 	return lhs.x * rhs.x + lhs.y * rhs.y + lhs.z * rhs.z;
 }
+
+Vector3 operator+(const Vector3& lhs, const Vector3& rhs)
+{
+	Vector3 ret;
+	ret.x = lhs.x + rhs.x;
+	ret.y = lhs.y + rhs.y;
+	ret.z = lhs.z + rhs.z;
+	return ret;
+}
+
+Vector3 operator-(const Vector3& lhs, const Vector3& rhs)
+{
+	Vector3 ret;
+	ret.x = lhs.x - rhs.x;
+	ret.y = lhs.y - rhs.y;
+	ret.z = lhs.z - rhs.z;
+	return ret;
+}
+
+Vector3 operator*(const Vector3&v, float scale)
+{
+	Vector3 ret;
+	ret.x = v.x * scale;
+	ret.y = v.y * scale;
+	ret.z = v.z * scale;
+	return ret;
+}
+
+Vector3 operator*(float scale, const Vector3&v)
+{
+	Vector3 ret;
+	ret.x = v.x * scale;
+	ret.y = v.y * scale;
+	ret.z = v.z * scale;
+	return ret;
+}
+
+Vector3 operator/(const Vector3&v, float scale)
+{
+	Vector3 ret;
+	ret.x = v.x / scale;
+	ret.y = v.y / scale;
+	ret.z = v.z / scale;
+	return ret;
+}

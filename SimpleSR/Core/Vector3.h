@@ -24,4 +24,10 @@ public:
 	static float Dot(const Vector3& lhs, const Vector3& rhs);
 };
 
+Vector3 operator+(const Vector3& lhs, const Vector3& rhs);
+Vector3 operator-(const Vector3& lhs, const Vector3& rhs);
+Vector3 operator*(const Vector3&v, float scale);
+Vector3 operator*(float scale, const Vector3&v);
+Vector3 operator/(const Vector3&v, float scale);
+
 #endif // Vector3_h__
