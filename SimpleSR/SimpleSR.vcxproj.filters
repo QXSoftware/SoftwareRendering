@@ -48,6 +48,9 @@
     <ClInclude Include="Core\Triangle.h">
       <Filter>Core</Filter>
     </ClInclude>
+    <ClInclude Include="Core\Color.h">
+      <Filter>Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main\Main.cpp">
@@ -73,6 +76,15 @@
     </ClCompile>
     <ClCompile Include="Core\Triangle.cpp">
       <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Color.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Tool\DrawingTool.h">
+      <Filter>Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\DrawingTool.cpp">
+      <Filter>Tool</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
