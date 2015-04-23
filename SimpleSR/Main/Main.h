@@ -15,5 +15,7 @@
 #include "Vector2.h"
 #include "Vector3.h"
 #include "Vector4.h"
+#include "DrawingTool.h"
+#include "Screen.h"
 
 #endif // Main_h__

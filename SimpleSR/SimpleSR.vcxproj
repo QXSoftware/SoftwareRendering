@@ -51,7 +51,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>./Resources;./Tool;./Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./Main;./Resources;./Tool;./Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -79,6 +79,7 @@
     <ClInclude Include="Core\Color.h" />
     <ClInclude Include="Core\Matrix4x4.h" />
     <ClInclude Include="Core\Mesh.h" />
+    <ClInclude Include="Core\Screen.h" />
     <ClInclude Include="Core\Vector2.h" />
     <ClInclude Include="Core\Vector3.h" />
     <ClInclude Include="Core\Vector4.h" />
@@ -91,12 +92,12 @@
     <ClCompile Include="Core\Camera.cpp" />
     <ClCompile Include="Core\Color.cpp" />
     <ClCompile Include="Core\Mesh.cpp" />
+    <ClCompile Include="Core\Screen.cpp" />
     <ClCompile Include="Core\Vector2.cpp" />
     <ClCompile Include="Core\Vector3.cpp" />
     <ClCompile Include="Core\Vector4.cpp" />
     <ClCompile Include="Main\Main.cpp" />
     <ClCompile Include="Matrix4x4.cpp" />
-    <ClCompile Include="Tool\DrawingTool.cpp" />
     <ClCompile Include="Tool\DrawingTool.h" />
   </ItemGroup>
   <ItemGroup>
