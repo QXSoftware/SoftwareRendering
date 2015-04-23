@@ -21,6 +21,7 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 
     MSG msg;
     HACCEL hAccelTable;
+    SREngine engine;
 
     LoadString(hInstance, IDS_APP_TITLE, g_Title, MAX_LOADSTRING);
     LoadString(hInstance, IDC_SIMPLESR, g_WindowClass, MAX_LOADSTRING);
@@ -41,7 +42,11 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
             TranslateMessage(&msg);
             DispatchMessage(&msg);
         }
+
+        engine.Update();
     }
+
+    engine.ShutDown();
 
     return (int)msg.wParam;
 }
@@ -111,10 +116,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         case WM_PAINT:
         {
             Screen::current->UpdateScreenSize();
-            PAINTSTRUCT ps;
-            auto hdc = BeginPaint(hWnd, &ps);
-            // todo
-            EndPaint(hWnd, &ps);
             break;
         }
         case WM_DESTROY:

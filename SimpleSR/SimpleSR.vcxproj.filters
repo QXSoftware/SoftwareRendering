@@ -51,6 +51,9 @@
     <ClInclude Include="Core\Screen.h">
       <Filter>Core</Filter>
     </ClInclude>
+    <ClInclude Include="Core\SREngine.h">
+      <Filter>Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main\Main.cpp">
@@ -81,6 +84,9 @@
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="Core\Screen.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\SREngine.cpp">
       <Filter>Core</Filter>
     </ClCompile>
   </ItemGroup>

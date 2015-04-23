@@ -17,5 +17,6 @@
 #include "Vector4.h"
 #include "DrawingTool.h"
 #include "Screen.h"
+#include "SREngine.h"
 
 #endif // Main_h__
