@@ -6,6 +6,15 @@
 Vector3 Vector3::one(1, 1, 1);
 Vector3 Vector3::zero(0, 0, 0);
 
+Vector3::Vector3(const Vector2& v)
+    :x(v.x), y(v.y), z(0){}
+
+Vector3::Vector3(const Vector2& v, float z)
+    : x(v.x), y(v.y), z(z){}
+
+Vector3::Vector3(const Vector4& v)
+    : x(v.x), y(v.y), z(v.z){}
+
 Vector3 Vector3::Cross(const Vector3& lhs, const Vector3& rhs)
 {
     auto x = -lhs.y * rhs.z + lhs.z * rhs.y;

@@ -17,13 +17,9 @@ public:
         :x(x), y(y), z(z){}
     Vector3(float x, float y)
         :x(x), y(y), z(0){}
-
-    Vector3(const Vector2& v)
-        :x(v.x), y(v.y), z(0){}
-    Vector3(const Vector2& v, float z)
-        :x(v.x), y(v.y), z(z){}
-    Vector3(const Vector4& v)
-        :x(v.x), y(v.y), z(v.z){}
+    Vector3(const Vector2& v);
+    Vector3(const Vector2& v, float z);
+    Vector3(const Vector4& v);
 public:
     static Vector3 Cross(const Vector3& lhs, const Vector3& rhs);
     static float Dot(const Vector3& lhs, const Vector3& rhs);

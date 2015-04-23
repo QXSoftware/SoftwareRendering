@@ -20,12 +20,9 @@ public:
         :x(x), y(y), z(z), w(0){}
     Vector4(float x, float y)
         :x(x), y(y), z(0), w(0){}
-    Vector4(const Vector2& v)
-        :x(v.x), y(v.y), z(0), w(0){}
-    Vector4(const Vector3& v)
-        :x(v.x), y(v.y), z(v.z), w(0){}
-    Vector4(const Vector3& v, float w)
-        :x(v.x), y(v.y), z(v.z), w(w){}
+    Vector4(const Vector2& v);
+    Vector4(const Vector3& v);
+    Vector4(const Vector3& v, float w);
 public:
     Vector4 normalized();
     static float Dot(const Vector4& lhs, const Vector4& rhs);

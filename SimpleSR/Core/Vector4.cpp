@@ -6,6 +6,15 @@
 Vector4 Vector4::one(1, 1, 1, 1);
 Vector4 Vector4::zero(0, 0, 0, 0);
 
+Vector4::Vector4(const Vector2& v)
+    :x(v.x), y(v.y), z(0), w(0){}
+
+Vector4::Vector4(const Vector3& v)
+    : x(v.x), y(v.y), z(v.z), w(0){}
+
+Vector4::Vector4(const Vector3& v, float w)
+    : x(v.x), y(v.y), z(v.z), w(w){}
+
 float Vector4::Dot(const Vector4& lhs, const Vector4& rhs)
 {
     return lhs.x * rhs.x + lhs.y * rhs.y + lhs.z * rhs.z + lhs.w * rhs.w;
