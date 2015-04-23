@@ -10,13 +10,17 @@ public:
     float x;
     float y;
 
-    Vector2() = default;
+    Vector2()
+        :x(0), y(0){}
     Vector2(float x, float y)
         :x(x), y(y){}
-    Vector2(const Vector3& v);
-    Vector2(const Vector4& v);
+    Vector2(const Vector3& v)
+        :x(v.x), y(v.y){}
+    Vector2(const Vector4& v)
+        :x(v.x), y(v.y){}
 public:
     static float Dot(const Vector2& lhs, const Vector2& rhs);
+    Vector2 normalized();
 public:
     static Vector2 one;
     static Vector2 zero;

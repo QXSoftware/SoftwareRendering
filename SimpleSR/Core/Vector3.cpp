@@ -1,23 +1,10 @@
 #include "Vector3.h"
 #include "Vector2.h"
 #include "Vector4.h"
+#include "Mathf.h"
 
 Vector3 Vector3::one(1, 1, 1);
 Vector3 Vector3::zero(0, 0, 0);
-
-Vector3::Vector3(const Vector2& v)
-    :z(0)
-{
-    x = v.x;
-    y = v.y;
-}
-
-Vector3::Vector3(const Vector4& v)
-{
-    x = v.x;
-    y = v.y;
-    z = v.z;
-}
 
 Vector3 Vector3::Cross(const Vector3& lhs, const Vector3& rhs)
 {
@@ -31,6 +18,15 @@ Vector3 Vector3::Cross(const Vector3& lhs, const Vector3& rhs)
 float Vector3::Dot(const Vector3& lhs, const Vector3& rhs)
 {
     return lhs.x * rhs.x + lhs.y * rhs.y + lhs.z * rhs.z;
+}
+
+Vector3 Vector3::normalized()
+{
+    auto magnitude = Mathf::Sqrt(x*x + y*y + z*z);
+    if (magnitude == 0)
+        return Vector3(x, y, z);
+    auto tmp = 1.0f / magnitude;
+    return Vector3(x * tmp, y * tmp, z * tmp);
 }
 
 Vector3 operator+(const Vector3& lhs, const Vector3& rhs)

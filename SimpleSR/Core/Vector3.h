@@ -11,17 +11,23 @@ public:
     float y;
     float z;
 
-    Vector3() = default;
+    Vector3()
+        :x(0), y(0), z(0){}
     Vector3(float x, float y, float z)
         :x(x), y(y), z(z){}
     Vector3(float x, float y)
-        :x(x), y(y){}
+        :x(x), y(y), z(0){}
 
-    Vector3(const Vector2& v);
-    Vector3(const Vector4& v);
+    Vector3(const Vector2& v)
+        :x(v.x), y(v.y), z(0){}
+    Vector3(const Vector2& v, float z)
+        :x(v.x), y(v.y), z(z){}
+    Vector3(const Vector4& v)
+        :x(v.x), y(v.y), z(v.z){}
 public:
     static Vector3 Cross(const Vector3& lhs, const Vector3& rhs);
     static float Dot(const Vector3& lhs, const Vector3& rhs);
+    Vector3 normalized();
 public:
     static Vector3 one;
     static Vector3 zero;

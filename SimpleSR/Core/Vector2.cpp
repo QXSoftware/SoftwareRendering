@@ -1,25 +1,23 @@
 #include "Vector2.h"
 #include "Vector3.h"
 #include "Vector4.h"
+#include "Mathf.h"
 
 Vector2 Vector2::one(1, 1);
 Vector2 Vector2::zero(0, 0);
 
-Vector2::Vector2(const Vector3& v)
-{
-    x = v.x;
-    y = v.y;
-}
-
-Vector2::Vector2(const Vector4& v)
-{
-    x = v.x;
-    y = v.y;
-}
-
 float Vector2::Dot(const Vector2& lhs, const Vector2& rhs)
 {
     return lhs.x * rhs.x + lhs.y * rhs.y;
+}
+
+Vector2 Vector2::normalized()
+{
+    auto magnitude = Mathf::Sqrt(x*x + y*y);
+    if (magnitude == 0)
+        return Vector2(x, y);
+    auto tmp = 1.0f / magnitude;
+    return Vector2(x * tmp, y * tmp);
 }
 
 Vector2 operator+(const Vector2& lhs, const Vector2& rhs)
