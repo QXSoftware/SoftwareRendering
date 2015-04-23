@@ -81,6 +81,7 @@
     <ClInclude Include="Core\Mesh.h" />
     <ClInclude Include="Core\Screen.h" />
     <ClInclude Include="Core\SREngine.h" />
+    <ClInclude Include="Core\Transform.h" />
     <ClInclude Include="Core\Vector2.h" />
     <ClInclude Include="Core\Vector3.h" />
     <ClInclude Include="Core\Vector4.h" />
@@ -95,6 +96,7 @@
     <ClCompile Include="Core\Mesh.cpp" />
     <ClCompile Include="Core\Screen.cpp" />
     <ClCompile Include="Core\SREngine.cpp" />
+    <ClCompile Include="Core\Transform.cpp" />
     <ClCompile Include="Core\Vector2.cpp" />
     <ClCompile Include="Core\Vector3.cpp" />
     <ClCompile Include="Core\Vector4.cpp" />
