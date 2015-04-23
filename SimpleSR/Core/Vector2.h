@@ -7,19 +7,19 @@ class Vector4;
 class Vector2
 {
 public:
-	float x;
-	float y;
+    float x;
+    float y;
 
-	Vector2() = default;
-	Vector2(float x, float y)
-		:x(x), y(y){}
-	Vector2(const Vector3& v);
-	Vector2(const Vector4& v);
+    Vector2() = default;
+    Vector2(float x, float y)
+        :x(x), y(y){}
+    Vector2(const Vector3& v);
+    Vector2(const Vector4& v);
 public:
-	static float Dot(const Vector2& lhs, const Vector2& rhs);
+    static float Dot(const Vector2& lhs, const Vector2& rhs);
 public:
-	static Vector2 one;
-	static Vector2 zero;
+    static Vector2 one;
+    static Vector2 zero;
 };
 
 Vector2 operator+(const Vector2& lhs, const Vector2& rhs);
