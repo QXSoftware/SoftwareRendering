@@ -10,6 +10,7 @@ class Camera
     Matrix4x4 m_ProjectionMatrix;
     Matrix4x4 m_CameraToWorldMatrix;
     Matrix4x4 m_WorldToCameraMatrix;
+    Matrix4x4 m_ViewPortMatrix;
     float m_FarClipPlane;
     float m_NearClipPlane;
     float m_Aspect;
@@ -27,7 +28,7 @@ public:
     void SetAspect(float f);
     void SetFieldOfView(float f);
     void UpdateMatrix();
-    void Render(const Mesh* mesh);
+    void Render(Mesh* mesh);
 };
 
 #endif // Camera_h__

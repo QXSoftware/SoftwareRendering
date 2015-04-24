@@ -51,7 +51,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>./Main;./Resources;./Tool;./Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./Main;./Resources;./Tool;./Core;./Model;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -87,6 +87,7 @@
     <ClInclude Include="Core\Vector3.h" />
     <ClInclude Include="Core\Vector4.h" />
     <ClInclude Include="Main\Main.h" />
+    <ClInclude Include="Model\ModelFactory.h" />
     <ClInclude Include="Resources\Resource.h" />
     <ClInclude Include="Resources\targetver.h" />
     <ClInclude Include="Tool\DrawingTool.h" />
@@ -105,6 +106,7 @@
     <ClCompile Include="Core\Vector4.cpp" />
     <ClCompile Include="Main\Main.cpp" />
     <ClCompile Include="Matrix4x4.cpp" />
+    <ClCompile Include="Model\ModelFactory.cpp" />
     <ClCompile Include="Tool\DrawingTool.cpp" />
     <ClCompile Include="Tool\Mathf.cpp" />
   </ItemGroup>

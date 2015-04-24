@@ -5,9 +5,10 @@
 
 class SREngine
 {
-    const Camera* m_Camera;
+    Camera* m_Camera;
+    Mesh* m_Target;
 public:
-    SREngine();
+    SREngine() = default;
     ~SREngine();
     SREngine(const SREngine&) = delete;
     SREngine& operator=(const SREngine&) = delete;

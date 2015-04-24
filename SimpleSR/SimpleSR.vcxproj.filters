@@ -13,6 +13,9 @@
     <Filter Include="Tool">
       <UniqueIdentifier>{29debc4c-2e07-43be-bfff-f255ce050966}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Model">
+      <UniqueIdentifier>{80e0382e-71b5-4fb7-826b-4074f010094f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main\Main.h">
@@ -63,6 +66,9 @@
     <ClInclude Include="Tool\DrawingTool.h">
       <Filter>Tool</Filter>
     </ClInclude>
+    <ClInclude Include="Model\ModelFactory.h">
+      <Filter>Model</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main\Main.cpp">
@@ -106,6 +112,9 @@
     </ClCompile>
     <ClCompile Include="Tool\DrawingTool.cpp">
       <Filter>Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\ModelFactory.cpp">
+      <Filter>Model</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

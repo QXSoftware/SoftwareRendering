@@ -160,7 +160,12 @@ Matrix4x4 Matrix4x4::Transposed()
 
 Matrix4x4 Matrix4x4::Perspective(float fov, float aspect, float zNear, float zFar)
 {
-    return identity;
+    auto cotHalfFOV = Mathf::Cot(fov * 0.5f * Mathf::Deg2Rad);
+    return Matrix4x4(
+        cotHalfFOV / aspect, 0, 0, 0,
+        0, cotHalfFOV, 0, 0,
+        0, 0, (zNear + zFar) / (zNear - zFar), (2 * zNear * zFar) / (zNear - zFar),
+        0, 0, -1, 0);
 }
 
 Matrix4x4 Matrix4x4::Translate(const Vector3& v)

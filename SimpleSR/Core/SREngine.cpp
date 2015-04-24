@@ -1,24 +1,26 @@
 #include "SREngine.h"
-
-SREngine::SREngine()
-    :m_Camera(new Camera())
-{}
+#include "ModelFactory.h"
 
 SREngine::~SREngine()
 {
-    delete m_Camera;
-    m_Camera = nullptr;
+    ShutDown();
 }
 
 void SREngine::Init()
 {
-    m_Camera->Transform->SetPosition(0, 0, -10);
+    m_Camera = new Camera();
+    m_Camera->Transform->SetPosition(0, 0, 0);
+    m_Camera->UpdateMatrix();
+    m_Target = ModelFactory::GetQuad();
 }
 
 void SREngine::Update()
 {
+    m_Camera->Render(m_Target);
 }
 
 void SREngine::ShutDown()
 {
+    delete m_Camera;
+    m_Camera = nullptr;
 }

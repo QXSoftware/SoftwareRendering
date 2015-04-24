@@ -11,6 +11,12 @@ public:
     static const float Epsilon;
     static const float PI;
 public:
+    // Returns the absolute value of x.
+    static inline int Abs(int x)
+    {
+        return abs(x);
+    }
+
     // Returns the sine of angle f in radians.
     static inline float Sin(float f)
     {
@@ -27,6 +33,11 @@ public:
     static inline float Tan(float f)
     {
         return tan(f);
+    }
+
+    static inline float Cot(float f)
+    {
+        return 1.0f / tan(f);
     }
 
     // Clamps a value between a minimum float and maximum float value.
@@ -75,6 +86,18 @@ public:
     static inline float Floor(float f)
     {
         return floor(f);
+    }
+
+    // Returns f rounded to the nearest integer.
+    static inline float Round(float f)
+    {
+        return round(f);
+    }
+
+    // Returns f rounded to the nearest integer.
+    static inline int RoundToInt(float f)
+    {
+        return (int)round(f);
     }
 
     // Returns f raised to power p.

@@ -1,5 +1,6 @@
 #include "Camera.h"
 #include "Mesh.h"
+#include "Screen.h"
 
 Camera::Camera()
     :m_FarClipPlane(100),
@@ -40,8 +41,20 @@ void Camera::SetFieldOfView(float f)
 
 void Camera::UpdateMatrix()
 {
+    m_CameraToWorldMatrix = Transform->LocalToWorldMatrix();
+    m_WorldToCameraMatrix = Transform->WorldToLocalMatrix();
+    auto aspect = Screen::current->GetAspect();
+    m_ProjectionMatrix = Matrix4x4::Perspective(m_FieldOfView, aspect, m_NearClipPlane, m_FarClipPlane);
+    auto scrWidth = Screen::current->GetScreenWidth();
+    auto scrHeight = Screen::current->GetScreenHeight();
+    m_ViewPortMatrix = Matrix4x4(
+        scrWidth / 2, 0, 0, scrWidth / 2,
+        0, scrHeight / 2, 0, scrHeight / 2,
+        0, 0, 0.5, 0.5,
+        0, 0, 0, 1);
 }
 
-void Camera::Render(const Mesh* mesh)
+void Camera::Render(Mesh* mesh)
 {
+    mesh->Render(m_ProjectionMatrix, m_WorldToCameraMatrix, m_ViewPortMatrix);
 }
