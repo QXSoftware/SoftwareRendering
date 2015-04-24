@@ -14,11 +14,34 @@ Camera::~Camera()
     Transform = nullptr;
 }
 
-void Camera::Render(const Mesh* mesh)
+void Camera::SetFarClipPlane(float f)
 {
+    m_FarClipPlane = f;
+    UpdateMatrix();
+}
+
+void Camera::SetNearClipPlane(float f)
+{
+    m_NearClipPlane = f;
+    UpdateMatrix();
+}
+
+void Camera::SetAspect(float f)
+{
+    m_Aspect = f;
+    UpdateMatrix();
+}
+
+void Camera::SetFieldOfView(float f)
+{
+    m_FieldOfView = f;
+    UpdateMatrix();
 }
 
 void Camera::UpdateMatrix()
 {
-    m_MVP = Matrix4x4::identity;
+}
+
+void Camera::Render(const Mesh* mesh)
+{
 }
