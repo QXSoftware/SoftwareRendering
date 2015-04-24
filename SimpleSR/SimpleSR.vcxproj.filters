@@ -60,6 +60,9 @@
     <ClInclude Include="Core\Matrix3x3.h">
       <Filter>Core</Filter>
     </ClInclude>
+    <ClInclude Include="Tool\DrawingTool.h">
+      <Filter>Tool</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main\Main.cpp">
@@ -82,9 +85,6 @@
     </ClCompile>
     <ClCompile Include="Core\Color.cpp">
       <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Tool\DrawingTool.h">
-      <Filter>Tool</Filter>
     </ClCompile>
     <ClCompile Include="Core\Mesh.cpp">
       <Filter>Core</Filter>

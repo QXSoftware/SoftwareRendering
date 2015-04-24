@@ -89,6 +89,7 @@
     <ClInclude Include="Main\Main.h" />
     <ClInclude Include="Resources\Resource.h" />
     <ClInclude Include="Resources\targetver.h" />
+    <ClInclude Include="Tool\DrawingTool.h" />
     <ClInclude Include="Tool\Mathf.h" />
   </ItemGroup>
   <ItemGroup>
@@ -105,7 +106,6 @@
     <ClCompile Include="Main\Main.cpp" />
     <ClCompile Include="Matrix4x4.cpp" />
     <ClCompile Include="Tool\DrawingTool.cpp" />
-    <ClCompile Include="Tool\DrawingTool.h" />
     <ClCompile Include="Tool\Mathf.cpp" />
   </ItemGroup>
   <ItemGroup>
