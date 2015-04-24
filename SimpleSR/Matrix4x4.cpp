@@ -1,5 +1,6 @@
 #include "Matrix4x4.h"
 #include "Matrix3x3.h"
+#include "Mathf.h"
 
 Matrix4x4 Matrix4x4::identity(
     1, 0, 0, 0,
@@ -164,20 +165,45 @@ Matrix4x4 Matrix4x4::Perspective(float fov, float aspect, float zNear, float zFa
 
 Matrix4x4 Matrix4x4::Translate(const Vector3& v)
 {
-    return identity;
+    return Matrix4x4(
+        1, 0, 0, v.x,
+        0, 1, 0, v.y,
+        0, 0, 1, v.z,
+        0, 0, 0, 1);
+}
+
+Matrix4x4 Matrix4x4::Scale(const Vector3& v)
+{
+    return Matrix4x4(
+        v.x, 0, 0, 1,
+        0, v.y, 0, 1,
+        0, 0, v.z, 1,
+        0, 0, 0, 1);
 }
 
 Matrix4x4 Matrix4x4::RotateByX(float angle)
 {
-    return identity;
+    return Matrix4x4(
+        1, 0, 0, 0,
+        0, Mathf::Cos(angle), -Mathf::Sin(angle), 0,
+        0, Mathf::Sin(angle), Mathf::Cos(angle), 0,
+        0, 0, 0, 1);
 }
 
 Matrix4x4 Matrix4x4::RotateByY(float angle)
 {
-    return identity;
+    return Matrix4x4(
+        Mathf::Cos(angle), 0, Mathf::Sin(angle), 0,
+        0, 1, 0, 0,
+        -Mathf::Sin(angle), 0, Mathf::Cos(angle), 0,
+        0, 0, 0, 1);
 }
 
 Matrix4x4 Matrix4x4::RotateByZ(float angle)
 {
-    return identity;
+    return Matrix4x4(
+        Mathf::Cos(angle), -Mathf::Sin(angle), 0, 0,
+        Mathf::Sin(angle), Mathf::Cos(angle), 0, 0,
+        0, 0, 1, 0,
+        0, 0, 0, 1);
 }

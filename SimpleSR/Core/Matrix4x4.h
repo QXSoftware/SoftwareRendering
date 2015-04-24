@@ -41,6 +41,7 @@ public:
     static Matrix4x4 identity;
     static Matrix4x4 Perspective(float fov, float aspect, float zNear, float zFar);
     static Matrix4x4 Translate(const Vector3& v);
+    static Matrix4x4 Scale(const Vector3& v);
     static Matrix4x4 RotateByX(float angle);
     static Matrix4x4 RotateByY(float angle);
     static Matrix4x4 RotateByZ(float angle);
