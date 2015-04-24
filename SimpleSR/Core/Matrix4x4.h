@@ -34,7 +34,16 @@ public:
     {}
     ~Matrix4x4() = default;
 public:
+    float Determinant();//行列式
+    Matrix4x4 Inversed();//逆矩阵
+    Matrix4x4 Transposed();//转置矩阵
+
     static Matrix4x4 identity;
+    static Matrix4x4 Perspective(float fov, float aspect, float zNear, float zFar);
+    static Matrix4x4 Translate(const Vector3& v);
+    static Matrix4x4 RotateByX(float angle);
+    static Matrix4x4 RotateByY(float angle);
+    static Matrix4x4 RotateByZ(float angle);
 };
 
 Vector4 operator*(const Vector4& v, const Matrix4x4& m);
