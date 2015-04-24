@@ -104,7 +104,9 @@
     <ClCompile Include="Core\Vector4.cpp" />
     <ClCompile Include="Main\Main.cpp" />
     <ClCompile Include="Matrix4x4.cpp" />
+    <ClCompile Include="Tool\DrawingTool.cpp" />
     <ClCompile Include="Tool\DrawingTool.h" />
+    <ClCompile Include="Tool\Mathf.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resources\SimpleSR.rc" />

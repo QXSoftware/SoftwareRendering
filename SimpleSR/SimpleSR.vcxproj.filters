@@ -101,6 +101,12 @@
     <ClCompile Include="Core\Matrix3x3.cpp">
       <Filter>Core</Filter>
     </ClCompile>
+    <ClCompile Include="Tool\Mathf.cpp">
+      <Filter>Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="Tool\DrawingTool.cpp">
+      <Filter>Tool</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resources\SimpleSR.rc">
