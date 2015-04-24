@@ -13,8 +13,8 @@ Mesh* ModelFactory::GetQuad()
     mesh->m_Triangles.push_back(1);
     mesh->m_Triangles.push_back(2);
 
-    mesh->Transform->SetPosition(0, 0, 20);
-    mesh->Transform->SetRotation(0, 0, 20);
+    mesh->Transform->SetPosition(0, 0, 0);
+    mesh->Transform->SetRotation(0, 0, 0);
 
     return mesh;
 }
