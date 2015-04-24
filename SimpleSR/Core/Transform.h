@@ -9,6 +9,9 @@ class Transform
 {
     Vector3 m_Position;
     Vector3 m_Rotation;
+    Matrix4x4 m_LocalToWorldMatrix;
+    Matrix4x4 m_WorldToLocalMatrix;
+    void RebuildMatrix();
 public:
     Transform()
         :m_Position(Vector3::zero), m_Rotation(Vector3::zero){}
@@ -20,8 +23,23 @@ public:
     void SetPosition(float x, float y, float z);
     void SetRotation(const Vector3& rot);
     void SetRotation(float x, float y, float z);
-    Vector3 GetPosition() const;
-    Vector3 GetRotation() const;
+
+    inline Vector3 GetPosition() const
+    {
+        return m_Position;
+    }
+    inline Vector3 GetRotation() const
+    {
+        return m_Rotation;
+    }
+    inline Matrix4x4 LocalToWorldMatrix() const
+    {
+        return m_LocalToWorldMatrix;
+    }
+    inline Matrix4x4 WorldToLocalMatrix() const
+    {
+        return m_WorldToLocalMatrix;
+    }
 };
 
 #endif // Transform_h__
