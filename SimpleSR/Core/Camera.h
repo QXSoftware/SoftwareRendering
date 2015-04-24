@@ -13,7 +13,6 @@ class Camera
     Matrix4x4 m_ViewPortMatrix;
     float m_FarClipPlane;
     float m_NearClipPlane;
-    float m_Aspect;
     float m_FieldOfView;
 public:
     Camera();
@@ -25,7 +24,6 @@ public:
 public:
     void SetFarClipPlane(float f);
     void SetNearClipPlane(float f);
-    void SetAspect(float f);
     void SetFieldOfView(float f);
     void UpdateMatrix();
     void Render(Mesh* mesh);

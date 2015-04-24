@@ -27,12 +27,6 @@ void Camera::SetNearClipPlane(float f)
     UpdateMatrix();
 }
 
-void Camera::SetAspect(float f)
-{
-    m_Aspect = f;
-    UpdateMatrix();
-}
-
 void Camera::SetFieldOfView(float f)
 {
     m_FieldOfView = f;
@@ -56,5 +50,6 @@ void Camera::UpdateMatrix()
 
 void Camera::Render(Mesh* mesh)
 {
+    UpdateMatrix();
     mesh->Render(m_ProjectionMatrix, m_WorldToCameraMatrix, m_ViewPortMatrix);
 }
