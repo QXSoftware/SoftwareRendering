@@ -13,6 +13,14 @@ public:
     SREngine(const SREngine&) = delete;
     SREngine& operator=(const SREngine&) = delete;
 public:
+    inline Camera* GetCamera()
+    {
+        return m_Camera;
+    }
+    inline Mesh* GetTarget()
+    {
+        return m_Target;
+    }
     void Init();
     void Update();
     void ShutDown();

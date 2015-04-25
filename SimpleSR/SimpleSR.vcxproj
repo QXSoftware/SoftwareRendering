@@ -90,6 +90,7 @@
     <ClInclude Include="Core\Vertex.h" />
     <ClInclude Include="Main\Main.h" />
     <ClInclude Include="Model\ModelFactory.h" />
+    <ClInclude Include="Model\ModelParser.h" />
     <ClInclude Include="Resources\Resource.h" />
     <ClInclude Include="Resources\targetver.h" />
     <ClInclude Include="Tool\DrawingTool.h" />
@@ -111,6 +112,7 @@
     <ClCompile Include="Main\Main.cpp" />
     <ClCompile Include="Matrix4x4.cpp" />
     <ClCompile Include="Model\ModelFactory.cpp" />
+    <ClCompile Include="Model\ModelParser.cpp" />
     <ClCompile Include="Tool\DrawingTool.cpp" />
     <ClCompile Include="Tool\Mathf.cpp" />
   </ItemGroup>

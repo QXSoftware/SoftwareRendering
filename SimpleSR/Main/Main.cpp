@@ -10,6 +10,7 @@ HWND g_MainWindowHwnd;                    // 主窗口句柄
 ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
+SREngine engine;
 
 int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
     _In_opt_ HINSTANCE hPrevInstance,
@@ -21,7 +22,6 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 
     MSG msg;
     HACCEL hAccelTable;
-    SREngine engine;
     engine.Init();
 
     LoadString(hInstance, IDS_APP_TITLE, g_Title, MAX_LOADSTRING);
@@ -99,24 +99,89 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
     {
-        case WM_COMMAND:
+        case WM_KEYDOWN:
         {
-            auto wmId = LOWORD(wParam);
-            auto wmEvent = HIWORD(wParam);
-            // 分析菜单选择:
-            switch (wmId)
+            // 临时代码，稍微解决一下刷新的问题
+            auto screenWidth = Screen::current->GetScreenWidth();
+            auto screenHeight = Screen::current->GetScreenHeight();
+            RECT rect = { 0, 0, screenWidth, screenHeight };
+            InvalidateRect(hWnd, &rect, TRUE);
+
+            auto delta = 0.3f;
+            if ((_TCHAR)wParam == 'W')
             {
-                case IDM_EXIT:
-                    DestroyWindow(hWnd);
-                    break;
-                default:
-                    return DefWindowProc(hWnd, message, wParam, lParam);
+                auto target = engine.GetTarget()->Transform;
+                auto pos = target->GetPosition();
+                target->SetPosition(pos.x, pos.y + delta, pos.z);
+            }
+            else if ((_TCHAR)wParam == 'S')
+            {
+                auto target = engine.GetTarget()->Transform;
+                auto pos = target->GetPosition();
+                target->SetPosition(pos.x, pos.y - delta, pos.z);
+            }
+            else if ((_TCHAR)wParam == 'A')
+            {
+                auto target = engine.GetTarget()->Transform;
+                auto pos = target->GetPosition();
+                target->SetPosition(pos.x - delta, pos.y, pos.z);
+            }
+            else if ((_TCHAR)wParam == 'D')
+            {
+                auto target = engine.GetTarget()->Transform;
+                auto pos = target->GetPosition();
+                target->SetPosition(pos.x + delta, pos.y, pos.z);
+            }
+            else if ((_TCHAR)wParam == 'E')
+            {
+                auto target = engine.GetTarget()->Transform;
+                auto pos = target->GetPosition();
+                target->SetPosition(pos.x, pos.y, pos.z + delta);
+            }
+            else if ((_TCHAR)wParam == 'Q')
+            {
+                auto target = engine.GetTarget()->Transform;
+                auto pos = target->GetPosition();
+                target->SetPosition(pos.x, pos.y, pos.z - delta);
+            }
+            else if ((_TCHAR)wParam == VK_LEFT)
+            {
+                auto target = engine.GetTarget()->Transform;
+                auto rot = target->GetRotation();
+                target->SetRotation(rot.x, rot.y + delta * 10, rot.z);
+            }
+            else if ((_TCHAR)wParam == VK_RIGHT)
+            {
+                auto target = engine.GetTarget()->Transform;
+                auto rot = target->GetRotation();
+                target->SetRotation(rot.x, rot.y - delta * 10, rot.z);
+            }
+            else if ((_TCHAR)wParam == VK_UP)
+            {
+                auto target = engine.GetTarget()->Transform;
+                auto rot = target->GetRotation();
+                target->SetRotation(rot.x + delta * 10, rot.y, rot.z);
+            }
+            else if ((_TCHAR)wParam == VK_DOWN)
+            {
+                auto target = engine.GetTarget()->Transform;
+                auto rot = target->GetRotation();
+                target->SetRotation(rot.x - delta * 10, rot.y, rot.z);
             }
             break;
         }
         case WM_PAINT:
         {
             Screen::current->UpdateScreenSize();
+            auto screenWidth = Screen::current->GetScreenWidth();
+            auto screenHeight = Screen::current->GetScreenHeight();
+
+            PAINTSTRUCT ps;
+            HDC hdc = BeginPaint(hWnd, &ps);
+            RECT rect = { 0, 0, screenWidth, screenHeight };
+            HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
+            FillRect(hdc, &rect, brush);
+            EndPaint(hWnd, &ps);
             break;
         }
         case WM_DESTROY:

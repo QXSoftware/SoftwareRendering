@@ -11,6 +11,7 @@
 
 class Mesh
 {
+    friend class ModelParser;
     friend class ModelFactory;
     std::vector<Vector3*> m_Vertices;
     std::vector<Vector3*> m_Normals;

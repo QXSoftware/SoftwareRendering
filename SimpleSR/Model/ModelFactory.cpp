@@ -1,24 +1,23 @@
 #include "ModelFactory.h"
+#include <windows.h>
+#include <tchar.h>
 
 Mesh* ModelFactory::GetQuad()
 {
-    auto mesh = new Mesh();
-    mesh->m_Vertices.push_back(new Vector3(-0.5, -0.5, 0));
-    mesh->m_Vertices.push_back(new Vector3(0.5, 0.5, 0));
-    mesh->m_Vertices.push_back(new Vector3(0.5, -0.5, 0));
-    mesh->m_Vertices.push_back(new Vector3(-0.5, 0.5, 0));
-    mesh->m_Normals.push_back(new Vector3(0, 0, -1));
-    mesh->m_Normals.push_back(new Vector3(0, 0, -1));
-    mesh->m_Normals.push_back(new Vector3(0, 0, -1));
-    mesh->m_Normals.push_back(new Vector3(0, 0, -1));
-    mesh->m_Triangles.push_back(0);
-    mesh->m_Triangles.push_back(1);
-    mesh->m_Triangles.push_back(2);
-    mesh->m_Triangles.push_back(1);
-    mesh->m_Triangles.push_back(0);
-    mesh->m_Triangles.push_back(3);
-
+    TCHAR dir[255];
+    GetCurrentDirectory(255, dir);
+    std::wstring path(dir);
+    auto mesh = ModelParser::Parse(_T("/FBX/Quad"));
     mesh->Transform->SetPosition(0, 0, 5);
+    return mesh;
+}
 
+Mesh* ModelFactory::GetCube()
+{
+    TCHAR dir[255];
+    GetCurrentDirectory(255, dir);
+    std::wstring path(dir);
+    auto mesh = ModelParser::Parse(path.append(_T("/FBX/Cube")));
+    mesh->Transform->SetPosition(0, 0, 3);
     return mesh;
 }

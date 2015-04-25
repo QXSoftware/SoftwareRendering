@@ -75,6 +75,9 @@
     <ClInclude Include="Core\Vertex.h">
       <Filter>Core</Filter>
     </ClInclude>
+    <ClInclude Include="Model\ModelParser.h">
+      <Filter>Model</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main\Main.cpp">
@@ -127,6 +130,9 @@
     </ClCompile>
     <ClCompile Include="Core\Vertex.cpp">
       <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\ModelParser.cpp">
+      <Filter>Model</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

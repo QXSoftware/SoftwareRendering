@@ -47,8 +47,14 @@ void Mesh::ProcessTriangle(Vector3** triangle, const Matrix4x4& mvp, const Matri
 
 void Mesh::Clear()
 {
+    for (auto iter = m_Vertices.begin(); iter != m_Vertices.end(); iter++)
+        delete *iter;
     m_Vertices.clear();
+    for (auto iter = m_Normals.begin(); iter != m_Normals.end(); iter++)
+        delete *iter;
     m_Normals.clear();
+    for (auto iter = m_Uvs.begin(); iter != m_Uvs.end(); iter++)
+        delete *iter;
     m_Uvs.clear();
     m_Triangles.clear();
 }
