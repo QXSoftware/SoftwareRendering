@@ -14,6 +14,7 @@ class Camera
     float m_FarClipPlane;
     float m_NearClipPlane;
     float m_FieldOfView;
+    float m_Aspect;//投影平面高宽比
 public:
     Camera();
     ~Camera();
@@ -25,6 +26,7 @@ public:
     void SetFarClipPlane(float f);
     void SetNearClipPlane(float f);
     void SetFieldOfView(float f);
+    void SetAspect(float f);
     void UpdateMatrix();
     void Render(Mesh* mesh);
 };

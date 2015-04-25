@@ -6,6 +6,7 @@ Camera::Camera()
     :m_FarClipPlane(100),
     m_NearClipPlane(0.3f),
     m_FieldOfView(60),
+    m_Aspect(0.75),
     Transform(new ::Transform())
 {}
 
@@ -33,12 +34,17 @@ void Camera::SetFieldOfView(float f)
     UpdateMatrix();
 }
 
+void Camera::SetAspect(float f)
+{
+    m_Aspect = f;
+    UpdateMatrix();
+}
+
 void Camera::UpdateMatrix()
 {
     m_CameraToWorldMatrix = Transform->LocalToWorldMatrix();
     m_WorldToCameraMatrix = Transform->WorldToLocalMatrix();
-    auto aspect = Screen::current->GetAspect();
-    m_ProjectionMatrix = Matrix4x4::Perspective(m_FieldOfView, aspect, m_NearClipPlane, m_FarClipPlane);
+    m_ProjectionMatrix = Matrix4x4::Perspective(m_FieldOfView, m_Aspect, m_NearClipPlane, m_FarClipPlane);
     auto scrWidth = Screen::current->GetScreenWidth();
     auto scrHeight = Screen::current->GetScreenHeight();
     m_ViewPortMatrix = Matrix4x4(

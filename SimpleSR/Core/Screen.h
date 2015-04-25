@@ -38,10 +38,6 @@ public:
     {
         return GetSystemMetrics(SM_CYSCREEN);
     }
-    inline float GetAspect()
-    {
-        return  (float)m_Height / (float)m_Width;
-    }
 };
 
 #endif // Screen_h__
