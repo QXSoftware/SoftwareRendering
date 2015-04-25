@@ -4,6 +4,8 @@
 #include "Transform.h"
 #include "Matrix4x4.h"
 #include "Mesh.h"
+#include "DirectionalLight.h"
+#include "Color.h"
 
 class Camera
 {
@@ -18,6 +20,9 @@ class Camera
 
     HDC m_ColorBufferDC;
     HBITMAP m_ColorBuffer;
+
+    DirectionalLight m_DirectionalLight;
+    Color m_AmbientColor;
 public:
     Camera(HDC dc);
     ~Camera();

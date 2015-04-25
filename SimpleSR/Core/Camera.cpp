@@ -1,19 +1,25 @@
 #include "Camera.h"
 #include "Mesh.h"
 #include "Screen.h"
+#include "DrawingTool.h"
 
 Camera::Camera(HDC dc)
     :m_FarClipPlane(100),
     m_NearClipPlane(0.3f),
     m_FieldOfView(60),
     m_Aspect(0.75),
-    Transform(new ::Transform())
+    Transform(new ::Transform()),
+    m_AmbientColor(0.1f, 0.3f, 0.2f)
 {
     auto screenWidth = Screen::current->GetScreenWidth();
     auto screenHeight = Screen::current->GetScreenHeight();
     m_ColorBufferDC = CreateCompatibleDC(dc);
     m_ColorBuffer = CreateCompatibleBitmap(dc, screenWidth, screenHeight);
     SelectObject(m_ColorBufferDC, m_ColorBuffer);
+
+    m_DirectionalLight.Col = Color::red;
+    m_DirectionalLight.Intensity = 1.1f;
+    m_DirectionalLight.Rotation = Vector3::zero;
 }
 
 Camera::~Camera()
@@ -73,7 +79,7 @@ void Camera::Render(HWND hWnd, Mesh* mesh)
     auto screenHeight = Screen::current->GetScreenHeight();
 
     RECT rect = { 0, 0, screenWidth, screenHeight };
-    HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
+    HBRUSH brush = CreateSolidBrush(DrawingTool::GetSystemColor(m_AmbientColor));
     FillRect(m_ColorBufferDC, &rect, brush);
 
     mesh->Render(m_ColorBufferDC, m_ProjectionMatrix, m_WorldToCameraMatrix, m_ViewPortMatrix);

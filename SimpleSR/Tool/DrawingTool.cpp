@@ -1,6 +1,11 @@
 #include "DrawingTool.h"
 #include "Mathf.h"
 
+COLORREF DrawingTool::GetSystemColor(const Color& col)
+{
+    return RGB(col.r * 255, col.g * 255, col.b * 255);
+}
+
 void DrawingTool::DrawPixel(HDC dc, int x, int y, Color col)
 {
     if (dc)

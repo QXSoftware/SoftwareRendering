@@ -10,6 +10,11 @@ Mesh::~Mesh()
     Clear();
 }
 
+Color Mesh::ComputeColor(const DirectionalLight& d, const Color& a, const Vector3& n)
+{
+    return Color::green;
+}
+
 void Mesh::Render(HDC dc, const Matrix4x4&p, const Matrix4x4&v, const Matrix4x4& vp)
 {
     auto mvp = p * v * Transform->LocalToWorldMatrix();
