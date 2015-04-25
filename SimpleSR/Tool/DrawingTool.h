@@ -11,8 +11,8 @@ class DrawingTool
     DrawingTool() = delete;
     ~DrawingTool() = delete;
 public:
-    static void DrawPixel(int x, int y, Color col);
-    static void DrawLine(int x0, int y0, int x1, int y1, Color col);
+    static void DrawPixel(HDC dc, int x, int y, Color col);
+    static void DrawLine(HDC dc, int x0, int y0, int x1, int y1, Color col);
 };
 
 #endif // DrawingTool_h__

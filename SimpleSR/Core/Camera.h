@@ -15,8 +15,11 @@ class Camera
     float m_NearClipPlane;
     float m_FieldOfView;
     float m_Aspect;//投影平面高宽比
+
+    HDC m_ColorBufferDC;
+    HBITMAP m_ColorBuffer;
 public:
-    Camera();
+    Camera(HDC dc);
     ~Camera();
     Camera(const Camera&) = delete;
     Camera& operator=(const Camera&) = delete;
@@ -28,7 +31,7 @@ public:
     void SetFieldOfView(float f);
     void SetAspect(float f);
     void UpdateMatrix();
-    void Render(Mesh* mesh);
+    void Render(HWND hWnd, Mesh* mesh);
 };
 
 #endif // Camera_h__

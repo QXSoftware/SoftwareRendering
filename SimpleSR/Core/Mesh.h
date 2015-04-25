@@ -7,6 +7,7 @@
 #include "Transform.h"
 #include "Matrix4x4.h"
 #include "Mathf.h"
+#include <windows.h>
 #include <vector>
 
 class Mesh
@@ -17,7 +18,7 @@ class Mesh
     std::vector<Vector3*> m_Normals;
     std::vector<Vector2*> m_Uvs;
     std::vector<int> m_Triangles;
-    void ProcessTriangle(Vector3** triangle, const Matrix4x4& mvp, const Matrix4x4& vp);
+    void ProcessTriangle(HDC dc, Vector3** triangle, const Matrix4x4& mvp, const Matrix4x4& vp);
 public:
     Mesh();
     ~Mesh();
@@ -26,7 +27,7 @@ public:
 public:
     Transform* Transform;
 public:
-    void Render(const Matrix4x4&p, const Matrix4x4&v, const Matrix4x4& vp);
+    void Render(HDC dc, const Matrix4x4&p, const Matrix4x4&v, const Matrix4x4& vp);
     void Clear();
 };
 

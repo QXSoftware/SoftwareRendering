@@ -2,11 +2,19 @@
 #define SREngine_h__
 
 #include "Camera.h"
+#include <windows.h>
+#include <time.h>
+
+extern HWND g_MainWindowHwnd;
 
 class SREngine
 {
     Camera* m_Camera;
     Mesh* m_Target;
+
+    unsigned int m_LastTime;
+    unsigned int m_AnimationInterval = (unsigned int)(1000000.0f / 60.0f);
+    void GetTimeOfDay(struct timeval *tp, void* tzp);
 public:
     SREngine() = default;
     ~SREngine();

@@ -22,7 +22,6 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 
     MSG msg;
     HACCEL hAccelTable;
-    engine.Init();
 
     LoadString(hInstance, IDS_APP_TITLE, g_Title, MAX_LOADSTRING);
     LoadString(hInstance, IDC_SIMPLESR, g_WindowClass, MAX_LOADSTRING);
@@ -32,6 +31,8 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
     {
         return FALSE;
     }
+
+    engine.Init();
 
     hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_SIMPLESR));
 
@@ -101,12 +102,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     {
         case WM_KEYDOWN:
         {
-            // 临时代码，稍微解决一下刷新的问题
-            auto screenWidth = Screen::current->GetScreenWidth();
-            auto screenHeight = Screen::current->GetScreenHeight();
-            RECT rect = { 0, 0, screenWidth, screenHeight };
-            InvalidateRect(hWnd, &rect, TRUE);
-
             auto delta = 0.3f;
             if ((_TCHAR)wParam == 'W')
             {
@@ -173,15 +168,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         case WM_PAINT:
         {
             Screen::current->UpdateScreenSize();
-            auto screenWidth = Screen::current->GetScreenWidth();
-            auto screenHeight = Screen::current->GetScreenHeight();
-
-            PAINTSTRUCT ps;
-            HDC hdc = BeginPaint(hWnd, &ps);
-            RECT rect = { 0, 0, screenWidth, screenHeight };
-            HBRUSH brush = CreateSolidBrush(RGB(0, 0, 0));
-            FillRect(hdc, &rect, brush);
-            EndPaint(hWnd, &ps);
             break;
         }
         case WM_DESTROY:
