@@ -83,5 +83,6 @@ Mesh* ModelParser::Parse(const std::wstring& path)
             }
         }
     }
+    infile.close();
     return mesh;
 }
