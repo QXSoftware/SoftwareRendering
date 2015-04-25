@@ -14,6 +14,7 @@ void SREngine::Init()
     m_Camera->SetNearClipPlane(1);
     m_Camera->SetFarClipPlane(50);
     //m_Target = ModelFactory::GetQuad();
+    //m_Target = ModelFactory::GetCapsule();
     m_Target = ModelFactory::GetCube();
 }
 
