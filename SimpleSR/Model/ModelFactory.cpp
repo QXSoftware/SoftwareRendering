@@ -18,6 +18,7 @@ Mesh* ModelFactory::GetCube()
     GetCurrentDirectory(255, dir);
     std::wstring path(dir);
     auto mesh = ModelParser::Parse(path.append(_T("/FBX/Cube")));
-    mesh->Transform->SetPosition(0, 0, 3);
+    mesh->Transform->SetPosition(0, 0, 0);
+    mesh->Transform->SetRotation(0, 60, 0);
     return mesh;
 }

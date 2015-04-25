@@ -110,61 +110,61 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             auto delta = 0.3f;
             if ((_TCHAR)wParam == 'W')
             {
-                auto target = engine.GetTarget()->Transform;
+                auto target = engine.GetCamera()->Transform;
                 auto pos = target->GetPosition();
                 target->SetPosition(pos.x, pos.y + delta, pos.z);
             }
             else if ((_TCHAR)wParam == 'S')
             {
-                auto target = engine.GetTarget()->Transform;
+                auto target = engine.GetCamera()->Transform;
                 auto pos = target->GetPosition();
                 target->SetPosition(pos.x, pos.y - delta, pos.z);
             }
             else if ((_TCHAR)wParam == 'A')
             {
-                auto target = engine.GetTarget()->Transform;
+                auto target = engine.GetCamera()->Transform;
                 auto pos = target->GetPosition();
                 target->SetPosition(pos.x - delta, pos.y, pos.z);
             }
             else if ((_TCHAR)wParam == 'D')
             {
-                auto target = engine.GetTarget()->Transform;
+                auto target = engine.GetCamera()->Transform;
                 auto pos = target->GetPosition();
                 target->SetPosition(pos.x + delta, pos.y, pos.z);
             }
             else if ((_TCHAR)wParam == 'E')
             {
-                auto target = engine.GetTarget()->Transform;
+                auto target = engine.GetCamera()->Transform;
                 auto pos = target->GetPosition();
                 target->SetPosition(pos.x, pos.y, pos.z + delta);
             }
             else if ((_TCHAR)wParam == 'Q')
             {
-                auto target = engine.GetTarget()->Transform;
+                auto target = engine.GetCamera()->Transform;
                 auto pos = target->GetPosition();
                 target->SetPosition(pos.x, pos.y, pos.z - delta);
             }
             else if ((_TCHAR)wParam == VK_LEFT)
             {
-                auto target = engine.GetTarget()->Transform;
+                auto target = engine.GetCamera()->Transform;
                 auto rot = target->GetRotation();
                 target->SetRotation(rot.x, rot.y + delta * 10, rot.z);
             }
             else if ((_TCHAR)wParam == VK_RIGHT)
             {
-                auto target = engine.GetTarget()->Transform;
+                auto target = engine.GetCamera()->Transform;
                 auto rot = target->GetRotation();
                 target->SetRotation(rot.x, rot.y - delta * 10, rot.z);
             }
             else if ((_TCHAR)wParam == VK_UP)
             {
-                auto target = engine.GetTarget()->Transform;
+                auto target = engine.GetCamera()->Transform;
                 auto rot = target->GetRotation();
                 target->SetRotation(rot.x + delta * 10, rot.y, rot.z);
             }
             else if ((_TCHAR)wParam == VK_DOWN)
             {
-                auto target = engine.GetTarget()->Transform;
+                auto target = engine.GetCamera()->Transform;
                 auto rot = target->GetRotation();
                 target->SetRotation(rot.x - delta * 10, rot.y, rot.z);
             }
