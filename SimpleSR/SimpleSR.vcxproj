@@ -77,6 +77,7 @@
   <ItemGroup>
     <ClInclude Include="Core\Camera.h" />
     <ClInclude Include="Core\Color.h" />
+    <ClInclude Include="Core\DirectionalLight.h" />
     <ClInclude Include="Core\Matrix3x3.h" />
     <ClInclude Include="Core\Matrix4x4.h" />
     <ClInclude Include="Core\Mesh.h" />
@@ -86,6 +87,7 @@
     <ClInclude Include="Core\Vector2.h" />
     <ClInclude Include="Core\Vector3.h" />
     <ClInclude Include="Core\Vector4.h" />
+    <ClInclude Include="Core\Vertex.h" />
     <ClInclude Include="Main\Main.h" />
     <ClInclude Include="Model\ModelFactory.h" />
     <ClInclude Include="Resources\Resource.h" />
@@ -96,6 +98,7 @@
   <ItemGroup>
     <ClCompile Include="Core\Camera.cpp" />
     <ClCompile Include="Core\Color.cpp" />
+    <ClCompile Include="Core\DirectionalLight.cpp" />
     <ClCompile Include="Core\Matrix3x3.cpp" />
     <ClCompile Include="Core\Mesh.cpp" />
     <ClCompile Include="Core\Screen.cpp" />
@@ -104,6 +107,7 @@
     <ClCompile Include="Core\Vector2.cpp" />
     <ClCompile Include="Core\Vector3.cpp" />
     <ClCompile Include="Core\Vector4.cpp" />
+    <ClCompile Include="Core\Vertex.cpp" />
     <ClCompile Include="Main\Main.cpp" />
     <ClCompile Include="Matrix4x4.cpp" />
     <ClCompile Include="Model\ModelFactory.cpp" />
