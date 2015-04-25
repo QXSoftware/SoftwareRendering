@@ -11,6 +11,8 @@ void SREngine::Init()
     m_Camera = new Camera();
     m_Camera->Transform->SetPosition(0, 0, 0);
     m_Camera->UpdateMatrix();
+    m_Camera->SetNearClipPlane(1);
+    m_Camera->SetFarClipPlane(50);
     m_Target = ModelFactory::GetQuad();
 }
 

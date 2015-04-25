@@ -40,7 +40,7 @@ public:
     }
     inline float GetAspect()
     {
-        return  (float)m_Width / (float)m_Height;
+        return  (float)m_Height / (float)m_Width;
     }
 };
 

@@ -28,9 +28,18 @@ void Mesh::Render(const Matrix4x4&p, const Matrix4x4&v, const Matrix4x4& vp)
 
 void Mesh::ProcessTriangle(Vector3** triangle, const Matrix4x4& mvp, const Matrix4x4& vp)
 {
-    auto v0 = vp * mvp * Vector4(*triangle[0], 1);
-    auto v1 = vp * mvp * Vector4(*triangle[1], 1);
-    auto v2 = vp * mvp * Vector4(*triangle[2], 1);
+    auto v0 = mvp * Vector4(*triangle[0], 1);
+    auto v1 = mvp * Vector4(*triangle[1], 1);
+    auto v2 = mvp * Vector4(*triangle[2], 1);
+
+    v0 = v0 / v0.w;
+    v1 = v1 / v1.w;
+    v2 = v2 / v2.w;
+
+    v0 = vp * v0;
+    v1 = vp * v1;
+    v2 = vp * v2;
+
     DrawingTool::DrawLine(v0.x, v0.y, v1.x, v1.y, Color::red);
     DrawingTool::DrawLine(v0.x, v0.y, v2.x, v2.y, Color::red);
     DrawingTool::DrawLine(v2.x, v2.y, v1.x, v1.y, Color::red);

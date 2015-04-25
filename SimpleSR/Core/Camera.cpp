@@ -43,8 +43,8 @@ void Camera::UpdateMatrix()
     auto scrHeight = Screen::current->GetScreenHeight();
     m_ViewPortMatrix = Matrix4x4(
         scrWidth / 2, 0, 0, scrWidth / 2,
-        0, scrHeight / 2, 0, scrHeight / 2,
-        0, 0, 0.5, 0.5,
+        0, -scrHeight / 2, 0, scrHeight / 2,
+        0, 0, 1, 0,
         0, 0, 0, 1);
 }
 
