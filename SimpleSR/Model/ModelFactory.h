@@ -14,6 +14,7 @@ public:
     static Mesh* GetQuad();
     static Mesh* GetCube();
     static Mesh* GetCapsule();
+    static Mesh* GetCylinder();
 };
 
 #endif // ModelFactory_h__
