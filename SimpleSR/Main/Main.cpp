@@ -81,7 +81,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
     auto scrWidth = Screen::current->GetSystemMetricsWidth();
     auto scrHeight = Screen::current->GetSystemMetricsHeight();
 
-    HWND hWnd = CreateWindow(g_WindowClass, g_Title, WS_OVERLAPPEDWINDOW,
+    HWND hWnd = CreateWindow(g_WindowClass, g_Title, WS_OVERLAPPED | WS_MINIMIZEBOX | WS_SYSMENU,
         (scrWidth - winWidth) / 2, (scrHeight - winHeight) / 2, winWidth, winHeight, NULL, NULL, hInstance, NULL);
     g_MainWindowHwnd = hWnd;
 
@@ -163,11 +163,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
                 auto rot = target->GetRotation();
                 target->SetRotation(rot.x - delta * 10, rot.y, rot.z);
             }
-            break;
-        }
-        case WM_PAINT:
-        {
-            Screen::current->UpdateScreenSize();
             break;
         }
         case WM_DESTROY:
