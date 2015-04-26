@@ -62,11 +62,7 @@ void Camera::UpdateMatrix()
     m_ProjectionMatrix = Matrix4x4::Perspective(m_FieldOfView, m_Aspect, m_NearClipPlane, m_FarClipPlane);
     auto scrWidth = Screen::current->GetScreenWidth();
     auto scrHeight = Screen::current->GetScreenHeight();
-    m_ViewPortMatrix = Matrix4x4(
-        scrWidth * 0.5f, 0, 0, scrWidth * 0.5f,
-        0, -scrHeight * 0.5f, 0, scrHeight * 0.5f,
-        0, 0, 1, 0,
-        0, 0, 0, 1);
+    m_ViewPortMatrix = Matrix4x4::ViewPortMatrix(scrWidth, scrHeight);
 }
 
 void Camera::Render(HWND hWnd, Mesh* mesh)

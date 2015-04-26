@@ -41,6 +41,7 @@ public:
     static Matrix4x4 identity;
     static Matrix4x4 viewPortMatrix;
     static Matrix4x4 Perspective(float fov, float aspect, float n, float f);
+    static Matrix4x4 ViewPortMatrix(int w, int h);
     static Matrix4x4 Translate(const Vector3& v);
     static Matrix4x4 Scale(const Vector3& v);
     static Matrix4x4 RotateByX(float angle);
