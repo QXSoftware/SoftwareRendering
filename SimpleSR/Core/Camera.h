@@ -25,6 +25,8 @@ class Camera
 
     DirectionalLight m_DirectionalLight;
     Color m_AmbientColor;
+
+    void UpdateMatrix();
 public:
     Camera();
     ~Camera();
@@ -37,7 +39,6 @@ public:
     void SetNearClipPlane(float f);
     void SetFieldOfView(float f);
     void SetAspect(float f);
-    void UpdateMatrix();
     void Render(Mesh* mesh);
 };
 

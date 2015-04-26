@@ -4,6 +4,7 @@
 #include <Vector3.h>
 #include <Matrix4x4.h>
 #include <Mathf.h>
+#include <functional>
 
 class Transform
 {
@@ -11,6 +12,7 @@ class Transform
     Vector3 m_Rotation;
     Matrix4x4 m_LocalToWorldMatrix;
     Matrix4x4 m_WorldToLocalMatrix;
+    std::function<void()> m_Callback;
     void RebuildMatrix();
 public:
     Transform()
@@ -23,6 +25,7 @@ public:
     void SetPosition(float x, float y, float z);
     void SetRotation(const Vector3& rot);
     void SetRotation(float x, float y, float z);
+    void SetCallback(std::function<void()> f);
 
     inline Vector3 GetPosition() const
     {

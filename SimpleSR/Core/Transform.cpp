@@ -9,6 +9,8 @@ void Transform::RebuildMatrix()
         Matrix4x4::RotateByX(m_Rotation.x * Mathf::Deg2Rad)*
         Matrix4x4::Translate(m_Position);
     m_WorldToLocalMatrix = m_LocalToWorldMatrix.Inversed();
+    if (m_Callback != nullptr)
+        m_Callback();
 }
 
 void Transform::SetPosition(const Vector3& pos)
@@ -41,4 +43,9 @@ void Transform::SetRotation(float x, float y, float z)
     m_Rotation.y = y;
     m_Rotation.z = z;
     RebuildMatrix();
+}
+
+void Transform::SetCallback(std::function<void()> f)
+{
+    m_Callback = f;
 }

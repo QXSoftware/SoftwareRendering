@@ -4,6 +4,7 @@
 #include <Vector2.h>
 #include <Vector3.h>
 #include <Vector4.h>
+#include <Color.h>
 
 struct Vertex
 {
@@ -11,6 +12,7 @@ struct Vertex
     Vector4 Pos;
     Vector3 Normal;
     Vector2 UV0;
+    Color Col;
 };
 
 #endif // Vertex_h__

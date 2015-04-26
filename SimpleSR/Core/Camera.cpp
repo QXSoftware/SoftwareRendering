@@ -1,14 +1,17 @@
 #include <Camera.h>
 #include <Mesh.h>
 #include <Screen.h>
+#include <functional>
 
 Camera::Camera()
     :m_FarClipPlane(100),
     m_NearClipPlane(0.3f),
     m_FieldOfView(60),
-    Transform(new ::Transform()),
     m_AmbientColor(0.1f, 0.3f, 0.2f)
 {
+    Transform = new ::Transform();
+    Transform->SetCallback(std::bind(&Camera::UpdateMatrix, this));
+
     auto screenWidth = Screen::current->GetScreenWidth();
     auto screenHeight = Screen::current->GetScreenHeight();
     m_Aspect = (float)screenWidth / (float)screenHeight;
@@ -67,7 +70,6 @@ void Camera::UpdateMatrix()
 
 void Camera::Render(Mesh* mesh)
 {
-    UpdateMatrix();
     m_ColorBuffer->Clear(m_AmbientColor);
     m_DepthBuffer->Clear(0);
 
