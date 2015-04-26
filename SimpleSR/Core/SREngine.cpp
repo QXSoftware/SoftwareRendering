@@ -45,7 +45,7 @@ void SREngine::Update()
     if ((now - m_LastTime) > m_AnimationInterval)
     {
         m_LastTime = now;
-        m_Camera->Render(g_MainWindowHwnd, m_Target);
+        m_Camera->Render(m_Target);
     }
     else
     {

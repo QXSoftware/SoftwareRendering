@@ -9,8 +9,6 @@
 #include "ColorBuffer.h"
 #include "DepthBuffer.h"
 
-extern HWND g_MainWindowHwnd;
-
 class Camera
 {
     Matrix4x4 m_ProjectionMatrix;
@@ -40,7 +38,7 @@ public:
     void SetFieldOfView(float f);
     void SetAspect(float f);
     void UpdateMatrix();
-    void Render(HWND hWnd, Mesh* mesh);
+    void Render(Mesh* mesh);
 };
 
 #endif // Camera_h__

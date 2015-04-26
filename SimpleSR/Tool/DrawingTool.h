@@ -4,8 +4,6 @@
 #include "Color.h"
 #include <windows.h>
 
-extern HWND g_MainWindowHwnd;
-
 class DrawingTool
 {
     DrawingTool() = delete;

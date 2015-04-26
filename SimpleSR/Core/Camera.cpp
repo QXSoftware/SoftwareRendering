@@ -65,7 +65,7 @@ void Camera::UpdateMatrix()
     m_ViewPortMatrix = Matrix4x4::ViewPortMatrix(scrWidth, scrHeight);
 }
 
-void Camera::Render(HWND hWnd, Mesh* mesh)
+void Camera::Render(Mesh* mesh)
 {
     UpdateMatrix();
     m_ColorBuffer->Clear(m_AmbientColor);

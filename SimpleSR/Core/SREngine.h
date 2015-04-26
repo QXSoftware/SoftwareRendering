@@ -5,8 +5,6 @@
 #include <windows.h>
 #include <time.h>
 
-extern HWND g_MainWindowHwnd;
-
 class SREngine
 {
     Camera* m_Camera;
