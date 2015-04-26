@@ -1,7 +1,7 @@
 #ifndef SREngine_h__
 #define SREngine_h__
 
-#include "Camera.h"
+#include <Camera.h>
 #include <windows.h>
 #include <time.h>
 

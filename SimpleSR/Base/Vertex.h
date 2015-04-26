@@ -1,9 +1,9 @@
 #ifndef Vertex_h__
 #define Vertex_h__
 
-#include "Vector2.h"
-#include "Vector3.h"
-#include "Vector4.h"
+#include <Vector2.h>
+#include <Vector3.h>
+#include <Vector4.h>
 
 struct Vertex
 {

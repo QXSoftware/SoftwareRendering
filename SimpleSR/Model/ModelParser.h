@@ -3,7 +3,7 @@
 
 #include <string>
 #include <fstream>
-#include "Mesh.h"
+#include <Mesh.h>
 
 class ModelParser
 {

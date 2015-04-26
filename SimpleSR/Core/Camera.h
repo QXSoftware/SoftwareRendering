@@ -1,13 +1,13 @@
 #ifndef Camera_h__
 #define Camera_h__
 
-#include "Transform.h"
-#include "Matrix4x4.h"
-#include "Mesh.h"
-#include "DirectionalLight.h"
-#include "Color.h"
-#include "ColorBuffer.h"
-#include "DepthBuffer.h"
+#include <Transform.h>
+#include <Matrix4x4.h>
+#include <Mesh.h>
+#include <DirectionalLight.h>
+#include <Color.h>
+#include <ColorBuffer.h>
+#include <DepthBuffer.h>
 
 class Camera
 {

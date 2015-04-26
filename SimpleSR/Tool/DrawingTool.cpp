@@ -1,5 +1,5 @@
-#include "DrawingTool.h"
-#include "Mathf.h"
+#include <DrawingTool.h>
+#include <Mathf.h>
 
 COLORREF DrawingTool::GetSystemColor(const Color& col)
 {

@@ -1,7 +1,7 @@
 #ifndef DrawingTool_h__
 #define DrawingTool_h__
 
-#include "Color.h"
+#include <Color.h>
 #include <windows.h>
 
 class DrawingTool

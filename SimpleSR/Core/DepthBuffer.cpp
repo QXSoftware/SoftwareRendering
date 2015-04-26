@@ -1,4 +1,4 @@
-#include "DepthBuffer.h"
+#include <DepthBuffer.h>
 
 DepthBuffer::DepthBuffer(int w, int h)
     :m_Width(w), m_Height(h)

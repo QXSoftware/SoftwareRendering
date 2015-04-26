@@ -1,8 +1,8 @@
 #ifndef DirectionalLight_h__
 #define DirectionalLight_h__
 
-#include "Vector3.h"
-#include "Color.h"
+#include <Vector3.h>
+#include <Color.h>
 
 class DirectionalLight
 {

@@ -2,8 +2,8 @@
 #define __ColorBuffer_h__
 
 #include <windows.h>
-#include "Color.h"
-#include "Screen.h"
+#include <Color.h>
+#include <Screen.h>
 
 extern HWND g_MainWindowHwnd;
 

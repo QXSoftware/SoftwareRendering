@@ -1,9 +1,9 @@
 #ifndef ModelFactory_h__
 #define ModelFactory_h__
 
-#include "Mesh.h"
-#include "Vector3.h"
-#include "ModelParser.h"
+#include <Mesh.h>
+#include <Vector3.h>
+#include <ModelParser.h>
 
 class ModelFactory
 {

@@ -1,5 +1,5 @@
-#include "ColorBuffer.h"
-#include "DrawingTool.h"
+#include <ColorBuffer.h>
+#include <DrawingTool.h>
 
 ColorBuffer::ColorBuffer(int w, int h)
     :m_Width(w), m_Height(h)
