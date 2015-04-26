@@ -31,9 +31,6 @@ void SREngine::Init()
     m_Camera->UpdateMatrix();
     m_Camera->SetNearClipPlane(1);
     m_Camera->SetFarClipPlane(50);
-    //m_Target = ModelFactory::GetQuad();
-    //m_Target = ModelFactory::GetCapsule();
-    //m_Target = ModelFactory::GetCylinder();
     m_Target = ModelFactory::GetCube();
 }
 
@@ -57,4 +54,6 @@ void SREngine::ShutDown()
 {
     delete m_Camera;
     m_Camera = nullptr;
+    delete m_Target;
+    m_Target = nullptr;
 }
