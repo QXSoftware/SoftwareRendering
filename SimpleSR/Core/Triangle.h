@@ -8,6 +8,7 @@
 #include <Matrix4x4.h>
 #include <ColorBuffer.h>
 #include <DepthBuffer.h>
+#include <DirectionalLight.h>
 
 class Triangle
 {
@@ -22,8 +23,13 @@ class Triangle
     Matrix4x4* m_ViewPortMatrix;
     Matrix4x4* m_MVP;
 
+    DirectionalLight* m_DirectionalLight;
+    Color m_AmbientColor;
+
     ColorBuffer* m_ColorBuf;
     DepthBuffer* m_DepthBuf;
+
+    void ComputeVertexLighting(Vertex* v);
 public:
     Triangle() = default;
     ~Triangle() = default;
@@ -31,6 +37,7 @@ public:
     Triangle& operator=(const Triangle&) = delete;
 public:
     void SetVertices(Vertex* v0, Vertex* v1, Vertex* v2);
+    void SetLight(DirectionalLight* l, Color a);
     void SetMatrixes(Matrix4x4* obj2w, Matrix4x4* obj2wi, Matrix4x4* v, Matrix4x4* p, Matrix4x4* vp, Matrix4x4* mvp);
     void SetBuffers(ColorBuffer* cb, DepthBuffer* db);
     void Render();

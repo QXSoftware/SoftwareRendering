@@ -7,7 +7,7 @@
 class DirectionalLight
 {
 public:
-    Vector3 Rotation;
+    Vector3 Direction;
     float Intensity;
     Color Col;
 };

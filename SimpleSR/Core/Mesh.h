@@ -22,7 +22,8 @@ class Mesh
     std::vector<Vector3*> m_Normals;
     std::vector<Vector2*> m_Uvs;
     std::vector<int> m_Triangles;
-    Color ComputeColor(const DirectionalLight& d, const Color& a, const Vector3& n);
+    DirectionalLight* m_DirectionalLight;
+    Color m_AmbientColor;
 public:
     Mesh();
     ~Mesh();
@@ -31,6 +32,7 @@ public:
 public:
     Transform* Transform;
 public:
+    void SetLight(DirectionalLight* l, Color a);
     void Render(ColorBuffer* cBuf, DepthBuffer* dBuf, const Matrix4x4&p, const Matrix4x4&v, const Matrix4x4& vp);
     void Clear();
 };

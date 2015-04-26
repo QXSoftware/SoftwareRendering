@@ -117,6 +117,12 @@ public:
     {
         return (to - from) * t;
     }
+
+    // Returns largest of two or more values
+    static inline float Max(float a, float b)
+    {
+        return a > b ? a : b;
+    }
 };
 
 #endif // Mathf_h__

@@ -10,9 +10,10 @@ Mesh::~Mesh()
     Clear();
 }
 
-Color Mesh::ComputeColor(const DirectionalLight& d, const Color& a, const Vector3& n)
+void Mesh::SetLight(DirectionalLight* l, Color a)
 {
-    return Color::green;
+    m_DirectionalLight = l;
+    m_AmbientColor = a;
 }
 
 void Mesh::Render(ColorBuffer* cBuf, DepthBuffer* dBuf, const Matrix4x4&p, const Matrix4x4&v, const Matrix4x4& vp)
@@ -42,6 +43,7 @@ void Mesh::Render(ColorBuffer* cBuf, DepthBuffer* dBuf, const Matrix4x4&p, const
             tr.SetVertices(&v0, &v1, &v2);
             tr.SetBuffers(cBuf, dBuf);
             tr.SetMatrixes(&obj2w, &obj2wi, const_cast<Matrix4x4*>(&v), const_cast<Matrix4x4*>(&p), const_cast<Matrix4x4*>(&vp), &mvp);
+            tr.SetLight(m_DirectionalLight, m_AmbientColor);
             tr.Render();
         }
     }

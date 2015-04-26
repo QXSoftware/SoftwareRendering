@@ -11,7 +11,7 @@ struct Vertex
     Vector4 Pos;
     Vector4 PosWorld;
     Vector4 Normal;
-    Vector4 NormalWorld;
+    Vector3 NormalWorld;
     Vector2 UV0;
     float DiffuseLight;
     Color Col;

@@ -21,7 +21,7 @@ Camera::Camera()
 
     m_DirectionalLight.Col = Color::red;
     m_DirectionalLight.Intensity = 1.1f;
-    m_DirectionalLight.Rotation = Vector3::zero;
+    m_DirectionalLight.Direction = Vector3(30, 60, 20).normalized();
 }
 
 Camera::~Camera()
@@ -73,6 +73,7 @@ void Camera::Render(Mesh* mesh)
     m_ColorBuffer->Clear(m_AmbientColor);
     m_DepthBuffer->Clear(0);
 
+    mesh->SetLight(&m_DirectionalLight, m_AmbientColor);
     mesh->Render(m_ColorBuffer, m_DepthBuffer, m_ProjectionMatrix, m_WorldToCameraMatrix, m_ViewPortMatrix);
 
     m_ColorBuffer->Flush();
