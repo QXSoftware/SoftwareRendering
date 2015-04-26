@@ -16,6 +16,9 @@
     <Filter Include="Model">
       <UniqueIdentifier>{80e0382e-71b5-4fb7-826b-4074f010094f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Base">
+      <UniqueIdentifier>{e487950f-762f-45b2-bb23-75a0e7395bb3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main\Main.h">
@@ -30,22 +33,7 @@
     <ClInclude Include="Tool\Mathf.h">
       <Filter>Tool</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Vector2.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\Vector3.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\Vector4.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\Matrix4x4.h">
-      <Filter>Core</Filter>
-    </ClInclude>
     <ClInclude Include="Core\Camera.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\Color.h">
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="Core\Mesh.h">
@@ -60,9 +48,6 @@
     <ClInclude Include="Core\Transform.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Matrix3x3.h">
-      <Filter>Core</Filter>
-    </ClInclude>
     <ClInclude Include="Tool\DrawingTool.h">
       <Filter>Tool</Filter>
     </ClInclude>
@@ -70,9 +55,6 @@
       <Filter>Model</Filter>
     </ClInclude>
     <ClInclude Include="Core\DirectionalLight.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\Vertex.h">
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="Model\ModelParser.h">
@@ -84,24 +66,33 @@
     <ClInclude Include="Core\ColorBuffer.h">
       <Filter>Core</Filter>
     </ClInclude>
+    <ClInclude Include="Base\Color.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Matrix3x3.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Matrix4x4.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Vector2.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Vector3.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Vector4.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Vertex.h">
+      <Filter>Base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main\Main.cpp">
       <Filter>Main</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Vector2.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\Vector3.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\Vector4.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
     <ClCompile Include="Core\Camera.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\Color.cpp">
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="Core\Mesh.cpp">
@@ -116,9 +107,6 @@
     <ClCompile Include="Core\Transform.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Matrix3x3.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
     <ClCompile Include="Tool\Mathf.cpp">
       <Filter>Tool</Filter>
     </ClCompile>
@@ -131,20 +119,35 @@
     <ClCompile Include="Core\DirectionalLight.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Vertex.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
     <ClCompile Include="Model\ModelParser.cpp">
       <Filter>Model</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\Matrix4x4.cpp">
-      <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="Core\DepthBuffer.cpp">
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="Core\ColorBuffer.cpp">
       <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Color.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Matrix3x3.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Matrix4x4.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Vector2.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Vector3.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Vector4.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\Vertex.cpp">
+      <Filter>Base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

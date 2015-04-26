@@ -51,7 +51,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>./Main;./Resources;./Tool;./Core;./Model;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./Main;./Resources;./Tool;./Base;./Core;./Model;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -66,7 +66,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>./Main;./Resources;./Tool;./Core;./Model;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./Main;./Resources;./Tool;./Base;./Core;./Model;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -76,21 +76,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Base\Color.h" />
+    <ClInclude Include="Base\Matrix3x3.h" />
+    <ClInclude Include="Base\Matrix4x4.h" />
+    <ClInclude Include="Base\Vector2.h" />
+    <ClInclude Include="Base\Vector3.h" />
+    <ClInclude Include="Base\Vector4.h" />
+    <ClInclude Include="Base\Vertex.h" />
     <ClInclude Include="Core\Camera.h" />
-    <ClInclude Include="Core\Color.h" />
     <ClInclude Include="Core\ColorBuffer.h" />
     <ClInclude Include="Core\DepthBuffer.h" />
     <ClInclude Include="Core\DirectionalLight.h" />
-    <ClInclude Include="Core\Matrix3x3.h" />
-    <ClInclude Include="Core\Matrix4x4.h" />
     <ClInclude Include="Core\Mesh.h" />
     <ClInclude Include="Core\Screen.h" />
     <ClInclude Include="Core\SREngine.h" />
     <ClInclude Include="Core\Transform.h" />
-    <ClInclude Include="Core\Vector2.h" />
-    <ClInclude Include="Core\Vector3.h" />
-    <ClInclude Include="Core\Vector4.h" />
-    <ClInclude Include="Core\Vertex.h" />
     <ClInclude Include="Main\Main.h" />
     <ClInclude Include="Model\ModelFactory.h" />
     <ClInclude Include="Model\ModelParser.h" />
@@ -100,21 +100,21 @@
     <ClInclude Include="Tool\Mathf.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Base\Color.cpp" />
+    <ClCompile Include="Base\Matrix3x3.cpp" />
+    <ClCompile Include="Base\Matrix4x4.cpp" />
+    <ClCompile Include="Base\Vector2.cpp" />
+    <ClCompile Include="Base\Vector3.cpp" />
+    <ClCompile Include="Base\Vector4.cpp" />
+    <ClCompile Include="Base\Vertex.cpp" />
     <ClCompile Include="Core\Camera.cpp" />
-    <ClCompile Include="Core\Color.cpp" />
     <ClCompile Include="Core\ColorBuffer.cpp" />
     <ClCompile Include="Core\DepthBuffer.cpp" />
     <ClCompile Include="Core\DirectionalLight.cpp" />
-    <ClCompile Include="Core\Matrix3x3.cpp" />
-    <ClCompile Include="Core\Matrix4x4.cpp" />
     <ClCompile Include="Core\Mesh.cpp" />
     <ClCompile Include="Core\Screen.cpp" />
     <ClCompile Include="Core\SREngine.cpp" />
     <ClCompile Include="Core\Transform.cpp" />
-    <ClCompile Include="Core\Vector2.cpp" />
-    <ClCompile Include="Core\Vector3.cpp" />
-    <ClCompile Include="Core\Vector4.cpp" />
-    <ClCompile Include="Core\Vertex.cpp" />
     <ClCompile Include="Main\Main.cpp" />
     <ClCompile Include="Model\ModelFactory.cpp" />
     <ClCompile Include="Model\ModelParser.cpp" />
