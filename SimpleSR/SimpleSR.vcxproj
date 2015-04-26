@@ -102,6 +102,7 @@
     <ClCompile Include="Core\Color.cpp" />
     <ClCompile Include="Core\DirectionalLight.cpp" />
     <ClCompile Include="Core\Matrix3x3.cpp" />
+    <ClCompile Include="Core\Matrix4x4.cpp" />
     <ClCompile Include="Core\Mesh.cpp" />
     <ClCompile Include="Core\Screen.cpp" />
     <ClCompile Include="Core\SREngine.cpp" />
@@ -111,7 +112,6 @@
     <ClCompile Include="Core\Vector4.cpp" />
     <ClCompile Include="Core\Vertex.cpp" />
     <ClCompile Include="Main\Main.cpp" />
-    <ClCompile Include="Matrix4x4.cpp" />
     <ClCompile Include="Model\ModelFactory.cpp" />
     <ClCompile Include="Model\ModelParser.cpp" />
     <ClCompile Include="Tool\DrawingTool.cpp" />

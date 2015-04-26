@@ -92,9 +92,6 @@
     <ClCompile Include="Core\Vector4.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="Matrix4x4.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
     <ClCompile Include="Core\Camera.cpp">
       <Filter>Core</Filter>
     </ClCompile>
@@ -133,6 +130,9 @@
     </ClCompile>
     <ClCompile Include="Model\ModelParser.cpp">
       <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Matrix4x4.cpp">
+      <Filter>Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
