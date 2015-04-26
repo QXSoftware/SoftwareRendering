@@ -8,6 +8,8 @@
 #include "Matrix4x4.h"
 #include "Mathf.h"
 #include "Color.h"
+#include "ColorBuffer.h"
+#include "DepthBuffer.h"
 #include "DirectionalLight.h"
 #include <windows.h>
 #include <vector>
@@ -20,7 +22,7 @@ class Mesh
     std::vector<Vector3*> m_Normals;
     std::vector<Vector2*> m_Uvs;
     std::vector<int> m_Triangles;
-    void ProcessTriangle(HDC dc, Vector3** triangle, const Matrix4x4& mvp, const Matrix4x4& vp);
+    void ProcessTriangle(ColorBuffer* cBuf, DepthBuffer* dBuf, Vector3** triangle, const Matrix4x4& mvp, const Matrix4x4& vp);
     Color ComputeColor(const DirectionalLight& d, const Color& a, const Vector3& n);
 public:
     Mesh();
@@ -30,7 +32,7 @@ public:
 public:
     Transform* Transform;
 public:
-    void Render(HDC dc, const Matrix4x4&p, const Matrix4x4&v, const Matrix4x4& vp);
+    void Render(ColorBuffer* cBuf, DepthBuffer* dBuf, const Matrix4x4&p, const Matrix4x4&v, const Matrix4x4& vp);
     void Clear();
 };
 

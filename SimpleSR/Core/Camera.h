@@ -6,6 +6,10 @@
 #include "Mesh.h"
 #include "DirectionalLight.h"
 #include "Color.h"
+#include "ColorBuffer.h"
+#include "DepthBuffer.h"
+
+extern HWND g_MainWindowHwnd;
 
 class Camera
 {
@@ -16,15 +20,15 @@ class Camera
     float m_FarClipPlane;
     float m_NearClipPlane;
     float m_FieldOfView;
-    float m_Aspect;//投影平面高宽比
+    float m_Aspect;
 
-    HDC m_ColorBufferDC;
-    HBITMAP m_ColorBuffer;
+    ColorBuffer* m_ColorBuffer;
+    DepthBuffer* m_DepthBuffer;
 
     DirectionalLight m_DirectionalLight;
     Color m_AmbientColor;
 public:
-    Camera(HDC dc);
+    Camera();
     ~Camera();
     Camera(const Camera&) = delete;
     Camera& operator=(const Camera&) = delete;

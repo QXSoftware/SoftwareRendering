@@ -78,6 +78,8 @@
   <ItemGroup>
     <ClInclude Include="Core\Camera.h" />
     <ClInclude Include="Core\Color.h" />
+    <ClInclude Include="Core\ColorBuffer.h" />
+    <ClInclude Include="Core\DepthBuffer.h" />
     <ClInclude Include="Core\DirectionalLight.h" />
     <ClInclude Include="Core\Matrix3x3.h" />
     <ClInclude Include="Core\Matrix4x4.h" />
@@ -100,6 +102,8 @@
   <ItemGroup>
     <ClCompile Include="Core\Camera.cpp" />
     <ClCompile Include="Core\Color.cpp" />
+    <ClCompile Include="Core\ColorBuffer.cpp" />
+    <ClCompile Include="Core\DepthBuffer.cpp" />
     <ClCompile Include="Core\DirectionalLight.cpp" />
     <ClCompile Include="Core\Matrix3x3.cpp" />
     <ClCompile Include="Core\Matrix4x4.cpp" />

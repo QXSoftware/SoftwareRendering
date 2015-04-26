@@ -26,8 +26,7 @@ void SREngine::GetTimeOfDay(struct timeval *tp, void* tzp)
 
 void SREngine::Init()
 {
-    auto dc = GetDC(g_MainWindowHwnd);
-    m_Camera = new Camera(dc);
+    m_Camera = new Camera();
     m_Camera->Transform->SetPosition(0, 0, -10);
     m_Camera->UpdateMatrix();
     m_Camera->SetNearClipPlane(1);

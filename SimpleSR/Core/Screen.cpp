@@ -11,4 +11,3 @@ void Screen::UpdateScreenSize()
         m_Height = rect.bottom - rect.top;
     }
 }
-

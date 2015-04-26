@@ -78,6 +78,12 @@
     <ClInclude Include="Model\ModelParser.h">
       <Filter>Model</Filter>
     </ClInclude>
+    <ClInclude Include="Core\DepthBuffer.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\ColorBuffer.h">
+      <Filter>Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main\Main.cpp">
@@ -132,6 +138,12 @@
       <Filter>Model</Filter>
     </ClCompile>
     <ClCompile Include="Core\Matrix4x4.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\DepthBuffer.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\ColorBuffer.cpp">
       <Filter>Core</Filter>
     </ClCompile>
   </ItemGroup>

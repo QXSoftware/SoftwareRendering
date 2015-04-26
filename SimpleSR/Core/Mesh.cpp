@@ -15,7 +15,7 @@ Color Mesh::ComputeColor(const DirectionalLight& d, const Color& a, const Vector
     return Color::green;
 }
 
-void Mesh::Render(HDC dc, const Matrix4x4&p, const Matrix4x4&v, const Matrix4x4& vp)
+void Mesh::Render(ColorBuffer* cBuf, DepthBuffer* dBuf, const Matrix4x4&p, const Matrix4x4&v, const Matrix4x4& vp)
 {
     auto mvp = p * v * Transform->LocalToWorldMatrix();
     Vector3* triangle[3];
@@ -26,12 +26,12 @@ void Mesh::Render(HDC dc, const Matrix4x4&p, const Matrix4x4&v, const Matrix4x4&
         if (i > 2)
         {
             i = 0;
-            ProcessTriangle(dc, triangle, mvp, vp);
+            ProcessTriangle(cBuf, dBuf, triangle, mvp, vp);
         }
     }
 }
 
-void Mesh::ProcessTriangle(HDC dc, Vector3** triangle, const Matrix4x4& mvp, const Matrix4x4& vp)
+void Mesh::ProcessTriangle(ColorBuffer* cBuf, DepthBuffer* dBuf, Vector3** triangle, const Matrix4x4& mvp, const Matrix4x4& vp)
 {
     auto v0 = mvp * Vector4(*triangle[0], 1);
     auto v1 = mvp * Vector4(*triangle[1], 1);
@@ -45,6 +45,7 @@ void Mesh::ProcessTriangle(HDC dc, Vector3** triangle, const Matrix4x4& mvp, con
     v1 = vp * v1;
     v2 = vp * v2;
 
+    auto dc = cBuf->GetDC();
     DrawingTool::DrawLine(dc, v0.x, v0.y, v1.x, v1.y, Color::red);
     DrawingTool::DrawLine(dc, v0.x, v0.y, v2.x, v2.y, Color::red);
     DrawingTool::DrawLine(dc, v2.x, v2.y, v1.x, v1.y, Color::red);

@@ -51,10 +51,9 @@ Mesh* ModelParser::Parse(const std::wstring& path)
             }
             case 2:
             {
-                char* pEnd;
                 float x;
                 x = std::wcstof(buff, NULL);
-                mesh->m_Triangles.push_back(x);
+                mesh->m_Triangles.push_back((int)x);
                 break;
             }
             case 3:
