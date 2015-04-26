@@ -24,7 +24,8 @@ ColorBuffer::~ColorBuffer()
 
 Color ColorBuffer::GetColor(int x, int y)
 {
-    return Color::red;
+    auto col = GetPixel(m_MemoryDC, x, y);
+    return DrawingTool::ConvertSystemColor(col);
 }
 
 void ColorBuffer::SetColor(int x, int y, const Color& col)

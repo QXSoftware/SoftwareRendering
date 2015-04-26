@@ -6,6 +6,14 @@ COLORREF DrawingTool::GetSystemColor(const Color& col)
     return RGB(col.r * 255, col.g * 255, col.b * 255);
 }
 
+Color DrawingTool::ConvertSystemColor(COLORREF col)
+{
+    auto r = static_cast<float>(GetRValue(col)) / 255.0f;
+    auto g = static_cast<float>(GetGValue(col)) / 255.0f;
+    auto b = static_cast<float>(GetBValue(col)) / 255.0f;
+    return Color(r, g, b);
+}
+
 void DrawingTool::DrawPixel(HDC dc, int x, int y, Color col)
 {
     if (dc)
