@@ -82,7 +82,6 @@
     <ClInclude Include="Base\Vector2.h" />
     <ClInclude Include="Base\Vector3.h" />
     <ClInclude Include="Base\Vector4.h" />
-    <ClInclude Include="Base\Vertex.h" />
     <ClInclude Include="Core\Camera.h" />
     <ClInclude Include="Core\ColorBuffer.h" />
     <ClInclude Include="Core\DepthBuffer.h" />
@@ -91,6 +90,8 @@
     <ClInclude Include="Core\Screen.h" />
     <ClInclude Include="Core\SREngine.h" />
     <ClInclude Include="Core\Transform.h" />
+    <ClInclude Include="Core\Triangle.h" />
+    <ClInclude Include="Core\Vertex.h" />
     <ClInclude Include="Main\Main.h" />
     <ClInclude Include="Model\ModelFactory.h" />
     <ClInclude Include="Model\ModelParser.h" />
@@ -106,7 +107,6 @@
     <ClCompile Include="Base\Vector2.cpp" />
     <ClCompile Include="Base\Vector3.cpp" />
     <ClCompile Include="Base\Vector4.cpp" />
-    <ClCompile Include="Base\Vertex.cpp" />
     <ClCompile Include="Core\Camera.cpp" />
     <ClCompile Include="Core\ColorBuffer.cpp" />
     <ClCompile Include="Core\DepthBuffer.cpp" />
@@ -115,6 +115,8 @@
     <ClCompile Include="Core\Screen.cpp" />
     <ClCompile Include="Core\SREngine.cpp" />
     <ClCompile Include="Core\Transform.cpp" />
+    <ClCompile Include="Core\Triangle.cpp" />
+    <ClCompile Include="Core\Vertex.cpp" />
     <ClCompile Include="Main\Main.cpp" />
     <ClCompile Include="Model\ModelFactory.cpp" />
     <ClCompile Include="Model\ModelParser.cpp" />

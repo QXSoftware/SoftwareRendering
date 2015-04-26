@@ -1,5 +1,5 @@
 #include <Mesh.h>
-#include <DrawingTool.h>
+#include <Triangle.h>
 
 Mesh::Mesh()
     :Transform(new ::Transform())
@@ -17,38 +17,34 @@ Color Mesh::ComputeColor(const DirectionalLight& d, const Color& a, const Vector
 
 void Mesh::Render(ColorBuffer* cBuf, DepthBuffer* dBuf, const Matrix4x4&p, const Matrix4x4&v, const Matrix4x4& vp)
 {
-    auto mvp = p * v * Transform->LocalToWorldMatrix();
-    Vector3* triangle[3];
+    auto obj2w = Transform->LocalToWorldMatrix();
+    auto obj2wi = Transform->WorldToLocalMatrix();
+    auto mvp = p * v * obj2w;
+
+    Vector3* normal[3];
+    Vector3* vertex[3];
+    Vector2* uv0[3];
     auto i = 0;
     for (auto iter = m_Triangles.begin(); iter != m_Triangles.end(); iter++)
     {
-        triangle[i++] = m_Vertices[*iter];
+        vertex[i] = m_Vertices[*iter];
+        normal[i] = m_Normals[*iter];
+        uv0[i] = m_Uvs[*iter];
+        i++;
         if (i > 2)
         {
             i = 0;
-            ProcessTriangle(cBuf, dBuf, triangle, mvp, vp);
+
+            Triangle tr;
+            Vertex v0(vertex[0], normal[0], uv0[0]);
+            Vertex v1(vertex[1], normal[1], uv0[1]);
+            Vertex v2(vertex[2], normal[2], uv0[2]);
+            tr.SetVertices(&v0, &v1, &v2);
+            tr.SetBuffers(cBuf, dBuf);
+            tr.SetMatrixes(&obj2w, &obj2wi, const_cast<Matrix4x4*>(&v), const_cast<Matrix4x4*>(&p), const_cast<Matrix4x4*>(&vp), &mvp);
+            tr.Render();
         }
     }
-}
-
-void Mesh::ProcessTriangle(ColorBuffer* cBuf, DepthBuffer* dBuf, Vector3** triangle, const Matrix4x4& mvp, const Matrix4x4& vp)
-{
-    auto v0 = mvp * Vector4(*triangle[0], 1);
-    auto v1 = mvp * Vector4(*triangle[1], 1);
-    auto v2 = mvp * Vector4(*triangle[2], 1);
-
-    v0 = v0 / v0.w;
-    v1 = v1 / v1.w;
-    v2 = v2 / v2.w;
-
-    v0 = vp * v0;
-    v1 = vp * v1;
-    v2 = vp * v2;
-
-    auto dc = cBuf->GetDC();
-    DrawingTool::DrawLine(dc, v0.x, v0.y, v1.x, v1.y, Color::red);
-    DrawingTool::DrawLine(dc, v0.x, v0.y, v2.x, v2.y, Color::red);
-    DrawingTool::DrawLine(dc, v2.x, v2.y, v1.x, v1.y, Color::red);
 }
 
 void Mesh::Clear()

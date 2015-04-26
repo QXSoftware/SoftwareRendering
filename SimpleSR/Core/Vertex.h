@@ -8,11 +8,16 @@
 
 struct Vertex
 {
-    Vector4 PosWorld;
     Vector4 Pos;
-    Vector3 Normal;
+    Vector4 PosWorld;
+    Vector4 Normal;
+    Vector4 NormalWorld;
     Vector2 UV0;
+    float DiffuseLight;
     Color Col;
+
+    Vertex(Vector3* pos, Vector3* n, Vector2* uv0);
+    ~Vertex() = default;
 };
 
 #endif // Vertex_h__

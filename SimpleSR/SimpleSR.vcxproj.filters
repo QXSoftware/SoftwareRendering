@@ -27,9 +27,6 @@
     <ClInclude Include="Resources\Resource.h">
       <Filter>Resources</Filter>
     </ClInclude>
-    <ClInclude Include="Resources\targetver.h">
-      <Filter>Resources</Filter>
-    </ClInclude>
     <ClInclude Include="Tool\Mathf.h">
       <Filter>Tool</Filter>
     </ClInclude>
@@ -84,8 +81,14 @@
     <ClInclude Include="Base\Vector4.h">
       <Filter>Base</Filter>
     </ClInclude>
-    <ClInclude Include="Base\Vertex.h">
-      <Filter>Base</Filter>
+    <ClInclude Include="Resources\targetver.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Vertex.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Triangle.h">
+      <Filter>Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -146,8 +149,11 @@
     <ClCompile Include="Base\Vector4.cpp">
       <Filter>Base</Filter>
     </ClCompile>
-    <ClCompile Include="Base\Vertex.cpp">
-      <Filter>Base</Filter>
+    <ClCompile Include="Core\Vertex.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Triangle.cpp">
+      <Filter>Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
