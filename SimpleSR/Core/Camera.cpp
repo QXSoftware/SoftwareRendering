@@ -7,7 +7,7 @@ Camera::Camera(HDC dc)
     :m_FarClipPlane(100),
     m_NearClipPlane(0.3f),
     m_FieldOfView(60),
-    m_Aspect(0.75),
+    m_Aspect((float)DEFAULT_SCREEN_WIDTH / (float)DEFAULT_SCREEN_HEIGHT),
     Transform(new ::Transform()),
     m_AmbientColor(0.1f, 0.3f, 0.2f)
 {
