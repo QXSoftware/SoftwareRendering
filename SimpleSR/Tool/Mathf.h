@@ -2,6 +2,10 @@
 #define Mathf_h__
 
 #include <math.h>
+#include <Color.h>
+#include <Vector2.h>
+#include <Vector3.h>
+#include <Vector4.h>
 
 class Mathf
 {
@@ -13,6 +17,12 @@ public:
 public:
     // Returns the absolute value of x.
     static inline int Abs(int x)
+    {
+        return abs(x);
+    }
+
+    // Returns the absolute value of x.
+    static inline float Abs(float x)
     {
         return abs(x);
     }
@@ -113,9 +123,46 @@ public:
     }
 
     // Interpolates between a and b by t. t is clamped between 0 and 1.
-    static inline float Lerp(float from, float to, float t)
+    static inline float Lerp(float a, float b, float t)
     {
-        return (to - from) * t;
+        return a * (1 - t) + b * t;
+    }
+
+    // Interpolates between a and b by t. t is clamped between 0 and 1.
+    static inline Color Lerp(const Color& a, const Color& b, float t)
+    {
+        return Color(
+            Lerp(a.r, b.r, t),
+            Lerp(a.g, b.g, t),
+            Lerp(a.b, b.b, t),
+            Lerp(a.a, b.a, t));
+    }
+
+    // Interpolates between a and b by t. t is clamped between 0 and 1.
+    static inline Vector2 Lerp(const Vector2& a, const Vector2& b, float t)
+    {
+        return Vector2(
+            Lerp(a.x, b.x, t),
+            Lerp(a.y, b.y, t));
+    }
+
+    // Interpolates between a and b by t. t is clamped between 0 and 1.
+    static inline Vector3 Lerp(const Vector3& a, const Vector3& b, float t)
+    {
+        return Vector3(
+            Lerp(a.x, b.x, t),
+            Lerp(a.y, b.y, t),
+            Lerp(a.z, b.z, t));
+    }
+
+    // Interpolates between a and b by t. t is clamped between 0 and 1.
+    static inline Vector4 Lerp(const Vector4& a, const Vector4& b, float t)
+    {
+        return Vector4(
+            Lerp(a.x, b.x, t),
+            Lerp(a.y, b.y, t),
+            Lerp(a.z, b.z, t),
+            Lerp(a.w, b.w, t));
     }
 
     // Returns largest of two or more values
