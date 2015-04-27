@@ -11,6 +11,7 @@ public:
     ModelFactory() = delete;
     ~ModelFactory() = delete;
 public:
+    static Mesh* GetTriangle();
     static Mesh* GetQuad();
     static Mesh* GetCube();
     static Mesh* GetCapsule();
