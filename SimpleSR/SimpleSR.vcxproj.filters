@@ -90,6 +90,12 @@
     <ClInclude Include="Core\Triangle.h">
       <Filter>Core</Filter>
     </ClInclude>
+    <ClInclude Include="Core\Texture2D.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\MacrosAndDefines.h">
+      <Filter>Base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main\Main.cpp">
@@ -153,6 +159,9 @@
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="Core\Triangle.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Texture2D.cpp">
       <Filter>Core</Filter>
     </ClCompile>
   </ItemGroup>

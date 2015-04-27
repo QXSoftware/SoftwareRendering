@@ -86,9 +86,11 @@
     <ClInclude Include="Core\ColorBuffer.h" />
     <ClInclude Include="Core\DepthBuffer.h" />
     <ClInclude Include="Core\DirectionalLight.h" />
+    <ClInclude Include="Core\MacrosAndDefines.h" />
     <ClInclude Include="Core\Mesh.h" />
     <ClInclude Include="Core\Screen.h" />
     <ClInclude Include="Core\SREngine.h" />
+    <ClInclude Include="Core\Texture2D.h" />
     <ClInclude Include="Core\Transform.h" />
     <ClInclude Include="Core\Triangle.h" />
     <ClInclude Include="Core\Vertex.h" />
@@ -114,6 +116,7 @@
     <ClCompile Include="Core\Mesh.cpp" />
     <ClCompile Include="Core\Screen.cpp" />
     <ClCompile Include="Core\SREngine.cpp" />
+    <ClCompile Include="Core\Texture2D.cpp" />
     <ClCompile Include="Core\Transform.cpp" />
     <ClCompile Include="Core\Triangle.cpp" />
     <ClCompile Include="Core\Vertex.cpp" />

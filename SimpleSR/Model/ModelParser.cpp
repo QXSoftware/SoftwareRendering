@@ -2,7 +2,7 @@
 #include <windows.h>
 #include <tchar.h>
 
-Mesh* ModelParser::Parse(const std::wstring& path)
+Mesh* ModelParser::Parse(const tstring& path)
 {
     auto mesh = new Mesh();
     std::wifstream infile(path, std::ios::in);
@@ -10,27 +10,27 @@ Mesh* ModelParser::Parse(const std::wstring& path)
     int step = 0;
     while (infile.getline(buff, 100))
     {
-        if (std::wstring(buff) == _T("#vertices"))
+        if (tstring(buff) == _T("#vertices"))
         {
             step = 1;
             continue;
         }
-        else if (std::wstring(buff) == _T("#triangles"))
+        else if (tstring(buff) == _T("#triangles"))
         {
             step = 2;
             continue;
         }
-        else if (std::wstring(buff) == _T("#normals"))
+        else if (tstring(buff) == _T("#normals"))
         {
             step = 3;
             continue;
         }
-        else if (std::wstring(buff) == _T("#uvs"))
+        else if (tstring(buff) == _T("#uvs"))
         {
             step = 4;
             continue;
         }
-        else if (std::wstring(buff).empty())
+        else if (tstring(buff).empty())
         {
             continue;
         }

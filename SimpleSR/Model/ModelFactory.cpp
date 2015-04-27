@@ -1,13 +1,19 @@
 #include <ModelFactory.h>
 #include <windows.h>
-#include <tchar.h>
+#include <MacrosAndDefines.h>
 
-Mesh* ModelFactory::GetTriangle()
+tstring ModelFactory::GetBaseDir()
 {
     TCHAR dir[255];
     GetCurrentDirectory(255, dir);
-    std::wstring path(dir);
-    auto mesh = ModelParser::Parse(path.append(_T("/FBX/Triangle")));
+    tstring path(dir);
+    return path;
+}
+
+Mesh* ModelFactory::GetTriangle()
+{
+    auto mesh = ModelParser::Parse(GetBaseDir().append(_T("/FBX/Triangle")));
+    mesh->m_Texture = Texture2D::Load(GetBaseDir().append(_T("Texture/baby.bmp")));
     mesh->Transform->SetPosition(0, 0, 0);
     mesh->Transform->SetRotation(0, 0, 0);
     return mesh;
@@ -15,10 +21,8 @@ Mesh* ModelFactory::GetTriangle()
 
 Mesh* ModelFactory::GetQuad()
 {
-    TCHAR dir[255];
-    GetCurrentDirectory(255, dir);
-    std::wstring path(dir);
-    auto mesh = ModelParser::Parse(path.append(_T("/FBX/Quad")));
+    auto mesh = ModelParser::Parse(GetBaseDir().append(_T("/FBX/Quad")));
+    mesh->m_Texture = Texture2D::Load(GetBaseDir().append(_T("/Texture/baby.bmp")));
     mesh->Transform->SetPosition(0, 0, 0);
     mesh->Transform->SetRotation(0, 60, 0);
     return mesh;
@@ -26,10 +30,8 @@ Mesh* ModelFactory::GetQuad()
 
 Mesh* ModelFactory::GetCube()
 {
-    TCHAR dir[255];
-    GetCurrentDirectory(255, dir);
-    std::wstring path(dir);
-    auto mesh = ModelParser::Parse(path.append(_T("/FBX/Cube")));
+    auto mesh = ModelParser::Parse(GetBaseDir().append(_T("/FBX/Cube")));
+    mesh->m_Texture = Texture2D::Load(GetBaseDir().append(_T("/Texture/baby.bmp")));
     mesh->Transform->SetPosition(0, 0, 0);
     mesh->Transform->SetRotation(0, 60, 0);
     return mesh;
@@ -37,10 +39,8 @@ Mesh* ModelFactory::GetCube()
 
 Mesh* ModelFactory::GetCapsule()
 {
-    TCHAR dir[255];
-    GetCurrentDirectory(255, dir);
-    std::wstring path(dir);
-    auto mesh = ModelParser::Parse(path.append(_T("/FBX/Capsule")));
+    auto mesh = ModelParser::Parse(GetBaseDir().append(_T("/FBX/Capsule")));
+    mesh->m_Texture = Texture2D::Load(GetBaseDir().append(_T("/Texture/baby.bmp")));
     mesh->Transform->SetPosition(0, 0, 0);
     mesh->Transform->SetRotation(0, 60, 0);
     return mesh;
@@ -48,10 +48,8 @@ Mesh* ModelFactory::GetCapsule()
 
 Mesh* ModelFactory::GetCylinder()
 {
-    TCHAR dir[255];
-    GetCurrentDirectory(255, dir);
-    std::wstring path(dir);
-    auto mesh = ModelParser::Parse(path.append(_T("/FBX/Cylinder")));
+    auto mesh = ModelParser::Parse(GetBaseDir().append(_T("/FBX/Cylinder")));
+    mesh->m_Texture = Texture2D::Load(GetBaseDir().append(_T("/Texture/baby.bmp")));
     mesh->Transform->SetPosition(0, 0, 0);
     mesh->Transform->SetRotation(0, 60, 0);
     return mesh;

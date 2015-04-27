@@ -9,6 +9,7 @@
 #include <ColorBuffer.h>
 #include <DepthBuffer.h>
 #include <DirectionalLight.h>
+#include <Texture2D.h>
 
 class Triangle
 {
@@ -28,6 +29,7 @@ class Triangle
 
     ColorBuffer* m_ColorBuf;
     DepthBuffer* m_DepthBuf;
+    Texture2D* m_Texture;
 
     void ComputeVertexLighting(Vertex* v);
     void SortVerticesByY();// 把三个顶点按照屏幕坐标从上到下排序，排序后 m_V0 为 y 最小的顶点，m_V2 为 y 最大的顶点
@@ -43,6 +45,7 @@ public:
     void SetLight(DirectionalLight* l, Color a);
     void SetMatrixes(Matrix4x4* obj2w, Matrix4x4* obj2wi, Matrix4x4* v, Matrix4x4* p, Matrix4x4* vp, Matrix4x4* mvp);
     void SetBuffers(ColorBuffer* cb, DepthBuffer* db);
+    void SetTexture(Texture2D* t);
     void Render();
 };
 

@@ -44,6 +44,7 @@ void Mesh::Render(ColorBuffer* cBuf, DepthBuffer* dBuf, const Matrix4x4&p, const
             tr.SetBuffers(cBuf, dBuf);
             tr.SetMatrixes(&obj2w, &obj2wi, const_cast<Matrix4x4*>(&v), const_cast<Matrix4x4*>(&p), const_cast<Matrix4x4*>(&vp), &mvp);
             tr.SetLight(m_DirectionalLight, m_AmbientColor);
+            tr.SetTexture(m_Texture);
             tr.Render();
         }
     }
@@ -61,4 +62,6 @@ void Mesh::Clear()
         delete *iter;
     m_Uvs.clear();
     m_Triangles.clear();
+    delete m_Texture;
+    m_Texture = nullptr;
 }

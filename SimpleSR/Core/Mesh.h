@@ -13,6 +13,7 @@
 #include <DirectionalLight.h>
 #include <windows.h>
 #include <vector>
+#include <Texture2D.h>
 
 class Mesh
 {
@@ -23,6 +24,7 @@ class Mesh
     std::vector<Vector2*> m_Uvs;
     std::vector<int> m_Triangles;
     DirectionalLight* m_DirectionalLight;
+    Texture2D* m_Texture;
     Color m_AmbientColor;
 public:
     Mesh();
