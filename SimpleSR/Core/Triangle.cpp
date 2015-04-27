@@ -120,17 +120,17 @@ void Triangle::DrawGouraud()
     auto lit1 = m_V1->DiffCol; auto uv1 = m_V1->UV0; auto depth1 = vcvv1.z;
     auto lit2 = m_V2->DiffCol; auto uv2 = m_V2->UV0; auto depth2 = vcvv2.z;
 
-    auto stepY01 = static_cast<int>(Mathf::Abs(v0.y - v1.y));
-    auto stepY02 = static_cast<int>(Mathf::Abs(v0.y - v2.y));
-    auto stepY12 = static_cast<int>(Mathf::Abs(v1.y - v2.y));
-    auto stepX01 = static_cast<int>(Mathf::Abs(v0.x - v1.x));
-    auto stepX02 = static_cast<int>(Mathf::Abs(v0.x - v2.x));
-    auto stepX12 = static_cast<int>(Mathf::Abs(v1.x - v2.x));
-    auto incX01 = stepY01 == 0 ? 0 : (v0.x - v1.x) / (float)stepY01;
-    auto incX02 = stepY02 == 0 ? 0 : (v0.x - v2.x) / (float)stepY02;
-    auto incX12 = stepY12 == 0 ? 0 : (v1.x - v2.x) / (float)stepY12;
+    auto stepY01 = Mathf::Abs(v0.y - v1.y);
+    auto stepY02 = Mathf::Abs(v0.y - v2.y);
+    auto stepY12 = Mathf::Abs(v1.y - v2.y);
+    auto stepX01 = Mathf::Abs(v0.x - v1.x);
+    auto stepX02 = Mathf::Abs(v0.x - v2.x);
+    auto stepX12 = Mathf::Abs(v1.x - v2.x);
+    auto incX01 = stepY01 == 0 ? 0 : (v0.x - v1.x) / stepY01;
+    auto incX02 = stepY02 == 0 ? 0 : (v0.x - v2.x) / stepY02;
+    auto incX12 = stepY12 == 0 ? 0 : (v1.x - v2.x) / stepY12;
 
-    for (auto k = 0; k < stepY02; k++)
+    for (int k = 0; k < stepY02; k++)
     {
         if (k < stepY01)
         {
@@ -138,13 +138,19 @@ void Triangle::DrawGouraud()
             float t0 = Mathf::LerpFactor(v0, v1, n0);
             n0.z = Mathf::Lerp(depth0, depth1, t0);
             Vector2 n0uv = Mathf::Lerp(uv0, uv1, t0);
+
+            Color n0col(Color::green);
+            if (m_Texture != nullptr)
+                n0col = m_Texture->GetColor(n0uv);
+            DrawingTool::DrawPixel(m_ColorBuf, m_DepthBuf, n0, n0col);
+
             Vector3 n1(v0.x - incX02 * k, v0.y + k);
             float t1 = Mathf::LerpFactor(v0, v2, n1);
             n1.z = Mathf::Lerp(depth0, depth2, t1);
-            Vector2 n1uv = Mathf::Lerp(uv0, uv2, t0);
+            Vector2 n1uv = Mathf::Lerp(uv0, uv2, t1);
 
             int lineWidth = Mathf::RoundToInt(n1.x - n0.x);
-            for (int i = 0; i < Mathf::Abs(lineWidth); i++)
+            for (int i = 0; i <= Mathf::Abs(lineWidth); i++)
             {
                 auto lineInc = lineWidth > 0 ? i : -i;
                 Vector3 n3(n0.x + lineInc, n0.y);
@@ -163,13 +169,19 @@ void Triangle::DrawGouraud()
             float t0 = Mathf::LerpFactor(v1, v2, n0);
             n0.z = Mathf::Lerp(depth1, depth2, t0);
             Vector2 n0uv = Mathf::Lerp(uv1, uv2, t0);
+
+            Color n0col(Color::green);
+            if (m_Texture != nullptr)
+                n0col = m_Texture->GetColor(n0uv);
+            DrawingTool::DrawPixel(m_ColorBuf, m_DepthBuf, n0, n0col);
+
             Vector3 n1(v0.x - incX02 * k, v0.y + k);
             float t1 = Mathf::LerpFactor(v0, v2, n1);
             n1.z = Mathf::Lerp(depth0, depth2, t1);
             Vector2 n1uv = Mathf::Lerp(uv0, uv2, t1);
 
             int lineWidth = Mathf::RoundToInt(n1.x - n0.x);
-            for (int i = 0; i < Mathf::Abs(lineWidth); i++)
+            for (int i = 0; i <= Mathf::Abs(lineWidth); i++)
             {
                 auto lineInc = lineWidth > 0 ? i : -i;
                 Vector3 n3(n0.x + lineInc, n0.y);
@@ -197,5 +209,5 @@ void Triangle::Render()
     ComputeVertexLighting(m_V1);
 
     DrawGouraud();
-    DrawWireFrame();
+    //DrawWireFrame();
 }

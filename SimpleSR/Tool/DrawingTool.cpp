@@ -29,7 +29,7 @@ void DrawingTool::DrawPixel(ColorBuffer* cb, DepthBuffer* db, int x, int y, floa
 
 void DrawingTool::DrawPixel(ColorBuffer* cb, DepthBuffer* db, const Vector3& v, Color col)
 {
-    DrawPixel(cb, db, static_cast<int>(v.x), static_cast<int>(v.y), v.z, col);
+    DrawPixel(cb, db, Mathf::RoundToInt(v.x), Mathf::RoundToInt(v.y), v.z, col);
 }
 
 void DrawingTool::DrawLine(ColorBuffer* cb, DepthBuffer* db, int x0, int y0, float z0, int x1, int y1, float z1, Color col)
