@@ -71,7 +71,7 @@ void Camera::UpdateMatrix()
 void Camera::Render(Mesh* mesh)
 {
     m_ColorBuffer->Clear(m_AmbientColor);
-    m_DepthBuffer->Clear(0);
+    m_DepthBuffer->Clear(1);
 
     mesh->SetLight(&m_DirectionalLight, m_AmbientColor);
     mesh->Render(m_ColorBuffer, m_DepthBuffer, m_ProjectionMatrix, m_WorldToCameraMatrix, m_ViewPortMatrix);
