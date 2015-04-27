@@ -56,8 +56,7 @@ void Triangle::Render()
     v1 = *m_ViewPortMatrix * v1;
     v2 = *m_ViewPortMatrix * v2;
 
-    auto dc = m_ColorBuf->GetDC();
-    DrawingTool::DrawLine(dc, v0.x, v0.y, v1.x, v1.y, Color::red);
-    DrawingTool::DrawLine(dc, v0.x, v0.y, v2.x, v2.y, Color::red);
-    DrawingTool::DrawLine(dc, v2.x, v2.y, v1.x, v1.y, Color::red);
+    DrawingTool::DrawLine(m_ColorBuf, v0.x, v0.y, v1.x, v1.y, Color::red);
+    DrawingTool::DrawLine(m_ColorBuf, v0.x, v0.y, v2.x, v2.y, Color::red);
+    DrawingTool::DrawLine(m_ColorBuf, v2.x, v2.y, v1.x, v1.y, Color::red);
 }

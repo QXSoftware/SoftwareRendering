@@ -2,6 +2,7 @@
 #define DrawingTool_h__
 
 #include <Color.h>
+#include <ColorBuffer.h>
 #include <windows.h>
 
 class DrawingTool
@@ -11,8 +12,8 @@ class DrawingTool
 public:
     static COLORREF GetSystemColor(const Color& col);
     static Color ConvertSystemColor(COLORREF col);
-    static void DrawPixel(HDC dc, int x, int y, Color col);
-    static void DrawLine(HDC dc, int x0, int y0, int x1, int y1, Color col);
+    static void DrawPixel(ColorBuffer* buf, int x, int y, Color col);
+    static void DrawLine(ColorBuffer* buf, int x0, int y0, int x1, int y1, Color col);
 };
 
 #endif // DrawingTool_h__

@@ -14,13 +14,13 @@ Color DrawingTool::ConvertSystemColor(COLORREF col)
     return Color(r, g, b);
 }
 
-void DrawingTool::DrawPixel(HDC dc, int x, int y, Color col)
+void DrawingTool::DrawPixel(ColorBuffer* buf, int x, int y, Color col)
 {
-    if (dc)
-        SetPixel(dc, x, y, RGB(255 * col.r, 255 * col.g, 255 * col.b));
+    auto dc = buf->GetDC();
+    SetPixel(dc, x, y, GetSystemColor(col));
 }
 
-void DrawingTool::DrawLine(HDC dc, int x0, int y0, int x1, int y1, Color col)
+void DrawingTool::DrawLine(ColorBuffer* buf, int x0, int y0, int x1, int y1, Color col)
 {
     int dx = x1 - x0, dy = y1 - y0, steps;
     float xIncrement, yIncrement, x = (float)x0, y = (float)y0;
@@ -34,11 +34,11 @@ void DrawingTool::DrawLine(HDC dc, int x0, int y0, int x1, int y1, Color col)
     }
     xIncrement = (float)dx / (float)steps;
     yIncrement = (float)dy / (float)steps;
-    DrawPixel(dc, Mathf::RoundToInt(x), Mathf::RoundToInt(y), col);
+    DrawPixel(buf, Mathf::RoundToInt(x), Mathf::RoundToInt(y), col);
     for (auto k = 0; k < steps; k++)
     {
         x += xIncrement;
         y += yIncrement;
-        DrawPixel(dc, Mathf::RoundToInt(x), Mathf::RoundToInt(y), col);
+        DrawPixel(buf, Mathf::RoundToInt(x), Mathf::RoundToInt(y), col);
     }
 }
