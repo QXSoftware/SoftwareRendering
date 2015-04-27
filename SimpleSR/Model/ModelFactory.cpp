@@ -13,7 +13,7 @@ tstring ModelFactory::GetBaseDir()
 Mesh* ModelFactory::GetTriangle()
 {
     auto mesh = ModelParser::Parse(GetBaseDir().append(_T("/FBX/Triangle")));
-    mesh->m_Texture = Texture2D::Load(GetBaseDir().append(_T("Texture/baby.bmp")));
+    mesh->m_Texture = Texture2D::Load(GetBaseDir().append(_T("/Texture/baby.bmp")));
     mesh->Transform->SetPosition(0, 0, 0);
     mesh->Transform->SetRotation(0, 0, 0);
     return mesh;
