@@ -37,9 +37,9 @@ void Mesh::Render(ColorBuffer* cBuf, DepthBuffer* dBuf, const Matrix4x4&p, const
             i = 0;
 
             Triangle tr;
-            Vertex v0(vertex[0], normal[0], uv0[0]);
-            Vertex v1(vertex[1], normal[1], uv0[1]);
-            Vertex v2(vertex[2], normal[2], uv0[2]);
+            Vertex v0(*vertex[0], *normal[0], *uv0[0]);
+            Vertex v1(*vertex[1], *normal[1], *uv0[1]);
+            Vertex v2(*vertex[2], *normal[2], *uv0[2]);
             tr.SetVertices(&v0, &v1, &v2);
             tr.SetBuffers(cBuf, dBuf);
             tr.SetMatrixes(&obj2w, &obj2wi, const_cast<Matrix4x4*>(&v), const_cast<Matrix4x4*>(&p), const_cast<Matrix4x4*>(&vp), &mvp);

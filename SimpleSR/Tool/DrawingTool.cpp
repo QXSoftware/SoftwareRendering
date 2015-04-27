@@ -14,13 +14,25 @@ Color DrawingTool::ConvertSystemColor(COLORREF col)
     return Color(r, g, b);
 }
 
-void DrawingTool::DrawPixel(ColorBuffer* buf, int x, int y, Color col)
+void DrawingTool::DrawPixel(ColorBuffer* cb, DepthBuffer* db, int x, int y, float z, Color col)
 {
-    auto dc = buf->GetDC();
-    SetPixel(dc, x, y, GetSystemColor(col));
+    auto depth = db->GetDepth(x, y);
+    // ZTest LEqual
+    if (z <= depth)
+    {
+        // ZWrite On
+        db->SetDepth(x, y, z);
+        auto dc = cb->GetDC();
+        SetPixel(dc, x, y, GetSystemColor(col));
+    }
 }
 
-void DrawingTool::DrawLine(ColorBuffer* buf, int x0, int y0, int x1, int y1, Color col)
+void DrawingTool::DrawPixel(ColorBuffer* cb, DepthBuffer* db, const Vector3& v, Color col)
+{
+    DrawPixel(cb, db, static_cast<int>(v.x), static_cast<int>(v.y), v.z, col);
+}
+
+void DrawingTool::DrawLine(ColorBuffer* cb, DepthBuffer* db, int x0, int y0, float z0, int x1, int y1, float z1, Color col)
 {
     int dx = x1 - x0, dy = y1 - y0, steps;
     float xIncrement, yIncrement, x = (float)x0, y = (float)y0;
@@ -34,11 +46,23 @@ void DrawingTool::DrawLine(ColorBuffer* buf, int x0, int y0, int x1, int y1, Col
     }
     xIncrement = (float)dx / (float)steps;
     yIncrement = (float)dy / (float)steps;
-    DrawPixel(buf, Mathf::RoundToInt(x), Mathf::RoundToInt(y), col);
+    DrawPixel(cb, db, x0, y0, z0, col);
     for (auto k = 0; k < steps; k++)
     {
         x += xIncrement;
         y += yIncrement;
-        DrawPixel(buf, Mathf::RoundToInt(x), Mathf::RoundToInt(y), col);
+        Vector2 a(x0, y0);
+        Vector2 b(x1, y1);
+        Vector3 c(x, y);
+        auto t = Mathf::LerpFactor(a, b, c);
+        c.z = Mathf::Lerp(z0, z1, t);
+        DrawPixel(cb, db, c, col);
     }
+}
+
+void DrawingTool::DrawLine(ColorBuffer* cb, DepthBuffer* db, const Vector3&v0, const Vector3&v1, Color col)
+{
+    DrawLine(cb, db,
+        Mathf::RoundToInt(v0.x), Mathf::RoundToInt(v0.y), v0.z,
+        Mathf::RoundToInt(v1.x), Mathf::RoundToInt(v1.y), v1.z, col);
 }

@@ -165,6 +165,21 @@ public:
             Lerp(a.w, b.w, t));
     }
 
+    // Get the interpolation of t between a and b.
+    static inline float LerpFactor(const Vector2& a, const Vector2& b, const Vector2& t)
+    {
+        auto dx = Abs(a.x - b.x);
+        auto dy = Abs(a.y - b.y);
+        if (dx > dy)
+        {
+            return Abs(t.x - a.x) / dx;
+        }
+        else
+        {
+            return Abs(t.y - a.y) / dy;
+        }
+    }
+
     // Returns largest of two or more values
     static inline float Max(float a, float b)
     {

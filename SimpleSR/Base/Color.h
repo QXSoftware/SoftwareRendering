@@ -22,6 +22,17 @@ struct Color
     static Color red;
     static Color green;
     static Color blue;
+
+    Color& operator+=(const Color& c);
+    Color& operator-=(const Color& c);
+    Color& operator*=(float f);
+    Color& operator/=(float f);
 };
+
+Color operator+(const Color& lhs, const Color& rhs);
+Color operator-(const Color& lhs, const Color& rhs);
+Color operator*(const Color& c, float f);
+Color operator*(float f, const Color& c);
+Color operator/(const Color& c, float f);
 
 #endif // Color_h__

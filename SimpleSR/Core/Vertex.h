@@ -13,10 +13,11 @@ struct Vertex
     Vector4 Normal;
     Vector3 NormalWorld;
     Vector2 UV0;
-    float DiffuseLight;
-    Color Col;
+    Color DiffCol;
+    Color VertexCol;
 
-    Vertex(Vector3* pos, Vector3* n, Vector2* uv0);
+    Vertex(Vector3 pos, Vector3 n, Vector2 uv0);
+    Vertex() = default;
     ~Vertex() = default;
 };
 

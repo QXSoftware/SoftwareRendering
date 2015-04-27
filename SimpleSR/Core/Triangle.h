@@ -30,6 +30,9 @@ class Triangle
     DepthBuffer* m_DepthBuf;
 
     void ComputeVertexLighting(Vertex* v);
+    void SortVerticesByY();// 把三个顶点按照屏幕坐标从上到下排序，排序后 m_V0 为 y 最小的顶点，m_V2 为 y 最大的顶点
+    void DrawWireFrame();
+    void DrawGouraud();
 public:
     Triangle() = default;
     ~Triangle() = default;
