@@ -138,16 +138,20 @@ void Triangle::DrawGouraud()
             float t0 = Mathf::LerpFactor(v0, v1, n0);
             n0.z = Mathf::Lerp(depth0, depth1, t0);
             Vector2 n0uv = Mathf::Lerp(uv0, uv1, t0);
+            Color n0lit = Mathf::Lerp(lit0, lit1, t0);
 
             Color n0col(Color::green);
             if (m_Texture != nullptr)
                 n0col = m_Texture->GetColor(n0uv);
+            n0col += n0lit;
+            n0col += m_AmbientColor;
             DrawingTool::DrawPixel(m_ColorBuf, m_DepthBuf, n0, n0col);
 
             Vector3 n1(v0.x - incX02 * k, v0.y + k);
             float t1 = Mathf::LerpFactor(v0, v2, n1);
             n1.z = Mathf::Lerp(depth0, depth2, t1);
             Vector2 n1uv = Mathf::Lerp(uv0, uv2, t1);
+            Color n1lit = Mathf::Lerp(lit0, lit2, t1);
 
             int lineWidth = Mathf::RoundToInt(n1.x - n0.x);
             for (int i = 0; i <= Mathf::Abs(lineWidth); i++)
@@ -157,9 +161,12 @@ void Triangle::DrawGouraud()
                 float t3 = Mathf::LerpFactor(n0, n1, n3);
                 n3.z = Mathf::Lerp(n0.z, n1.z, t3);
                 Vector2 n3uv = Mathf::Lerp(n0uv, n1uv, t3);
+                Color n3lit = Mathf::Lerp(n0lit, n1lit, t3);
                 Color col(Color::green);
                 if (m_Texture != nullptr)
                     col = m_Texture->GetColor(n3uv);
+                col += n3lit;
+                col += m_AmbientColor;
                 DrawingTool::DrawPixel(m_ColorBuf, m_DepthBuf, n3, col);
             }
         }
@@ -169,10 +176,13 @@ void Triangle::DrawGouraud()
             float t0 = Mathf::LerpFactor(v1, v2, n0);
             n0.z = Mathf::Lerp(depth1, depth2, t0);
             Vector2 n0uv = Mathf::Lerp(uv1, uv2, t0);
+            Color n0lit = Mathf::Lerp(lit1, lit2, t0);
 
             Color n0col(Color::green);
             if (m_Texture != nullptr)
                 n0col = m_Texture->GetColor(n0uv);
+            n0col += n0lit;
+            n0col += m_AmbientColor;
             DrawingTool::DrawPixel(m_ColorBuf, m_DepthBuf, n0, n0col);
 
             Vector3 n1(v0.x - incX02 * k, v0.y + k);
@@ -188,9 +198,12 @@ void Triangle::DrawGouraud()
                 float t3 = Mathf::LerpFactor(n0, n1, n3);
                 n3.z = Mathf::Lerp(n0.z, n1.z, t3);
                 Vector2 n3uv = Mathf::Lerp(n0uv, n1uv, t3);
+                Color n3lit = Mathf::Lerp(lit0, lit1, t3);
                 Color col(Color::green);
                 if (m_Texture != nullptr)
                     col = m_Texture->GetColor(n3uv);
+                col += n3lit;
+                col += m_AmbientColor;
                 DrawingTool::DrawPixel(m_ColorBuf, m_DepthBuf, n3, col);
             }
         }

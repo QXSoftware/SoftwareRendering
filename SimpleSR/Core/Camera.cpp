@@ -7,7 +7,7 @@ Camera::Camera()
     :m_FarClipPlane(100),
     m_NearClipPlane(0.3f),
     m_FieldOfView(60),
-    m_AmbientColor(0.1f, 0.3f, 0.2f)
+    m_AmbientColor(0.1f, 0.1f, 0.3f)
 {
     Transform = new ::Transform();
     Transform->SetCallback(std::bind(&Camera::UpdateMatrix, this));
@@ -20,7 +20,7 @@ Camera::Camera()
     m_ColorBuffer = new ColorBuffer(screenWidth, screenHeight);
 
     m_DirectionalLight.Col = Color::red;
-    m_DirectionalLight.Intensity = 1.1f;
+    m_DirectionalLight.Intensity = 0.5f;
     m_DirectionalLight.Direction = Vector3(30, 60, 20).normalized();
 }
 

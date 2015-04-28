@@ -3,7 +3,13 @@
 
 COLORREF DrawingTool::GetSystemColor(const Color& col)
 {
-    return RGB(col.r * 255, col.g * 255, col.b * 255);
+    int r = col.r * 255;
+    int g = col.g * 255;
+    int b = col.b * 255;
+    r = Mathf::Clamp(r, 0, 255);
+    g = Mathf::Clamp(g, 0, 255);
+    b = Mathf::Clamp(b, 0, 255);
+    return RGB(r, g, b);
 }
 
 Color DrawingTool::ConvertSystemColor(COLORREF col)

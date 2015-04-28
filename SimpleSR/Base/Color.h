@@ -25,6 +25,7 @@ struct Color
 
     Color& operator+=(const Color& c);
     Color& operator-=(const Color& c);
+    Color& operator*=(const Color& c);
     Color& operator*=(float f);
     Color& operator/=(float f);
 };
