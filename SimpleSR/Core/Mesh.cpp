@@ -36,6 +36,10 @@ void Mesh::Render(ColorBuffer* cBuf, DepthBuffer* dBuf, const Matrix4x4&p, const
         {
             i = 0;
 
+            // Cull Back
+            if (Mathf::IsBackface(vertex[0], vertex[1], vertex[2], &mvp, const_cast<Matrix4x4*>(&vp)))
+                continue;
+
             Triangle tr;
             Vertex v0(*vertex[0], *normal[0], *uv0[0]);
             Vertex v1(*vertex[1], *normal[1], *uv0[1]);

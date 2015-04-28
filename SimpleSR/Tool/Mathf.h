@@ -6,6 +6,7 @@
 #include <Vector2.h>
 #include <Vector3.h>
 #include <Vector4.h>
+#include <Matrix4x4.h>
 
 class Mathf
 {
@@ -185,6 +186,9 @@ public:
     {
         return a > b ? a : b;
     }
+
+    // Returns whether the triangle is backface.
+    static bool IsBackface(Vector3* v0, Vector3* v1, Vector3* v2, Matrix4x4* mvp, Matrix4x4* vp);
 };
 
 #endif // Mathf_h__
