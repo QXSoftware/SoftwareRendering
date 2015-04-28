@@ -19,6 +19,7 @@ class Camera
     float m_NearClipPlane;
     float m_FieldOfView;
     float m_Aspect;
+    Color m_BackgroundColor;
 
     ColorBuffer* m_ColorBuffer;
     DepthBuffer* m_DepthBuffer;
