@@ -99,9 +99,57 @@ void Triangle::SortVerticesByY()
     }
 }
 
+void Triangle::DrawSegment(
+    const Vector2& v0, const Vector2& v1, const Vector2& v2,
+    const Vector2& uv0, const Vector2& uv1, const Vector2& uv2,
+    const Color& lit0, const Color& lit1, const Color& lit2,
+    const float& depth0, const float& depth1, const float& depth2)
+{
+    int v0y = Mathf::FloorToInt(v0.y);
+    int v2y = Mathf::CeilToInt(v2.y);
+    for (int i = 0, height = Mathf::Abs(v0y - v2y); i <= height; i++)
+    {
+        float t0 = (float)i / (float)height;
+        float dx01 = (v0.x - v1.x) / (float)height;
+        float dx02 = (v0.x - v2.x) / (float)height;
+        int deltaY = v0y < v2y ? 1 : -1;
+
+        Vector3 n0(v0.x - dx01 * i, v0y + deltaY * i);
+        n0.z = Mathf::Lerp(depth0, depth1, t0);
+        Vector2 n0uv = Mathf::Lerp(uv0, uv1, t0);
+        Color n0lit = Mathf::Lerp(lit0, lit1, t0);
+
+        Vector3 n1(v0.x - dx02 * i, v0y + deltaY * i);
+        n1.z = Mathf::Lerp(depth0, depth2, t0);
+        Vector2 n1uv = Mathf::Lerp(uv0, uv2, t0);
+        Color n1lit = Mathf::Lerp(lit0, lit2, t0);
+
+        int n0x = Mathf::FloorToInt(n0.x);
+        int n1x = Mathf::CeilToInt(n1.x);
+
+        for (int j = 0, width = Mathf::Abs(n0x - n1x); j <= width; j++)
+        {
+            int deltaX = n0x < n1x ? 1 : -1;
+            Vector3 n3(n0x + deltaX * j, n0.y);
+            float t3 = Mathf::LerpFactor(n0, n1, n3);
+            n3.z = Mathf::Lerp(n0.z, n1.z, t3);
+            Vector2 n3uv = Mathf::Lerp(n0uv, n1uv, t3);
+            Color n3lit = Mathf::Lerp(n0lit, n1lit, t3);
+
+            Color col(Color::pink);
+            if (m_Texture != nullptr)
+                col = m_Texture->GetColor(n3uv);
+            col += n3lit;
+            col += m_AmbientColor;
+            DrawingTool::DrawPixel(m_ColorBuf, m_DepthBuf, n3, col);
+        }
+    }
+}
+
 void Triangle::DrawGouraud()
 {
     SortVerticesByY();
+
     auto v0 = *m_MVP * m_V0->Pos;
     auto v1 = *m_MVP * m_V1->Pos;
     auto v2 = *m_MVP * m_V2->Pos;
@@ -120,108 +168,52 @@ void Triangle::DrawGouraud()
     auto lit1 = m_V1->DiffCol; auto uv1 = m_V1->UV0; auto depth1 = vcvv1.z;
     auto lit2 = m_V2->DiffCol; auto uv2 = m_V2->UV0; auto depth2 = vcvv2.z;
 
-    auto stepY01 = Mathf::Abs(v0.y - v1.y);
-    auto stepY02 = Mathf::Abs(v0.y - v2.y);
-    auto stepY12 = Mathf::Abs(v1.y - v2.y);
-    auto stepX01 = Mathf::Abs(v0.x - v1.x);
-    auto stepX02 = Mathf::Abs(v0.x - v2.x);
-    auto stepX12 = Mathf::Abs(v1.x - v2.x);
-    auto incX01 = stepY01 == 0 ? 0 : (v0.x - v1.x) / stepY01;
-    auto incX02 = stepY02 == 0 ? 0 : (v0.x - v2.x) / stepY02;
-    auto incX12 = stepY12 == 0 ? 0 : (v1.x - v2.x) / stepY12;
-
-    for (int k = 0; k < stepY02; k++)
+    if (v0.y == v1.y && v1.y == v2.y)
     {
-        if (k < stepY01)
-        {
-            Vector3 n0(v0.x - incX01 * k, v0.y + k);
-            float t0 = Mathf::LerpFactor(v0, v1, n0);
-            n0.z = Mathf::Lerp(depth0, depth1, t0);
-            Vector2 n0uv = Mathf::Lerp(uv0, uv1, t0);
-            Color n0lit = Mathf::Lerp(lit0, lit1, t0);
+        return;
+    }
+    else if (v0.x == v1.x && v1.x == v2.x)
+    {
+        return;
+    }
+    else if (v0.y == v1.y)
+    {
+        if (v0.x == v1.x)
+            return;
+        DrawSegment(
+            v2, v0, v1,
+            uv2, uv0, uv1,
+            lit2, lit0, lit1,
+            depth2, depth0, depth1);
+    }
+    else if (v1.y == v2.y)
+    {
+        if (v1.x == v2.x)
+            return;
+        DrawSegment(
+            v0, v1, v2,
+            uv0, uv1, uv2,
+            lit0, lit1, lit2,
+            depth0, depth1, depth2);
+    }
+    else
+    {
+        auto t3 = Mathf::Abs(v0.y - v1.y) / Mathf::Abs(v0.y - v2.y);
+        auto v3 = Mathf::Lerp(v0, v2, t3);
+        auto lit3 = Mathf::Lerp(lit0, lit2, t3);
+        auto uv3 = Mathf::Lerp(uv0, uv2, t3);
+        auto depth3 = Mathf::Lerp(depth0, depth2, t3);
 
-            Color n0col(Color::pink);
-            if (m_Texture != nullptr)
-                n0col = m_Texture->GetColor(n0uv);
-            n0col += n0lit;
-            n0col += m_AmbientColor;
-            DrawingTool::DrawPixel(m_ColorBuf, m_DepthBuf, n0, n0col);
-
-            Vector3 n1(v0.x - incX02 * k, v0.y + k);
-            float t1 = Mathf::LerpFactor(v0, v2, n1);
-            n1.z = Mathf::Lerp(depth0, depth2, t1);
-            Vector2 n1uv = Mathf::Lerp(uv0, uv2, t1);
-            Color n1lit = Mathf::Lerp(lit0, lit2, t1);
-
-            Color n1col(Color::pink);
-            if (m_Texture != nullptr)
-                n1col = m_Texture->GetColor(n1uv);
-            n1col += n1lit;
-            n1col += m_AmbientColor;
-            DrawingTool::DrawPixel(m_ColorBuf, m_DepthBuf, n1, n1col);
-
-            int lineWidth = Mathf::RoundToInt(n1.x - n0.x);
-            for (int i = 0; i <= Mathf::Abs(lineWidth); i++)
-            {
-                auto lineInc = lineWidth > 0 ? i : -i;
-                Vector3 n3(n0.x + lineInc, n0.y);
-                float t3 = Mathf::LerpFactor(n0, n1, n3);
-                n3.z = Mathf::Lerp(n0.z, n1.z, t3);
-                Vector2 n3uv = Mathf::Lerp(n0uv, n1uv, t3);
-                Color n3lit = Mathf::Lerp(n0lit, n1lit, t3);
-                Color col(Color::pink);
-                if (m_Texture != nullptr)
-                    col = m_Texture->GetColor(n3uv);
-                col += n3lit;
-                col += m_AmbientColor;
-                DrawingTool::DrawPixel(m_ColorBuf, m_DepthBuf, n3, col);
-            }
-        }
-        else
-        {
-            Vector3 n0(v1.x - incX12 * (k - stepY01), v0.y + k);
-            float t0 = Mathf::LerpFactor(v1, v2, n0);
-            n0.z = Mathf::Lerp(depth1, depth2, t0);
-            Vector2 n0uv = Mathf::Lerp(uv1, uv2, t0);
-            Color n0lit = Mathf::Lerp(lit1, lit2, t0);
-
-            Color n0col(Color::pink);
-            if (m_Texture != nullptr)
-                n0col = m_Texture->GetColor(n0uv);
-            n0col += n0lit;
-            n0col += m_AmbientColor;
-            DrawingTool::DrawPixel(m_ColorBuf, m_DepthBuf, n0, n0col);
-
-            Vector3 n1(v0.x - incX02 * k, v0.y + k);
-            float t1 = Mathf::LerpFactor(v0, v2, n1);
-            n1.z = Mathf::Lerp(depth0, depth2, t1);
-            Vector2 n1uv = Mathf::Lerp(uv0, uv2, t1);
-            Color n1lit = Mathf::Lerp(lit0, lit2, t1);
-
-            Color n1col(Color::pink);
-            if (m_Texture != nullptr)
-                n1col = m_Texture->GetColor(n1uv);
-            n1col += n1lit;
-            n1col += m_AmbientColor;
-            DrawingTool::DrawPixel(m_ColorBuf, m_DepthBuf, n1, n1col);
-
-            int lineWidth = Mathf::RoundToInt(n1.x - n0.x);
-            for (int i = 0; i <= Mathf::Abs(lineWidth); i++)
-            {
-                auto lineInc = lineWidth > 0 ? i : -i;
-                Vector3 n3(n0.x + lineInc, n0.y);
-                float t3 = Mathf::LerpFactor(n0, n1, n3);
-                n3.z = Mathf::Lerp(n0.z, n1.z, t3);
-                Vector2 n3uv = Mathf::Lerp(n0uv, n1uv, t3);
-                Color n3lit = Mathf::Lerp(lit0, lit1, t3);
-                Color col(Color::pink);
-                if (m_Texture != nullptr)
-                    col = m_Texture->GetColor(n3uv);
-                col += n3lit;
-                col += m_AmbientColor;
-                DrawingTool::DrawPixel(m_ColorBuf, m_DepthBuf, n3, col);
-            }
-        }
+        DrawSegment(
+            v0, v1, v3,
+            uv0, uv1, uv3,
+            lit0, lit1, lit3,
+            depth0, depth1, depth3);
+        DrawSegment(
+            v2, v1, v3,
+            uv2, uv1, uv3,
+            lit2, lit1, lit3,
+            depth2, depth1, depth3);
     }
 }
 

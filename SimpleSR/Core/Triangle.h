@@ -34,6 +34,13 @@ class Triangle
     void ComputeVertexLighting(Vertex* v);
     void SortVerticesByY();// 把三个顶点按照屏幕坐标从上到下排序，排序后 m_V0 为 y 最小的顶点，m_V2 为 y 最大的顶点
     void DrawWireFrame();
+    // v1 和 v2 是在一条线上的，v0 是三角形的最顶或最低（y 轴）
+    // 这个方法用于光栅化一个平底三角形或者“平顶”三角形
+    void DrawSegment(
+        const Vector2& v0, const Vector2& v1, const Vector2& v2,
+        const Vector2& uv0, const Vector2& uv1, const Vector2& uv2,
+        const Color& lit0, const Color& lit1, const Color& lit2,
+        const float& depth0, const float& depth1, const float& depth2);
     void DrawGouraud();
 public:
     Triangle() = default;

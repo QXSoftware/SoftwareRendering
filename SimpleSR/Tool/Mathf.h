@@ -99,6 +99,12 @@ public:
         return floor(f);
     }
 
+    // Returns the largest integer smaller to or equal to f.
+    static inline int FloorToInt(float f)
+    {
+        return (int)f;
+    }
+
     // Returns f rounded to the nearest integer.
     static inline float Round(float f)
     {
@@ -173,12 +179,15 @@ public:
         auto dy = Abs(a.y - b.y);
         if (dx > dy)
         {
-            return Abs(t.x - a.x) / dx;
+            if (dx != 0)
+                return Abs(t.x - a.x) / dx;
         }
         else
         {
-            return Abs(t.y - a.y) / dy;
+            if (dy != 0)
+                return Abs(t.y - a.y) / dy;
         }
+        return 0;
     }
 
     // Returns largest of two or more values
