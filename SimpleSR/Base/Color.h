@@ -22,6 +22,7 @@ struct Color
     static Color red;
     static Color green;
     static Color blue;
+    static Color pink;
 
     Color& operator+=(const Color& c);
     Color& operator-=(const Color& c);
