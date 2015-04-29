@@ -144,8 +144,8 @@ void Triangle::DrawSegment(
             Color col(Color::pink);
             if (m_Texture != nullptr)
                 col = m_Texture->GetColor(n3uv);
+            col *= m_AmbientColor;
             col += n3lit;
-            col += m_AmbientColor;
             DrawingTool::DrawPixel(m_ColorBuf, m_DepthBuf, n3, col);
         }
     }

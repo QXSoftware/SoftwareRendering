@@ -6,9 +6,7 @@
 Camera::Camera()
     :m_FarClipPlane(100),
     m_NearClipPlane(0.3f),
-    m_FieldOfView(60),
-    m_BackgroundColor(0.1f, 0.2f, 0.25f),
-    m_AmbientColor(0.1f, 0.4f, 0.05f)
+    m_FieldOfView(60)
 {
     Transform = new ::Transform();
     Transform->SetCallback(std::bind(&Camera::UpdateMatrix, this));
@@ -20,9 +18,11 @@ Camera::Camera()
     m_DepthBuffer = new DepthBuffer(screenWidth, screenHeight);
     m_ColorBuffer = new ColorBuffer(screenWidth, screenHeight);
 
-    m_DirectionalLight.Col = Color::red;
-    m_DirectionalLight.Intensity = 0.5f;
-    m_DirectionalLight.Direction = Vector3(30, 60, 20).normalized();
+    m_BackgroundColor = Color(49, 79, 126) / 255;
+    m_AmbientColor = Color(158, 106, 11) / 255;
+    m_DirectionalLight.Col = Color(38, 208, 40) / 255;
+    m_DirectionalLight.Intensity = 0.9f;
+    m_DirectionalLight.Direction = Vector3(-1, 1, 1).normalized();
 }
 
 Camera::~Camera()
