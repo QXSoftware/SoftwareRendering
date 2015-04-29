@@ -168,7 +168,6 @@ Matrix4x4 Matrix4x4::Perspective(float fov, float aspect, float n, float f)
         0, 0, 1, 0);
 }
 
-
 Matrix4x4 Matrix4x4::ViewPortMatrix(int w, int h)
 {
     return Matrix4x4(
