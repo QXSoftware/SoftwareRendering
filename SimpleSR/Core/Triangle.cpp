@@ -168,9 +168,13 @@ void Triangle::DrawGouraud()
     v2 = *m_ViewPortMatrix * vcvv2;
 
     auto mv = (*m_ViewMatrix) * (*m_ObjectToWorld);
-    auto w0 = 1.0f / (mv * m_V0->Pos).z;
-    auto w1 = 1.0f / (mv * m_V1->Pos).z;
-    auto w2 = 1.0f / (mv * m_V2->Pos).z;
+    auto z0 = (mv * m_V0->Pos).z;
+    auto z1 = (mv * m_V1->Pos).z;
+    auto z2 = (mv * m_V2->Pos).z;
+
+    auto w0 = 1.0f / (z0 == 0 ? 0.001f : z0);
+    auto w1 = 1.0f / (z1 == 0 ? 0.001f : z1);
+    auto w2 = 1.0f / (z2 == 0 ? 0.001f : z2);
 
     // 三角形三个点的 Lambert 光照值，uv 以及深度值
     // 这三个值将进行 Gouraud 差值
