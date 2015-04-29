@@ -101,7 +101,8 @@ void Triangle::SortVerticesByY()
 
 void Triangle::DrawSegment(
     const Vector2& v0, const Vector2& v1, const Vector2& v2,
-    const Vector2& uv0, const Vector2& uv1, const Vector2& uv2,
+    const float& w0, const float& w1, const float& w2,
+    const Vector2& uvw0, const Vector2& uvw1, const Vector2& uvw2,
     const Color& lit0, const Color& lit1, const Color& lit2,
     const float& depth0, const float& depth1, const float& depth2)
 {
@@ -117,12 +118,14 @@ void Triangle::DrawSegment(
 
         Vector3 n0(v0.x - dx01 * i, v0y + deltaY * i);
         n0.z = Mathf::Lerp(depth0, depth1, t0);
-        Vector2 n0uv = Mathf::Lerp(uv0, uv1, t0);
+        auto n0uvw = Mathf::Lerp(uvw0, uvw1, t0);
+        auto n0w = Mathf::Lerp(w0, w1, t0);
         Color n0lit = Mathf::Lerp(lit0, lit1, t0);
 
         Vector3 n1(v0.x - dx02 * i, v0y + deltaY * i);
         n1.z = Mathf::Lerp(depth0, depth2, t0);
-        Vector2 n1uv = Mathf::Lerp(uv0, uv2, t0);
+        auto n1uvw = Mathf::Lerp(uvw0, uvw2, t0);
+        auto n1w = Mathf::Lerp(w0, w2, t0);
         Color n1lit = Mathf::Lerp(lit0, lit2, t0);
 
         bool n0xIsSmaller = v1.x < v2.x;
@@ -135,7 +138,7 @@ void Triangle::DrawSegment(
             Vector3 n3(n0x + deltaX * j, n0.y);
             float t3 = Mathf::LerpFactor(n0, n1, n3);
             n3.z = Mathf::Lerp(n0.z, n1.z, t3);
-            Vector2 n3uv = Mathf::Lerp(n0uv, n1uv, t3);
+            Vector2 n3uv = Mathf::LerpUV(n0uvw, n0w, n1uvw, n1w, t3);
             Color n3lit = Mathf::Lerp(n0lit, n1lit, t3);
 
             Color col(Color::pink);
@@ -164,11 +167,16 @@ void Triangle::DrawGouraud()
     v1 = *m_ViewPortMatrix * vcvv1;
     v2 = *m_ViewPortMatrix * vcvv2;
 
+    auto mv = (*m_ViewMatrix) * (*m_ObjectToWorld);
+    auto w0 = 1.0f / (mv * m_V0->Pos).z;
+    auto w1 = 1.0f / (mv * m_V1->Pos).z;
+    auto w2 = 1.0f / (mv * m_V2->Pos).z;
+
     // 三角形三个点的 Lambert 光照值，uv 以及深度值
     // 这三个值将进行 Gouraud 差值
-    auto lit0 = m_V0->DiffCol; auto uv0 = m_V0->UV0; auto depth0 = vcvv0.z;
-    auto lit1 = m_V1->DiffCol; auto uv1 = m_V1->UV0; auto depth1 = vcvv1.z;
-    auto lit2 = m_V2->DiffCol; auto uv2 = m_V2->UV0; auto depth2 = vcvv2.z;
+    auto lit0 = m_V0->DiffCol; auto uvw0 = m_V0->UV0 * w0; auto depth0 = vcvv0.z;
+    auto lit1 = m_V1->DiffCol; auto uvw1 = m_V1->UV0 * w1; auto depth1 = vcvv1.z;
+    auto lit2 = m_V2->DiffCol; auto uvw2 = m_V2->UV0 * w2; auto depth2 = vcvv2.z;
 
     if (v0.y == v1.y && v1.y == v2.y)
     {
@@ -184,7 +192,8 @@ void Triangle::DrawGouraud()
             return;
         DrawSegment(
             v2, v0, v1,
-            uv2, uv0, uv1,
+            w2, w0, w1,
+            uvw2, uvw0, uvw1,
             lit2, lit0, lit1,
             depth2, depth0, depth1);
     }
@@ -194,7 +203,8 @@ void Triangle::DrawGouraud()
             return;
         DrawSegment(
             v0, v1, v2,
-            uv0, uv1, uv2,
+            w0, w1, w2,
+            uvw0, uvw1, uvw2,
             lit0, lit1, lit2,
             depth0, depth1, depth2);
     }
@@ -203,17 +213,20 @@ void Triangle::DrawGouraud()
         auto t3 = Mathf::Abs(v0.y - v1.y) / Mathf::Abs(v0.y - v2.y);
         auto v3 = Mathf::Lerp(v0, v2, t3);
         auto lit3 = Mathf::Lerp(lit0, lit2, t3);
-        auto uv3 = Mathf::Lerp(uv0, uv2, t3);
+        auto w3 = Mathf::Lerp(w0, w2, t3);
+        auto uvw3 = Mathf::Lerp(uvw0, uvw2, t3);
         auto depth3 = Mathf::Lerp(depth0, depth2, t3);
 
         DrawSegment(
             v0, v1, v3,
-            uv0, uv1, uv3,
+            w0, w1, w3,
+            uvw0, uvw1, uvw3,
             lit0, lit1, lit3,
             depth0, depth1, depth3);
         DrawSegment(
             v2, v1, v3,
-            uv2, uv1, uv3,
+            w2, w1, w3,
+            uvw2, uvw1, uvw3,
             lit2, lit1, lit3,
             depth2, depth1, depth3);
     }

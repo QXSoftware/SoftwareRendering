@@ -190,6 +190,14 @@ public:
         return 0;
     }
 
+    // Get the perspective correctted uv.
+    // uvw = uv / z
+    // w = 1 / z
+    static inline Vector2 LerpUV(const Vector2& uvw0, const float& w0, const Vector2& uvw1, const float& w1, float t)
+    {
+        return Lerp(uvw0, uvw1, t) / Lerp(w0, w1, t);
+    }
+
     // Returns largest of two or more values
     static inline float Max(float a, float b)
     {

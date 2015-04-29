@@ -38,7 +38,8 @@ class Triangle
     // 这个方法用于光栅化一个平底三角形或者“平顶”三角形
     void DrawSegment(
         const Vector2& v0, const Vector2& v1, const Vector2& v2,
-        const Vector2& uv0, const Vector2& uv1, const Vector2& uv2,
+        const float& w0, const float& w1, const float& w2,
+        const Vector2& uvw0, const Vector2& uvw1, const Vector2& uvw2,
         const Color& lit0, const Color& lit1, const Color& lit2,
         const float& depth0, const float& depth1, const float& depth2);
     void DrawGouraud();
