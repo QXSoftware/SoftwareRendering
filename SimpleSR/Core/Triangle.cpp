@@ -151,6 +151,42 @@ void Triangle::DrawSegment(
     }
 }
 
+RegionCode Triangle::Encode(Vector4& v)
+{
+    RegionCode ret = 0;
+    if (v.w > 0)
+    {
+        if (v.w + v.x < 0)
+            ret |= CVV_LEFT;
+        if (v.w - v.x < 0)
+            ret |= CVV_RIGHT;
+        if (v.w + v.y < 0)
+            ret |= CVV_BOTTOM;
+        if (v.w - v.y < 0)
+            ret |= CVV_TOP;
+        if (v.w + v.z < 0)
+            ret |= CVV_NEAR;
+        if (v.w - v.z < 0)
+            ret |= CVV_FAR;
+    }
+    else
+    {
+        if (v.w + v.x > 0)
+            ret |= CVV_LEFT;
+        if (v.w - v.x > 0)
+            ret |= CVV_RIGHT;
+        if (v.w + v.y > 0)
+            ret |= CVV_BOTTOM;
+        if (v.w - v.y > 0)
+            ret |= CVV_TOP;
+        if (v.w + v.z > 0)
+            ret |= CVV_NEAR;
+        if (v.w - v.z > 0)
+            ret |= CVV_FAR;
+    }
+    return ret;
+}
+
 void Triangle::DrawGouraud()
 {
     SortVerticesByY();

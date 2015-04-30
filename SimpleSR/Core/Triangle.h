@@ -10,6 +10,7 @@
 #include <DepthBuffer.h>
 #include <DirectionalLight.h>
 #include <Texture2D.h>
+#include <MacrosAndDefines.h>
 
 class Triangle
 {
@@ -30,6 +31,8 @@ class Triangle
     ColorBuffer* m_ColorBuf;
     DepthBuffer* m_DepthBuf;
     Texture2D* m_Texture;
+
+    RegionCode Encode(Vector4& v);
 
     void ComputeVertexLighting(Vertex* v);
     void SortVerticesByY();// 把三个顶点按照屏幕坐标从上到下排序，排序后 m_V0 为 y 最小的顶点，m_V2 为 y 最大的顶点
