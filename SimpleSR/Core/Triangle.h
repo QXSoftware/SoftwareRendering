@@ -47,7 +47,12 @@ class Triangle
         const float& depth0, const float& depth1, const float& depth2);
     void DrawGouraud();
 public:
-    Triangle() = default;
+    Triangle() :
+        m_V0(0), m_V1(0), m_V2(0),
+        m_ObjectToWorld(0), m_ObjectToWorldInversed(0), m_ViewMatrix(0),
+        m_ProjectionMatrix(0), m_ViewPortMatrix(0), m_MVP(0),
+        m_DirectionalLight(0), m_ColorBuf(0), m_DepthBuf(0), m_Texture(0)
+    {}
     ~Triangle() = default;
     Triangle(const Triangle&) = delete;
     Triangle& operator=(const Triangle&) = delete;

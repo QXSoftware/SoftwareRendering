@@ -214,9 +214,9 @@ void Triangle::DrawGouraud()
 
     // 三角形三个点的 Lambert 光照值，uv 以及深度值
     // 这三个值将进行 Gouraud 差值
-    auto lit0 = m_V0->DiffCol; auto uvw0 = m_V0->UV0 * w0; auto depth0 = vcvv0.z;
-    auto lit1 = m_V1->DiffCol; auto uvw1 = m_V1->UV0 * w1; auto depth1 = vcvv1.z;
-    auto lit2 = m_V2->DiffCol; auto uvw2 = m_V2->UV0 * w2; auto depth2 = vcvv2.z;
+    auto lit0 = m_V0->DiffCol; auto uvw0 = m_V0->UV * w0; auto depth0 = vcvv0.z;
+    auto lit1 = m_V1->DiffCol; auto uvw1 = m_V1->UV * w1; auto depth1 = vcvv1.z;
+    auto lit2 = m_V2->DiffCol; auto uvw2 = m_V2->UV * w2; auto depth2 = vcvv2.z;
 
     if (v0.y == v1.y && v1.y == v2.y)
     {

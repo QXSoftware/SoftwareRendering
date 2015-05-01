@@ -5,6 +5,7 @@
 #include <Vector3.h>
 #include <Vector4.h>
 #include <Color.h>
+#include <MacrosAndDefines.h>
 
 struct Vertex
 {
@@ -12,12 +13,15 @@ struct Vertex
     Vector4 PosWorld;
     Vector4 Normal;
     Vector3 NormalWorld;
-    Vector2 UV0;
+    Vector2 UV;
     Color DiffCol;
     Color VertexCol;
 
-    Vertex(Vector3 pos, Vector3 n, Vector2 uv0);
-    Vertex() = default;
+    RegionCode Code;
+    float BoundaryCode[6];
+
+    Vertex(Vector3 pos, Vector3 n, Vector2 uv);
+    Vertex();
     ~Vertex() = default;
 };
 
