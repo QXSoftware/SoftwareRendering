@@ -116,7 +116,7 @@ Vertex Mesh::ConstructVertex(Vector4& v, Vector4& n, Vector2& uv, const Matrix4x
     return vert;
 }
 
-void Mesh::Clip(Vertex& v0, Vertex& v1, Vertex& v2)
+void Mesh::Clip(Vertex v0, Vertex v1, Vertex v2, ColorBuffer* cBuf, DepthBuffer* dBuf, const Matrix4x4& vp)
 {
     auto clipPlanes =
     {
@@ -132,7 +132,7 @@ void Mesh::Clip(Vertex& v0, Vertex& v1, Vertex& v2)
     {
         std::vector<Vertex> input = output;
         output.clear();
-        Vertex s = *input.end();
+        Vertex s = input.back();
         for (Vertex e : input)
         {
             if (InsidePlane(e, plane))
@@ -149,6 +149,23 @@ void Mesh::Clip(Vertex& v0, Vertex& v1, Vertex& v2)
             }
             s = e;
         }
+    }
+
+    for (int i = 0, max = output.size() - 2; i < max; i++)
+    {
+        auto out0 = output[0];
+        auto out1 = output[i + 1];
+        auto out2 = output[i + 2];
+        Triangle tr;
+        tr.m_V0 = &out0;
+        tr.m_V1 = &out1;
+        tr.m_V2 = &out2;
+        tr.m_ColorBuf = cBuf;
+        tr.m_DepthBuf = dBuf;
+        tr.m_ViewPortMatrix = const_cast<Matrix4x4*>(&vp);
+        tr.m_Texture = m_Texture;
+        tr.m_AmbientColor = m_AmbientColor;
+        tr.Render();
     }
 }
 
@@ -181,16 +198,7 @@ void Mesh::Render(ColorBuffer* cBuf, DepthBuffer* dBuf, const Matrix4x4&p, const
             auto v1 = ConstructVertex(Vector4(*vertex[1], 1), Vector4(*normal[1]), *uv[1], mvp, mv, obj2wi);
             auto v2 = ConstructVertex(Vector4(*vertex[2], 1), Vector4(*normal[2]), *uv[2], mvp, mv, obj2wi);
 
-            Triangle tr;
-            tr.m_V0 = &v0;
-            tr.m_V1 = &v1;
-            tr.m_V2 = &v2;
-            tr.m_ColorBuf = cBuf;
-            tr.m_DepthBuf = dBuf;
-            tr.m_ViewPortMatrix = const_cast<Matrix4x4*>(&vp);
-            tr.m_Texture = m_Texture;
-            tr.m_AmbientColor = m_AmbientColor;
-            tr.Render();
+            Clip(v0, v1, v2, cBuf, dBuf, vp);
         }
     }
 }
