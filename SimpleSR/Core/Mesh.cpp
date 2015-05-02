@@ -132,6 +132,8 @@ void Mesh::Clip(Vertex v0, Vertex v1, Vertex v2, ColorBuffer* cBuf, DepthBuffer*
     {
         std::vector<Vertex> input = output;
         output.clear();
+        if (input.empty())
+            continue;
         Vertex s = input.back();
         for (Vertex e : input)
         {
