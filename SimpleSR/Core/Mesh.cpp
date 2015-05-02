@@ -177,11 +177,11 @@ void Mesh::Render(ColorBuffer* cBuf, DepthBuffer* dBuf, const Matrix4x4&p, const
             if (Mathf::IsBackface(vertex[0], vertex[1], vertex[2], &mvp, const_cast<Matrix4x4*>(&vp)))
                 continue;
 
-            Triangle tr;
             auto v0 = ConstructVertex(Vector4(*vertex[0], 1), Vector4(*normal[0]), *uv[0], mvp, mv, obj2wi);
             auto v1 = ConstructVertex(Vector4(*vertex[1], 1), Vector4(*normal[1]), *uv[1], mvp, mv, obj2wi);
             auto v2 = ConstructVertex(Vector4(*vertex[2], 1), Vector4(*normal[2]), *uv[2], mvp, mv, obj2wi);
 
+            Triangle tr;
             tr.m_V0 = &v0;
             tr.m_V1 = &v1;
             tr.m_V2 = &v2;
