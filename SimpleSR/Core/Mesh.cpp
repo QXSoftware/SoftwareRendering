@@ -111,11 +111,12 @@ Vertex Mesh::ConstructVertex(Vector4& v, Vector4& n, Vector2& uv, const Matrix4x
     auto normal = Vector3(n * obj2wi).normalized();
     vert.DiffCol = Mathf::Max(0, Vector3::Dot(normal, m_DirectionalLight->Direction))
         * m_DirectionalLight->Intensity * m_DirectionalLight->Col;
-    // vert->Code
+    // ¼ÆËãÇøÓòÂë
+    vert.Code = Encode(vert.Pos);
     return vert;
 }
 
-void Mesh::Clip(Vertex v0, Vertex v1, Vertex v2)
+void Mesh::Clip(Vertex& v0, Vertex& v1, Vertex& v2)
 {
     auto clipPlanes =
     {
