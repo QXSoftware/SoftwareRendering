@@ -7,6 +7,7 @@
 #include <Vector3.h>
 #include <Vector4.h>
 #include <Matrix4x4.h>
+#include <Vertex.h>
 
 class Mathf
 {
@@ -170,6 +171,54 @@ public:
             Lerp(a.y, b.y, t),
             Lerp(a.z, b.z, t),
             Lerp(a.w, b.w, t));
+    }
+
+    // Interpolates between a and b by t. t is clamped between 0 and 1.
+    static Vertex Lerp(const Vertex& a, const Vertex& b, float t)
+    {
+        Vertex v;
+        v.Pos = Mathf::Lerp(a.Pos, b.Pos, t);
+        v.UV = Mathf::Lerp(a.UV, b.UV, t);
+        v.DiffCol = Mathf::Lerp(a.DiffCol, b.DiffCol, t);
+        v.W = Mathf::Lerp(a.W, b.W, t);
+        v.Code = Encode(v.Pos);
+        return v;
+    }
+
+    static RegionCode Encode(Vector4& v)
+    {
+        RegionCode ret = 0;
+        if (v.w > 0)
+        {
+            if (v.w + v.x < 0)
+                ret |= CVV_LEFT;
+            if (v.w - v.x < 0)
+                ret |= CVV_RIGHT;
+            if (v.w + v.y < 0)
+                ret |= CVV_BOTTOM;
+            if (v.w - v.y < 0)
+                ret |= CVV_TOP;
+            if (v.w + v.z < 0)
+                ret |= CVV_NEAR;
+            if (v.w - v.z < 0)
+                ret |= CVV_FAR;
+        }
+        else
+        {
+            if (v.w + v.x > 0)
+                ret |= CVV_LEFT;
+            if (v.w - v.x > 0)
+                ret |= CVV_RIGHT;
+            if (v.w + v.y > 0)
+                ret |= CVV_BOTTOM;
+            if (v.w - v.y > 0)
+                ret |= CVV_TOP;
+            if (v.w + v.z > 0)
+                ret |= CVV_NEAR;
+            if (v.w - v.z > 0)
+                ret |= CVV_FAR;
+        }
+        return ret;
     }
 
     // Get the interpolation of t between a and b.

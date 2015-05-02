@@ -29,7 +29,6 @@ class Mesh
     Texture2D* m_Texture;
     Color m_AmbientColor;
 
-    RegionCode Encode(Vector4& v);
     inline bool InsidePlane(const Vertex& v, RegionCode plane)
     {
         return (v.Code & plane) == 0;

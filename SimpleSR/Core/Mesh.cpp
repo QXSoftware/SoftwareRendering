@@ -1,6 +1,8 @@
 #include <Mesh.h>
 #include <Triangle.h>
 
+#define MIN_W (0.0001f)
+
 Mesh::Mesh()
     :m_DirectionalLight(0), m_Texture(0)
 {
@@ -16,42 +18,6 @@ void Mesh::SetLight(DirectionalLight* l, Color a)
 {
     m_DirectionalLight = l;
     m_AmbientColor = a;
-}
-
-RegionCode Mesh::Encode(Vector4& v)
-{
-    RegionCode ret = 0;
-    if (v.w > 0)
-    {
-        if (v.w + v.x < 0)
-            ret |= CVV_LEFT;
-        if (v.w - v.x < 0)
-            ret |= CVV_RIGHT;
-        if (v.w + v.y < 0)
-            ret |= CVV_BOTTOM;
-        if (v.w - v.y < 0)
-            ret |= CVV_TOP;
-        if (v.w + v.z < 0)
-            ret |= CVV_NEAR;
-        if (v.w - v.z < 0)
-            ret |= CVV_FAR;
-    }
-    else
-    {
-        if (v.w + v.x > 0)
-            ret |= CVV_LEFT;
-        if (v.w - v.x > 0)
-            ret |= CVV_RIGHT;
-        if (v.w + v.y > 0)
-            ret |= CVV_BOTTOM;
-        if (v.w - v.y > 0)
-            ret |= CVV_TOP;
-        if (v.w + v.z > 0)
-            ret |= CVV_NEAR;
-        if (v.w - v.z > 0)
-            ret |= CVV_FAR;
-    }
-    return ret;
 }
 
 Vertex Mesh::ComputeIntersect(Vertex& v0, Vertex& v1, RegionCode plane)
@@ -92,13 +58,7 @@ Vertex Mesh::ComputeIntersect(Vertex& v0, Vertex& v1, RegionCode plane)
             break;
         }
     }
-    Vertex v;
-    v.Pos = Mathf::Lerp(in, out, u);
-    v.UV = Mathf::Lerp(v0.UV, v1.UV, u);
-    v.DiffCol = Mathf::Lerp(v0.DiffCol, v1.DiffCol, u);
-    v.W = Mathf::Lerp(v0.W, v1.W, u);
-    v.Code = Encode(v.Pos);
-    return v;
+    return Mathf::Lerp(v0, v1, u);
 }
 
 Vertex Mesh::ConstructVertex(Vector4& v, Vector4& n, Vector2& uv, const Matrix4x4& mvp, const Matrix4x4& mv, const Matrix4x4& obj2wi)
@@ -112,7 +72,7 @@ Vertex Mesh::ConstructVertex(Vector4& v, Vector4& n, Vector2& uv, const Matrix4x
     vert.DiffCol = Mathf::Max(0, Vector3::Dot(normal, m_DirectionalLight->Direction))
         * m_DirectionalLight->Intensity * m_DirectionalLight->Col;
     // ¼ÆËãÇøÓòÂë
-    vert.Code = Encode(vert.Pos);
+    vert.Code = Mathf::Encode(vert.Pos);
     return vert;
 }
 
