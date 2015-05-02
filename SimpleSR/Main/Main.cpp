@@ -163,6 +163,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
                 auto rot = target->GetRotation();
                 target->SetRotation(rot.x - delta * 10, rot.y, rot.z);
             }
+            else if ((_TCHAR)wParam == VK_ESCAPE)
+            {
+                auto target = engine.GetCamera()->Transform;
+                target->SetPosition(0, 0, -10);
+            }
             break;
         }
         case WM_ERASEBKGND:

@@ -141,7 +141,7 @@ void Mesh::Clip(Vertex v0, Vertex v1, Vertex v2, ColorBuffer* cBuf, DepthBuffer*
             {
                 if (!InsidePlane(s, plane))
                 {
-                    output.push_back(ComputeIntersect(s, e, plane));
+                    output.push_back(ComputeIntersect(e, s, plane));
                 }
                 output.push_back(e);
             }
