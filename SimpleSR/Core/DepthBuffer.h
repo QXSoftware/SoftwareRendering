@@ -12,7 +12,7 @@ public:
     DepthBuffer(const DepthBuffer&) = delete;
     DepthBuffer& operator=(const DepthBuffer&) = delete;
 public:
-    float GetDepth(int x, int y);
+    bool ZTest(int x, int y, float d);
     void SetDepth(int x, int y, float d);
     void Clear(float d);
 };

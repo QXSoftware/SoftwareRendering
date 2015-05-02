@@ -22,9 +22,8 @@ Color DrawingTool::ConvertSystemColor(COLORREF col)
 
 void DrawingTool::DrawPixel(ColorBuffer* cb, DepthBuffer* db, int x, int y, float z, Color col)
 {
-    auto depth = db->GetDepth(x, y);
     // ZTest LEqual
-    if (z <= depth)
+    if (db->ZTest(x, y, z))
     {
         // ZWrite On
         db->SetDepth(x, y, z);

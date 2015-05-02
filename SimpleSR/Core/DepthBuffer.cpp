@@ -21,9 +21,13 @@ DepthBuffer::~DepthBuffer()
     m_Buffer = nullptr;
 }
 
-float DepthBuffer::GetDepth(int x, int y)
+bool DepthBuffer::ZTest(int x, int y, float d)
 {
-    return m_Buffer[x][y];
+    if (x < m_Width && y < m_Height)
+    {
+        return m_Buffer[x][y] >= d;
+    }
+    return false;
 }
 
 void DepthBuffer::SetDepth(int x, int y, float d)
