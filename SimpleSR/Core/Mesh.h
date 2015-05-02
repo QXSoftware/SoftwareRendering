@@ -14,6 +14,8 @@
 #include <windows.h>
 #include <vector>
 #include <Texture2D.h>
+#include <Vertex.h>
+#include <MacrosAndDefines.h>
 
 class Mesh
 {
@@ -26,6 +28,15 @@ class Mesh
     DirectionalLight* m_DirectionalLight;
     Texture2D* m_Texture;
     Color m_AmbientColor;
+
+    RegionCode Encode(Vector4& v);
+    inline bool InsidePlane(const Vertex& v, RegionCode plane)
+    {
+        return (v.Code & plane) == 0;
+    };
+    Vertex ComputeIntersect(Vertex& v0, Vertex& v1, RegionCode plane);
+    Vertex ConstructVertex(Vector4& v, Vector4& n, Vector2& uv, const Matrix4x4& mvp, const Matrix4x4& mv, const Matrix4x4& obj2wi);
+    void Clip(Vertex v0, Vertex v1, Vertex v2);
 public:
     Mesh();
     ~Mesh();

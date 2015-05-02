@@ -1,49 +1,13 @@
 #include <Triangle.h>
 #include <DrawingTool.h>
 #include <Mathf.h>
-
-void Triangle::SetVertices(Vertex* v0, Vertex* v1, Vertex* v2)
-{
-    m_V0 = v0;
-    m_V1 = v1;
-    m_V2 = v2;
-}
-
-void Triangle::SetLight(DirectionalLight* l, Color a)
-{
-    m_DirectionalLight = l;
-    m_AmbientColor = a;
-}
-
-void Triangle::SetMatrixes(Matrix4x4* obj2w, Matrix4x4* obj2wi, Matrix4x4* v, Matrix4x4* p, Matrix4x4* vp, Matrix4x4* mvp)
-{
-    m_ObjectToWorld = obj2w;
-    m_ObjectToWorldInversed = obj2wi;
-    m_ViewMatrix = v;
-    m_ProjectionMatrix = p;
-    m_ViewPortMatrix = vp;
-    m_MVP = mvp;
-}
-
-void Triangle::SetBuffers(ColorBuffer* cb, DepthBuffer* db)
-{
-    m_ColorBuf = cb;
-    m_DepthBuf = db;
-}
-
-void Triangle::ComputeVertexLighting(Vertex* v)
-{
-    v->PosWorld = (*m_ObjectToWorld) * v->Pos;
-    v->NormalWorld = Vector3(v->Normal * (*m_ObjectToWorldInversed)).normalized();
-    v->DiffCol = Mathf::Max(0, Vector3::Dot(v->NormalWorld, m_DirectionalLight->Direction))
-        * m_DirectionalLight->Intensity * m_DirectionalLight->Col;
-}
+#include <vector>
 
 void Triangle::DrawWireFrame()
 {
-    auto v0 = *m_MVP * m_V0->Pos;
-    auto v1 = *m_MVP * m_V1->Pos;
-    auto v2 = *m_MVP * m_V2->Pos;
+    auto v0 = m_V0->Pos;
+    auto v1 = m_V1->Pos;
+    auto v2 = m_V2->Pos;
 
     auto vcvv0 = v0 / v0.w;
     auto vcvv1 = v1 / v1.w;
@@ -60,9 +24,9 @@ void Triangle::DrawWireFrame()
 
 void Triangle::SortVerticesByY()
 {
-    auto v0 = *m_MVP * m_V0->Pos;
-    auto v1 = *m_MVP * m_V1->Pos;
-    auto v2 = *m_MVP * m_V2->Pos;
+    auto v0 = m_V0->Pos;
+    auto v1 = m_V1->Pos;
+    auto v2 = m_V2->Pos;
 
     v0 = *m_ViewPortMatrix * (v0 / v0.w);
     v1 = *m_ViewPortMatrix * (v1 / v1.w);
@@ -151,49 +115,13 @@ void Triangle::DrawSegment(
     }
 }
 
-RegionCode Triangle::Encode(Vector4& v)
-{
-    RegionCode ret = 0;
-    if (v.w > 0)
-    {
-        if (v.w + v.x < 0)
-            ret |= CVV_LEFT;
-        if (v.w - v.x < 0)
-            ret |= CVV_RIGHT;
-        if (v.w + v.y < 0)
-            ret |= CVV_BOTTOM;
-        if (v.w - v.y < 0)
-            ret |= CVV_TOP;
-        if (v.w + v.z < 0)
-            ret |= CVV_NEAR;
-        if (v.w - v.z < 0)
-            ret |= CVV_FAR;
-    }
-    else
-    {
-        if (v.w + v.x > 0)
-            ret |= CVV_LEFT;
-        if (v.w - v.x > 0)
-            ret |= CVV_RIGHT;
-        if (v.w + v.y > 0)
-            ret |= CVV_BOTTOM;
-        if (v.w - v.y > 0)
-            ret |= CVV_TOP;
-        if (v.w + v.z > 0)
-            ret |= CVV_NEAR;
-        if (v.w - v.z > 0)
-            ret |= CVV_FAR;
-    }
-    return ret;
-}
-
 void Triangle::DrawGouraud()
 {
     SortVerticesByY();
 
-    auto v0 = *m_MVP * m_V0->Pos;
-    auto v1 = *m_MVP * m_V1->Pos;
-    auto v2 = *m_MVP * m_V2->Pos;
+    auto v0 = m_V0->Pos;
+    auto v1 = m_V1->Pos;
+    auto v2 = m_V2->Pos;
 
     auto vcvv0 = v0 / v0.w;
     auto vcvv1 = v1 / v1.w;
@@ -203,14 +131,9 @@ void Triangle::DrawGouraud()
     v1 = *m_ViewPortMatrix * vcvv1;
     v2 = *m_ViewPortMatrix * vcvv2;
 
-    auto mv = (*m_ViewMatrix) * (*m_ObjectToWorld);
-    auto z0 = (mv * m_V0->Pos).z;
-    auto z1 = (mv * m_V1->Pos).z;
-    auto z2 = (mv * m_V2->Pos).z;
-
-    auto w0 = 1.0f / (z0 == 0 ? 0.001f : z0);
-    auto w1 = 1.0f / (z1 == 0 ? 0.001f : z1);
-    auto w2 = 1.0f / (z2 == 0 ? 0.001f : z2);
+    auto w0 = m_V0->W;
+    auto w1 = m_V1->W;
+    auto w2 = m_V2->W;
 
     // 三角形三个点的 Lambert 光照值，uv 以及深度值
     // 这三个值将进行 Gouraud 差值
@@ -272,17 +195,8 @@ void Triangle::DrawGouraud()
     }
 }
 
-void Triangle::SetTexture(Texture2D* t)
-{
-    m_Texture = t;
-}
-
 void Triangle::Render()
 {
-    ComputeVertexLighting(m_V0);
-    ComputeVertexLighting(m_V2);
-    ComputeVertexLighting(m_V1);
-
     DrawGouraud();
     //DrawWireFrame();
 }

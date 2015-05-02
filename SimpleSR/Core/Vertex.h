@@ -9,18 +9,13 @@
 
 struct Vertex
 {
-    Vector4 Pos;
-    Vector4 PosWorld;
-    Vector4 Normal;
-    Vector3 NormalWorld;
+    Vector4 Pos;//齐次坐标，透视投影后，透视除法前
+    float W;//相机坐标系，1/z
     Vector2 UV;
-    Color DiffCol;
-    Color VertexCol;
+    Color DiffCol;//漫反射光照
 
     RegionCode Code;
-    float BoundaryCode[6];
 
-    Vertex(Vector3 pos, Vector3 n, Vector2 uv);
     Vertex();
     ~Vertex() = default;
 };
