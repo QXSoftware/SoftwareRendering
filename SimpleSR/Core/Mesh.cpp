@@ -1,7 +1,7 @@
 #include <Mesh.h>
 #include <Triangle.h>
 
-#define MIN_W (0.0001f)
+#define W_CLIPPING_PLANE (0.0001f)
 
 Mesh::Mesh()
     :m_DirectionalLight(0), m_Texture(0)
@@ -76,6 +76,31 @@ Vertex Mesh::ConstructVertex(Vector4& v, Vector4& n, Vector2& uv, const Matrix4x
     return vert;
 }
 
+std::vector<Vertex> Mesh::PreClip(Vertex v0, Vertex v1, Vertex v2)
+{
+    std::vector<Vertex> input{ v0, v1, v2 };
+    std::vector<Vertex> output;
+
+    Vertex s = input.back();
+    auto prev = s.Pos.w < W_CLIPPING_PLANE ? -1 : 1;
+    for (auto e : input)
+    {
+        auto cur = e.Pos.w < W_CLIPPING_PLANE ? -1 : 1;
+        if (prev * cur < 0)
+        {
+            auto t = (W_CLIPPING_PLANE - s.Pos.w) / (e.Pos.w - s.Pos.w);
+            output.push_back(Mathf::Lerp(s, e, t));
+        }
+        if (cur > 0)
+        {
+            output.push_back(e);
+        }
+        prev = cur;
+        s = e;
+    }
+    return output;
+}
+
 void Mesh::Clip(Vertex v0, Vertex v1, Vertex v2, ColorBuffer* cBuf, DepthBuffer* dBuf, const Matrix4x4& vp)
 {
     auto clipPlanes =
@@ -87,7 +112,13 @@ void Mesh::Clip(Vertex v0, Vertex v1, Vertex v2, ColorBuffer* cBuf, DepthBuffer*
         CVV_NEAR,
         CVV_FAR,
     };
-    std::vector<Vertex> output{ v0, v1, v2 };
+
+    // 裁剪 w 小于 W_CLIPPING_PLANE 的齐次坐标
+    auto output = PreClip(v0, v1, v2);
+    if (output.size() < 3)
+        return;
+
+    // cvv 裁剪
     for (RegionCode plane : clipPlanes)
     {
         std::vector<Vertex> input = output;
@@ -113,6 +144,10 @@ void Mesh::Clip(Vertex v0, Vertex v1, Vertex v2, ColorBuffer* cBuf, DepthBuffer*
         }
     }
 
+    if (output.size() < 3)
+        return;
+
+    // 渲染裁剪完毕的三角形
     for (int i = 0, max = output.size() - 2; i < max; i++)
     {
         auto out0 = output[0];
