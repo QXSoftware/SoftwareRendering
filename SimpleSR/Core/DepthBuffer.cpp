@@ -33,7 +33,7 @@ void DepthBuffer::SetDepth(int x, int y, float d)
 
 void DepthBuffer::Clear(float d)
 {
-    for (auto i = 0; i < m_Width;i++)
+    for (auto i = 0; i < m_Width; i++)
     {
         for (auto j = 0; j < m_Height; j++)
         {
