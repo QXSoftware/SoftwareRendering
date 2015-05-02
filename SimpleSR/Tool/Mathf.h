@@ -255,6 +255,7 @@ public:
 
     // Returns whether the triangle is backface.
     static bool IsBackface(Vector3* v0, Vector3* v1, Vector3* v2, Matrix4x4* mvp, Matrix4x4* vp);
+    static bool IsBackface(const Vector2& w0, const Vector2& w1, const Vector2& w2);
 };
 
 #endif // Mathf_h__

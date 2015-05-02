@@ -44,6 +44,7 @@ public:
     Triangle(const Triangle&) = delete;
     Triangle& operator=(const Triangle&) = delete;
 public:
+    bool IsBackface();
     void Render();
 };
 

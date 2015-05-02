@@ -15,6 +15,11 @@ bool Mathf::IsBackface(Vector3* v0, Vector3* v1, Vector3* v2, Matrix4x4* mvp, Ma
     w1 = (*vp) * (w1 / w1.w);
     w2 = (*vp) * (w2 / w2.w);
 
+    return IsBackface(w0, w1, w2);
+}
+
+bool Mathf::IsBackface(const Vector2& w0, const Vector2& w1, const Vector2& w2)
+{
     Matrix3x3 mat(
         w1.x - w0.x, w2.x - w0.x, w0.x,
         w1.y - w0.y, w2.y - w0.y, w0.y,

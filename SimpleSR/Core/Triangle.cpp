@@ -195,8 +195,23 @@ void Triangle::DrawGouraud()
     }
 }
 
+bool Triangle::IsBackface()
+{
+    auto v0 = m_V0->Pos;
+    auto v1 = m_V1->Pos;
+    auto v2 = m_V2->Pos;
+
+    v0 = *m_ViewPortMatrix * v0 / v0.w;
+    v1 = *m_ViewPortMatrix * v1 / v1.w;
+    v2 = *m_ViewPortMatrix * v2 / v2.w;
+
+    return Mathf::IsBackface(v0, v1, v2);
+}
+
 void Triangle::Render()
 {
+    if (IsBackface())
+        return;
     DrawGouraud();
     //DrawWireFrame();
 }
