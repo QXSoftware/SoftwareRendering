@@ -101,6 +101,8 @@
     <ClInclude Include="Resources\targetver.h" />
     <ClInclude Include="Tool\DrawingTool.h" />
     <ClInclude Include="Tool\Mathf.h" />
+    <ClInclude Include="Tool\StatusTool.h" />
+    <ClInclude Include="Tool\SRTime.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base\Color.cpp" />
@@ -125,6 +127,8 @@
     <ClCompile Include="Model\ModelParser.cpp" />
     <ClCompile Include="Tool\DrawingTool.cpp" />
     <ClCompile Include="Tool\Mathf.cpp" />
+    <ClCompile Include="Tool\StatusTool.cpp" />
+    <ClCompile Include="Tool\SRTime.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resources\SimpleSR.rc" />

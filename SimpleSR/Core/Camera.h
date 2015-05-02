@@ -11,6 +11,8 @@
 
 class Camera
 {
+    friend class SREngine;
+
     Matrix4x4 m_ProjectionMatrix;
     Matrix4x4 m_CameraToWorldMatrix;
     Matrix4x4 m_WorldToCameraMatrix;

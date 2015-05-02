@@ -2,6 +2,9 @@
 #include <Mesh.h>
 #include <Screen.h>
 #include <functional>
+#include <StatusTool.h>
+
+extern StatusTool g_StatusTool;
 
 Camera::Camera()
     :m_FarClipPlane(100),
@@ -76,6 +79,8 @@ void Camera::Render(Mesh* mesh)
 
     mesh->SetLight(&m_DirectionalLight, m_AmbientColor);
     mesh->Render(m_ColorBuffer, m_DepthBuffer, m_ProjectionMatrix, m_WorldToCameraMatrix, m_ViewPortMatrix);
+
+    g_StatusTool.DrawFPS();
 
     m_ColorBuffer->Flush();
 }

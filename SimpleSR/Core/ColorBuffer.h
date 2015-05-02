@@ -9,6 +9,8 @@ extern HWND g_MainWindowHwnd;
 
 class ColorBuffer
 {
+    friend class StatusTool;
+
     int m_Width;
     int m_Height;
 

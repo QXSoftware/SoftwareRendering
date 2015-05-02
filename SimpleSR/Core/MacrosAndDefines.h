@@ -1,6 +1,7 @@
 #ifndef MacrosAndDefines_h__
 #define MacrosAndDefines_h__
 
+#include <sstream>
 #include <string>
 #include <tchar.h>
 
@@ -8,6 +9,12 @@
 typedef std::wstring tstring;
 #else
 typedef std::string tstring;
+#endif
+
+#ifdef _UNICODE
+typedef std::wstringstream tstringstream;
+#else
+typedef std::stringstream tstringstream;
 #endif
 
 typedef unsigned char RegionCode;

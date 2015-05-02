@@ -96,6 +96,12 @@
     <ClInclude Include="Core\MacrosAndDefines.h">
       <Filter>Base</Filter>
     </ClInclude>
+    <ClInclude Include="Tool\StatusTool.h">
+      <Filter>Tool</Filter>
+    </ClInclude>
+    <ClInclude Include="Tool\SRTime.h">
+      <Filter>Tool</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main\Main.cpp">
@@ -163,6 +169,12 @@
     </ClCompile>
     <ClCompile Include="Core\Texture2D.cpp">
       <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Tool\StatusTool.cpp">
+      <Filter>Tool</Filter>
+    </ClCompile>
+    <ClCompile Include="Tool\SRTime.cpp">
+      <Filter>Tool</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

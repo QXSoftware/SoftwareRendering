@@ -1,5 +1,9 @@
 #include <SREngine.h>
 #include <ModelFactory.h>
+#include <StatusTool.h>
+#include <SRTime.h>
+
+StatusTool g_StatusTool;
 
 SREngine::~SREngine()
 {
@@ -30,6 +34,7 @@ void SREngine::Init()
     m_Camera->Transform->SetPosition(0, 0, -10);
     m_Camera->SetNearClipPlane(1);
     m_Camera->SetFarClipPlane(50);
+    g_StatusTool.SetColorBuffer(m_Camera->m_ColorBuffer);
     m_Target = ModelFactory::GetCube();
 }
 
@@ -38,6 +43,7 @@ void SREngine::Update()
     struct timeval tv;
     GetTimeOfDay(&tv, NULL);
     unsigned int now = tv.tv_sec * 1000000 + tv.tv_usec;
+    SRTime::DeltaTime = (now - m_LastTime) / 1000000.0f;
     if ((now - m_LastTime) > m_AnimationInterval)
     {
         m_LastTime = now;

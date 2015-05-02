@@ -7,7 +7,9 @@ ColorBuffer::ColorBuffer(int w, int h)
     auto screenWidth = Screen::current->GetScreenWidth();
     auto screenHeight = Screen::current->GetScreenHeight();
     m_OriginDC = ::GetDC(g_MainWindowHwnd);
+    SetBkMode(m_OriginDC, TRANSPARENT);
     m_MemoryDC = CreateCompatibleDC(m_OriginDC);
+    SetBkMode(m_MemoryDC, TRANSPARENT);
     m_MemoryBitmap = CreateCompatibleBitmap(m_OriginDC, screenWidth, screenHeight);
     SelectObject(m_MemoryDC, m_MemoryBitmap);
 }
