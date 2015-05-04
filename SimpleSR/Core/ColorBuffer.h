@@ -16,6 +16,8 @@ class ColorBuffer
 
     HDC m_OriginDC;
     HDC m_MemoryDC;
+    BITMAPINFO m_MemoryBitmapData;
+    DWORD* m_MemoryBitmapDataPointer;
     HBITMAP m_MemoryBitmap;
 public:
     ColorBuffer(int w, int h);
@@ -23,10 +25,6 @@ public:
     ColorBuffer(const ColorBuffer&) = delete;
     ColorBuffer& operator=(const ColorBuffer&) = delete;
 public:
-    inline HDC GetDC()
-    {
-        return m_MemoryDC;
-    }
     Color GetColor(int x, int y);
     void SetColor(int x, int y, const Color& col);
     void Clear(const Color& col);

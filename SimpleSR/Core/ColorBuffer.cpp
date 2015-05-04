@@ -10,7 +10,15 @@ ColorBuffer::ColorBuffer(int w, int h)
     SetBkMode(m_OriginDC, TRANSPARENT);
     m_MemoryDC = CreateCompatibleDC(m_OriginDC);
     SetBkMode(m_MemoryDC, TRANSPARENT);
-    m_MemoryBitmap = CreateCompatibleBitmap(m_OriginDC, screenWidth, screenHeight);
+
+    m_MemoryBitmapData.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
+    m_MemoryBitmapData.bmiHeader.biWidth = m_Width;
+    m_MemoryBitmapData.bmiHeader.biHeight = m_Height;
+    m_MemoryBitmapData.bmiHeader.biPlanes = 1;
+    m_MemoryBitmapData.bmiHeader.biBitCount = 32;
+    m_MemoryBitmapData.bmiHeader.biCompression = BI_RGB;
+
+    m_MemoryBitmap = CreateDIBSection(m_MemoryDC, &m_MemoryBitmapData, DIB_RGB_COLORS, (void**)(&m_MemoryBitmapDataPointer), NULL, 0);
     SelectObject(m_MemoryDC, m_MemoryBitmap);
 }
 
@@ -32,7 +40,9 @@ Color ColorBuffer::GetColor(int x, int y)
 
 void ColorBuffer::SetColor(int x, int y, const Color& col)
 {
-    SetPixel(m_MemoryDC, x, y, RGB(255 * col.r, 255 * col.g, 255 * col.b));
+    auto c = DrawingTool::GetSystemColor(col);
+    auto encodedCol = RGB(GetBValue(c), GetGValue(c), GetRValue(c));
+    m_MemoryBitmapDataPointer[y * m_Width + x] = encodedCol;
 }
 
 void ColorBuffer::Clear(const Color& col)

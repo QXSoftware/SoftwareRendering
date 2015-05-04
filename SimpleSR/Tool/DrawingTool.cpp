@@ -27,8 +27,7 @@ void DrawingTool::DrawPixel(ColorBuffer* cb, DepthBuffer* db, int x, int y, floa
     {
         // ZWrite On
         db->SetDepth(x, y, z);
-        auto dc = cb->GetDC();
-        SetPixel(dc, x, y, GetSystemColor(col));
+        cb->SetColor(x, y, col);
     }
 }
 
