@@ -1,7 +1,6 @@
 #include <Mesh.h>
 #include <Triangle.h>
-
-#define W_CLIPPING_PLANE (0.0001f)
+#include <MacrosAndDefines.h>
 
 Mesh::Mesh()
     :m_DirectionalLight(0), m_Texture(0)

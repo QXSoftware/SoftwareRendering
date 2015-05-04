@@ -26,4 +26,6 @@ static const RegionCode CVV_TOP    = 1 << 3;
 static const RegionCode CVV_NEAR   = 1 << 4;
 static const RegionCode CVV_FAR    = 1 << 5;
 
+#define W_CLIPPING_PLANE (0.0001f)
+
 #endif // MacrosAndDefines_h__
