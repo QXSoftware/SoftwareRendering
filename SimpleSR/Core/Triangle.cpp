@@ -71,9 +71,9 @@ void Triangle::DrawSegment(
     const float& depth0, const float& depth1, const float& depth2)
 {
     bool v0yIsSmaller = v0.y < v2.y;
-    bool n0xIsSmaller = v1.x < v2.x;
-    int v0y = v0yIsSmaller ? Mathf::FloorToInt(v0.y) : Mathf::CeilToInt(v0.y);
-    int v2y = v0yIsSmaller ? Mathf::CeilToInt(v2.y) : Mathf::FloorToInt(v2.y);
+
+    int v0y = (int)v0.y;
+    int v2y = (int)v2.y;
 
     Vector3 n0;
     Vector3 n1;
@@ -100,8 +100,8 @@ void Triangle::DrawSegment(
         auto n1w = Mathf::Lerp(w0, w2, t0);
         Color n1lit = Mathf::Lerp(lit0, lit2, t0);
 
-        int n0x = n0xIsSmaller ? Mathf::CeilToInt(n0.x) : Mathf::FloorToInt(n0.x);
-        int n1x = n0xIsSmaller ? Mathf::FloorToInt(n1.x) : Mathf::CeilToInt(n1.x);
+        int n0x = (int)n0.x;
+        int n1x = (int)n1.x;
 
         for (int j = 0, width = Mathf::Abs(n0x - n1x); j <= width; j++)
         {
