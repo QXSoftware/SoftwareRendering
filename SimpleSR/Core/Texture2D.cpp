@@ -2,63 +2,76 @@
 #include <DrawingTool.h>
 
 Texture2D::Texture2D()
-    :m_Bmp(NULL), m_MemDC(NULL)
+    :m_MemoryBitmap(0), m_MemoryBitmapDataPointer(0), m_Width(0), m_Height(0)
 {}
 
 Texture2D::~Texture2D()
 {
-    if (m_Bmp != NULL)
+    if (m_MemoryBitmap != NULL)
     {
-        DeleteObject(m_Bmp);
-        m_Bmp = NULL;
+        DeleteObject(m_MemoryBitmap);
+        m_MemoryBitmap = NULL;
     }
-    if (m_MemDC != NULL)
-    {
-        DeleteDC(m_MemDC);
-        m_MemDC = NULL;
-    }
+    m_MemoryBitmapDataPointer = NULL;
 }
 
 Texture2D* Texture2D::Load(tstring file)
 {
-    auto tex = new Texture2D();
     HANDLE bmp = LoadImage(NULL, file.c_str(), IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE);
     if (bmp == NULL)
     {
-        delete tex;
         return nullptr;
     }
-    tex->m_Bmp = bmp;
-    HDC memDC = CreateCompatibleDC(NULL);
-    if (SelectObject(memDC, tex->m_Bmp) == NULL)
+    HDC tmpDc = CreateCompatibleDC(NULL);
+    if (SelectObject(tmpDc, bmp) == NULL)
     {
-        DeleteDC(memDC);
-        delete tex;
+        DeleteDC(tmpDc);
         return nullptr;
     }
-    tex->m_MemDC = memDC;
-    GetObject(tex->m_Bmp, sizeof(tex->m_Tex), &tex->m_Tex);
+    BITMAP bitmap;
+    GetObject(bmp, sizeof(bitmap), &bitmap);
+
+    auto tex = new Texture2D();
+
+    tex->m_Width = bitmap.bmWidth;
+    tex->m_Height = bitmap.bmHeight;
+
+    tex->m_MemoryBitmapData.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
+    tex->m_MemoryBitmapData.bmiHeader.biWidth = tex->m_Width;
+    tex->m_MemoryBitmapData.bmiHeader.biHeight = tex->m_Height;
+    tex->m_MemoryBitmapData.bmiHeader.biPlanes = 1;
+    tex->m_MemoryBitmapData.bmiHeader.biBitCount = 32;
+    tex->m_MemoryBitmapData.bmiHeader.biSizeImage = tex->m_Width * tex->m_Height * 4;
+    tex->m_MemoryBitmapData.bmiHeader.biCompression = BI_RGB;
+
+    auto tmpDc2 = CreateCompatibleDC(NULL);
+    tex->m_MemoryBitmap = CreateDIBSection(tmpDc2, &tex->m_MemoryBitmapData, DIB_RGB_COLORS, (void**)(&tex->m_MemoryBitmapDataPointer), NULL, 0);
+    SelectObject(tmpDc2, tex->m_MemoryBitmap);
+    BitBlt(tmpDc2, 0, 0, tex->m_Width, tex->m_Height, tmpDc, 0, 0, SRCCOPY);
+
+    DeleteDC(tmpDc);
+    DeleteObject(bmp);
+    DeleteDC(tmpDc2);
+
     return tex;
-}
-
-int Texture2D::GetWidth()
-{
-    return m_Tex.bmWidth;
-}
-
-int Texture2D::GetHeight()
-{
-    return m_Tex.bmHeight;
 }
 
 Color Texture2D::GetColor(int x, int y)
 {
-    return DrawingTool::ConvertSystemColor(GetPixel(m_MemDC, x, y));
+    if (x >= m_Width)
+        x = m_Width - 1;
+    if (y >= m_Height)
+        y = m_Height - 1;
+    auto p = m_MemoryBitmapDataPointer;
+    auto b = p[y * m_Width * 4 + x * 4];
+    auto g = p[y * m_Width * 4 + x * 4 + 1];
+    auto r = p[y * m_Width * 4 + x * 4 + 2];
+    return Color(r, g, b) / 255;
 }
 
 Color Texture2D::GetColor(const Vector2& uv)
 {
-    int x = uv.x * m_Tex.bmWidth;
-    int y = (1 - uv.y) * m_Tex.bmHeight;
+    int x = uv.x * m_Width;
+    int y = (1 - uv.y) * m_Height;
     return GetColor(x, y);
 }

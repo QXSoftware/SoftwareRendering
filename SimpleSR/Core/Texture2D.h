@@ -8,9 +8,13 @@
 
 class Texture2D
 {
-    HANDLE m_Bmp;
-    HDC m_MemDC;
-    BITMAP m_Tex;
+    BITMAPINFO m_MemoryBitmapData;
+    HBITMAP m_MemoryBitmap;
+    PBYTE m_MemoryBitmapDataPointer;
+
+    int m_Width;
+    int m_Height;
+
     Texture2D();
 public:
     Texture2D(const Texture2D&) = delete;
@@ -18,8 +22,14 @@ public:
     ~Texture2D();
 public:
     static Texture2D* Load(tstring file);
-    int GetWidth();
-    int GetHeight();
+    inline int GetWidth() const
+    {
+        return m_Width;
+    };
+    inline int GetHeight() const
+    {
+        return m_Height;
+    };
     Color GetColor(int x, int y);
     Color GetColor(const Vector2& uv);
 };
