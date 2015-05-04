@@ -74,6 +74,11 @@ void Triangle::DrawSegment(
     bool n0xIsSmaller = v1.x < v2.x;
     int v0y = v0yIsSmaller ? Mathf::FloorToInt(v0.y) : Mathf::CeilToInt(v0.y);
     int v2y = v0yIsSmaller ? Mathf::CeilToInt(v2.y) : Mathf::FloorToInt(v2.y);
+
+    Vector3 n0;
+    Vector3 n1;
+    Vector3 n3;
+
     for (int i = 0, height = Mathf::Abs(v0y - v2y); i <= height; i++)
     {
         float t0 = (float)i / (float)height;
@@ -81,13 +86,15 @@ void Triangle::DrawSegment(
         float dx02 = (v0.x - v2.x) / (float)height;
         int deltaY = v0yIsSmaller ? 1 : -1;
 
-        Vector3 n0(v0.x - dx01 * i, v0y + deltaY * i);
+        n0.x = v0.x - dx01 * i;
+        n0.y = v0y + deltaY * i;
         n0.z = Mathf::Lerp(depth0, depth1, t0);
         auto n0uvw = Mathf::Lerp(uvw0, uvw1, t0);
         auto n0w = Mathf::Lerp(w0, w1, t0);
         Color n0lit = Mathf::Lerp(lit0, lit1, t0);
 
-        Vector3 n1(v0.x - dx02 * i, v0y + deltaY * i);
+        n1.x = v0.x - dx02 * i;
+        n1.y = v0y + deltaY * i;
         n1.z = Mathf::Lerp(depth0, depth2, t0);
         auto n1uvw = Mathf::Lerp(uvw0, uvw2, t0);
         auto n1w = Mathf::Lerp(w0, w2, t0);
@@ -99,7 +106,8 @@ void Triangle::DrawSegment(
         for (int j = 0, width = Mathf::Abs(n0x - n1x); j <= width; j++)
         {
             int deltaX = n0x < n1x ? 1 : -1;
-            Vector3 n3(n0x + deltaX * j, n0.y);
+            n3.x = (n0x + deltaX * j);
+            n3.y = n0.y;
             float t3 = Mathf::LerpFactor(n0, n1, n3);
             n3.z = Mathf::Lerp(n0.z, n1.z, t3);
             Vector2 n3uv = Mathf::LerpUV(n0uvw, n0w, n1uvw, n1w, t3);
