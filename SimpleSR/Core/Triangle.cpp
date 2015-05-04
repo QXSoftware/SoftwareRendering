@@ -71,6 +71,7 @@ void Triangle::DrawSegment(
     const float& depth0, const float& depth1, const float& depth2)
 {
     bool v0yIsSmaller = v0.y < v2.y;
+    bool n0xIsSmaller = v1.x < v2.x;
     int v0y = v0yIsSmaller ? Mathf::FloorToInt(v0.y) : Mathf::CeilToInt(v0.y);
     int v2y = v0yIsSmaller ? Mathf::CeilToInt(v2.y) : Mathf::FloorToInt(v2.y);
     for (int i = 0, height = Mathf::Abs(v0y - v2y); i <= height; i++)
@@ -92,9 +93,8 @@ void Triangle::DrawSegment(
         auto n1w = Mathf::Lerp(w0, w2, t0);
         Color n1lit = Mathf::Lerp(lit0, lit2, t0);
 
-        bool n0xIsSmaller = v1.x < v2.x;
-        int n0x = n0xIsSmaller ? Mathf::FloorToInt(n0.x) : Mathf::CeilToInt(n0.x);
-        int n1x = n0xIsSmaller ? Mathf::CeilToInt(n1.x) : Mathf::FloorToInt(n1.x);
+        int n0x = n0xIsSmaller ? Mathf::CeilToInt(n0.x) : Mathf::FloorToInt(n0.x);
+        int n1x = n0xIsSmaller ? Mathf::FloorToInt(n1.x) : Mathf::CeilToInt(n1.x);
 
         for (int j = 0, width = Mathf::Abs(n0x - n1x); j <= width; j++)
         {
@@ -173,7 +173,7 @@ void Triangle::DrawGouraud()
     }
     else
     {
-        auto t3 = Mathf::Abs(v0.y - v1.y) / Mathf::Abs(v0.y - v2.y);
+        auto t3 = (v0.y - v1.y) / (v0.y - v2.y);
         auto v3 = Mathf::Lerp(v0, v2, t3);
         auto lit3 = Mathf::Lerp(lit0, lit2, t3);
         auto w3 = Mathf::Lerp(w0, w2, t3);
