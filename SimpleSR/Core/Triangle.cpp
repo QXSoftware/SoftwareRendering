@@ -75,6 +75,9 @@ void Triangle::DrawSegment(
     int v0y = (int)v0.y;
     int v2y = (int)v2.y;
 
+    if (v0y == v2y)
+        return;
+
     Vector3 n0;
     Vector3 n1;
     Vector3 n3;

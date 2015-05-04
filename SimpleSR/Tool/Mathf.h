@@ -244,7 +244,8 @@ public:
     // w = 1 / z
     static inline Vector2 LerpUV(const Vector2& uvw0, const float& w0, const Vector2& uvw1, const float& w1, float t)
     {
-        return Lerp(uvw0, uvw1, t) / Lerp(w0, w1, t);
+        auto uv = Lerp(uvw0, uvw1, t) / Lerp(w0, w1, t);
+        return Vector2(Clamp01(uv.x), Clamp01(uv.y));
     }
 
     // Returns largest of two or more values
