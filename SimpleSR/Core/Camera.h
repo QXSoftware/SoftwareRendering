@@ -29,7 +29,11 @@ class Camera
     DirectionalLight m_DirectionalLight;
     Color m_AmbientColor;
 
+    Vector3 m_TranslationDelta;
+    Vector3 m_RotationDelta;
+
     void UpdateMatrix();
+    void UpdateTransform();
 public:
     Camera();
     ~Camera();
@@ -37,6 +41,10 @@ public:
     Camera& operator=(const Camera&) = delete;
 public:
     Transform* Transform;
+    void SetTranslationDelta(const Vector3& v);
+    void SetRotationDelta(const Vector3& v);
+    void ResetTranslationDelta();
+    void ResetRotationDelta();
 public:
     void SetFarClipPlane(float f);
     void SetNearClipPlane(float f);

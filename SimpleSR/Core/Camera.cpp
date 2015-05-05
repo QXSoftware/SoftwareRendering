@@ -63,6 +63,16 @@ void Camera::SetAspect(float f)
     UpdateMatrix();
 }
 
+void Camera::SetTranslationDelta(const Vector3& v)
+{
+    m_TranslationDelta += v;
+}
+
+void Camera::SetRotationDelta(const Vector3& v)
+{
+    m_RotationDelta += v;
+}
+
 void Camera::UpdateMatrix()
 {
     m_CameraToWorldMatrix = Transform->LocalToWorldMatrix();
@@ -73,26 +83,52 @@ void Camera::UpdateMatrix()
     m_ViewPortMatrix = Matrix4x4::ViewPortMatrix(scrWidth, scrHeight);
 }
 
+void Camera::ResetTranslationDelta()
+{
+    m_TranslationDelta = Vector3::zero;
+}
+
+void Camera::ResetRotationDelta()
+{
+    m_RotationDelta = Vector3::zero;
+}
+
+void Camera::UpdateTransform()
+{
+    auto isDirty = false;
+    if (m_TranslationDelta != Vector3::zero)
+    {
+        auto pos = Transform->GetPosition();
+        Transform->SetPosition(pos + m_TranslationDelta * SRTime::DeltaTime);
+        isDirty = true;
+    }
+    if (m_RotationDelta != Vector3::zero)
+    {
+        auto rot = Transform->GetRotation();
+        Transform->SetRotation(rot + m_RotationDelta * SRTime::DeltaTime);
+        isDirty = true;
+    }
+    if (isDirty)
+    {
+        m_CameraToWorldMatrix = Transform->LocalToWorldMatrix();
+        m_WorldToCameraMatrix = Transform->WorldToLocalMatrix();
+    }
+}
+
 void Camera::Render(std::vector<Mesh*>& meshList)
 {
     m_ColorBuffer->Clear(m_BackgroundColor);
     m_DepthBuffer->Clear(1);
 
+    UpdateTransform();
+
     for (auto mesh : meshList)
     {
         mesh->SetLight(&m_DirectionalLight, m_AmbientColor);
         auto rot = mesh->Transform->GetRotation();
-        if (mesh->GetName() == _T("Cube"))
+        if (mesh->GetName() == _T("Tortoise"))
         {
-            mesh->Transform->SetRotation(rot.x + 12 * SRTime::DeltaTime, rot.y + 15 * SRTime::DeltaTime, rot.z + 9 * SRTime::DeltaTime);
-        }
-        else if (mesh->GetName() == _T("Cylinder"))
-        {
-            mesh->Transform->SetRotation(rot.x + 23 * SRTime::DeltaTime, rot.y + 18 * SRTime::DeltaTime, rot.z + 30 * SRTime::DeltaTime);
-        }
-        else if (mesh->GetName() == _T("Capsule"))
-        {
-            mesh->Transform->SetRotation(rot.x + 16 * SRTime::DeltaTime, rot.y + 3 * SRTime::DeltaTime, rot.z + 14 * SRTime::DeltaTime);
+            mesh->Transform->SetRotation(rot.x, rot.y + 15 * SRTime::DeltaTime, rot.z);
         }
         mesh->Render(m_ColorBuffer, m_DepthBuffer, m_ProjectionMatrix, m_WorldToCameraMatrix, m_ViewPortMatrix);
     }

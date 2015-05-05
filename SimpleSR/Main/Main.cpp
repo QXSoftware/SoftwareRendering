@@ -103,71 +103,60 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         case WM_KEYDOWN:
         {
             auto delta = 0.3f;
+            auto cam = g_Engine.GetCamera();
             if ((_TCHAR)wParam == 'W')
             {
-                auto target = g_Engine.GetCamera()->Transform;
-                auto pos = target->GetPosition();
-                target->SetPosition(pos.x, pos.y + delta, pos.z);
+                cam->SetTranslationDelta(Vector3::up * delta);
             }
             else if ((_TCHAR)wParam == 'S')
             {
-                auto target = g_Engine.GetCamera()->Transform;
-                auto pos = target->GetPosition();
-                target->SetPosition(pos.x, pos.y - delta, pos.z);
+                cam->SetTranslationDelta(Vector3::down * delta);
             }
             else if ((_TCHAR)wParam == 'A')
             {
-                auto target = g_Engine.GetCamera()->Transform;
-                auto pos = target->GetPosition();
-                target->SetPosition(pos.x - delta, pos.y, pos.z);
+                cam->SetTranslationDelta(Vector3::left * delta);
             }
             else if ((_TCHAR)wParam == 'D')
             {
-                auto target = g_Engine.GetCamera()->Transform;
-                auto pos = target->GetPosition();
-                target->SetPosition(pos.x + delta, pos.y, pos.z);
+                cam->SetTranslationDelta(Vector3::right * delta);
             }
             else if ((_TCHAR)wParam == 'E')
             {
-                auto target = g_Engine.GetCamera()->Transform;
-                auto pos = target->GetPosition();
-                target->SetPosition(pos.x, pos.y, pos.z + delta);
+                cam->SetTranslationDelta(Vector3::forward * delta);
             }
             else if ((_TCHAR)wParam == 'Q')
             {
-                auto target = g_Engine.GetCamera()->Transform;
-                auto pos = target->GetPosition();
-                target->SetPosition(pos.x, pos.y, pos.z - delta);
+                cam->SetTranslationDelta(Vector3::backward * delta);
             }
             else if ((_TCHAR)wParam == VK_LEFT)
             {
-                auto target = g_Engine.GetCamera()->Transform;
-                auto rot = target->GetRotation();
-                target->SetRotation(rot.x, rot.y + delta * 10, rot.z);
+                cam->SetRotationDelta(Vector3::up * delta);
             }
             else if ((_TCHAR)wParam == VK_RIGHT)
             {
-                auto target = g_Engine.GetCamera()->Transform;
-                auto rot = target->GetRotation();
-                target->SetRotation(rot.x, rot.y - delta * 10, rot.z);
+                cam->SetRotationDelta(Vector3::down * delta);
             }
             else if ((_TCHAR)wParam == VK_UP)
             {
-                auto target = g_Engine.GetCamera()->Transform;
-                auto rot = target->GetRotation();
-                target->SetRotation(rot.x + delta * 10, rot.y, rot.z);
+                cam->SetRotationDelta(Vector3::right * delta);
             }
             else if ((_TCHAR)wParam == VK_DOWN)
             {
-                auto target = g_Engine.GetCamera()->Transform;
-                auto rot = target->GetRotation();
-                target->SetRotation(rot.x - delta * 10, rot.y, rot.z);
+                cam->SetRotationDelta(Vector3::left * delta);
             }
             else if ((_TCHAR)wParam == VK_ESCAPE)
             {
-                auto target = g_Engine.GetCamera()->Transform;
+                auto target = cam->Transform;
                 target->SetPosition(0, 0, -10);
+                target->SetRotation(0, 0, 0);
             }
+            break;
+        }
+        case WM_KEYUP:
+        {
+            auto cam = g_Engine.GetCamera();
+            cam->ResetTranslationDelta();
+            cam->ResetRotationDelta();
             break;
         }
         case WM_ERASEBKGND:

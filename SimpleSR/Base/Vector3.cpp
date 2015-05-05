@@ -5,6 +5,12 @@
 
 Vector3 Vector3::one(1, 1, 1);
 Vector3 Vector3::zero(0, 0, 0);
+Vector3 Vector3::left(-1, 0, 0);
+Vector3 Vector3::right(1, 0, 0);
+Vector3 Vector3::up(0, 1, 0);
+Vector3 Vector3::down(0, -1, 0);
+Vector3 Vector3::forward(0, 0, 1);
+Vector3 Vector3::backward(0, 0, -1);
 
 Vector3::Vector3(const Vector2& v)
     :x(v.x), y(v.y), z(0){}
@@ -35,6 +41,26 @@ Vector3 Vector3::normalized()
         return Vector3(x, y, z);
     auto tmp = 1.0f / magnitude;
     return Vector3(x * tmp, y * tmp, z * tmp);
+}
+
+bool operator==(const Vector3&lhs, const Vector3& rhs)
+{
+    return lhs.x == rhs.x
+        && lhs.y == rhs.y
+        && lhs.z == rhs.z;
+}
+
+bool operator!=(const Vector3&lhs, const Vector3& rhs)
+{
+    return !(lhs == rhs);
+}
+
+Vector3& Vector3::operator+=(const Vector3& v)
+{
+    x += v.x;
+    y += v.y;
+    z += v.z;
+    return *this;
 }
 
 Vector3 operator+(const Vector3& lhs, const Vector3& rhs)

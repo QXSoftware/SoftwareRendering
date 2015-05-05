@@ -24,11 +24,20 @@ public:
     static Vector3 Cross(const Vector3& lhs, const Vector3& rhs);
     static float Dot(const Vector3& lhs, const Vector3& rhs);
     Vector3 normalized();
+    Vector3& operator+=(const Vector3& v);
 public:
     static Vector3 one;
     static Vector3 zero;
+    static Vector3 left;
+    static Vector3 right;
+    static Vector3 up;
+    static Vector3 down;
+    static Vector3 forward;
+    static Vector3 backward;
 };
 
+bool operator==(const Vector3&lhs, const Vector3& rhs);
+bool operator!=(const Vector3&lhs, const Vector3& rhs);
 Vector3 operator+(const Vector3& lhs, const Vector3& rhs);
 Vector3 operator-(const Vector3& lhs, const Vector3& rhs);
 Vector3 operator*(const Vector3&v, float scale);
