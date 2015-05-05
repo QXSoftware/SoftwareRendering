@@ -3,6 +3,7 @@
 #include <Screen.h>
 #include <functional>
 #include <StatusTool.h>
+#include <SRTime.h>
 
 extern StatusTool g_StatusTool;
 
@@ -72,15 +73,30 @@ void Camera::UpdateMatrix()
     m_ViewPortMatrix = Matrix4x4::ViewPortMatrix(scrWidth, scrHeight);
 }
 
-void Camera::Render(Mesh* mesh)
+void Camera::Render(std::vector<Mesh*>& meshList)
 {
     m_ColorBuffer->Clear(m_BackgroundColor);
     m_DepthBuffer->Clear(1);
 
-    mesh->SetLight(&m_DirectionalLight, m_AmbientColor);
-    mesh->Render(m_ColorBuffer, m_DepthBuffer, m_ProjectionMatrix, m_WorldToCameraMatrix, m_ViewPortMatrix);
+    for (auto mesh : meshList)
+    {
+        mesh->SetLight(&m_DirectionalLight, m_AmbientColor);
+        auto rot = mesh->Transform->GetRotation();
+        if (mesh->GetName() == _T("Cube"))
+        {
+            mesh->Transform->SetRotation(rot.x + 12 * SRTime::DeltaTime, rot.y + 15 * SRTime::DeltaTime, rot.z + 9 * SRTime::DeltaTime);
+        }
+        else if (mesh->GetName() == _T("Cylinder"))
+        {
+            mesh->Transform->SetRotation(rot.x + 23 * SRTime::DeltaTime, rot.y + 18 * SRTime::DeltaTime, rot.z + 30 * SRTime::DeltaTime);
+        }
+        else if (mesh->GetName() == _T("Capsule"))
+        {
+            mesh->Transform->SetRotation(rot.x + 16 * SRTime::DeltaTime, rot.y + 3 * SRTime::DeltaTime, rot.z + 14 * SRTime::DeltaTime);
+        }
+        mesh->Render(m_ColorBuffer, m_DepthBuffer, m_ProjectionMatrix, m_WorldToCameraMatrix, m_ViewPortMatrix);
+    }
 
     g_StatusTool.DrawFPS();
-
     m_ColorBuffer->Flush();
 }

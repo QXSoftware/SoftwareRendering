@@ -5,6 +5,7 @@
 Mesh* ModelParser::Parse(const tstring& path)
 {
     auto mesh = new Mesh();
+    mesh->m_Name = path.substr(path.find_last_of('/') + 1);
     std::wifstream infile(path, std::ios::in);
     TCHAR buff[100];
     int step = 0;

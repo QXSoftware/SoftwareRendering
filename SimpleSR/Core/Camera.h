@@ -42,7 +42,7 @@ public:
     void SetNearClipPlane(float f);
     void SetFieldOfView(float f);
     void SetAspect(float f);
-    void Render(Mesh* mesh);
+    void Render(std::vector<Mesh*>& meshList);
 };
 
 #endif // Camera_h__

@@ -4,10 +4,10 @@
 void Transform::RebuildMatrix()
 {
     m_LocalToWorldMatrix =
+        Matrix4x4::Translate(m_Position) *
         Matrix4x4::RotateByZ(m_Rotation.z * Mathf::Deg2Rad)*
         Matrix4x4::RotateByY(m_Rotation.y * Mathf::Deg2Rad)*
-        Matrix4x4::RotateByX(m_Rotation.x * Mathf::Deg2Rad)*
-        Matrix4x4::Translate(m_Position);
+        Matrix4x4::RotateByX(m_Rotation.x * Mathf::Deg2Rad);
     m_WorldToLocalMatrix = m_LocalToWorldMatrix.Inversed();
     if (m_Callback != nullptr)
         m_Callback();

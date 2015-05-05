@@ -4,11 +4,12 @@
 #include <Camera.h>
 #include <windows.h>
 #include <time.h>
+#include <vector>
 
 class SREngine
 {
     Camera* m_Camera;
-    Mesh* m_Target;
+    std::vector<Mesh*> m_Target;
 
     unsigned int m_LastTime;
     unsigned int m_AnimationInterval = (unsigned int)(1000000.0f / 60.0f);
@@ -23,7 +24,7 @@ public:
     {
         return m_Camera;
     }
-    inline Mesh* GetTarget()
+    inline std::vector<Mesh*> GetTarget() const
     {
         return m_Target;
     }

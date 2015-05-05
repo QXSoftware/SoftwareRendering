@@ -28,7 +28,7 @@ class Mesh
     DirectionalLight* m_DirectionalLight;
     Texture2D* m_Texture;
     Color m_AmbientColor;
-
+    tstring m_Name;
     inline bool InsidePlane(const Vertex& v, RegionCode plane)
     {
         return (v.Code & plane) == 0;
@@ -45,6 +45,10 @@ public:
 public:
     Transform* Transform;
 public:
+    inline const tstring& GetName() const
+    {
+        return m_Name;
+    }
     void SetLight(DirectionalLight* l, Color a);
     void Render(ColorBuffer* cBuf, DepthBuffer* dBuf, const Matrix4x4&p, const Matrix4x4&v, const Matrix4x4& vp);
     void Clear();

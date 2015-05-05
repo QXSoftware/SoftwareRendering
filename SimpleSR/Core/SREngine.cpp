@@ -35,7 +35,10 @@ void SREngine::Init()
     m_Camera->SetNearClipPlane(1);
     m_Camera->SetFarClipPlane(50);
     g_StatusTool.SetColorBuffer(m_Camera->m_ColorBuffer);
-    m_Target = ModelFactory::GetCube();
+
+    m_Target.push_back(ModelFactory::GetCube());
+    m_Target.push_back(ModelFactory::GetCylinder());
+    m_Target.push_back(ModelFactory::GetCapsule());
 }
 
 void SREngine::Update()
@@ -59,6 +62,9 @@ void SREngine::ShutDown()
 {
     delete m_Camera;
     m_Camera = nullptr;
-    delete m_Target;
-    m_Target = nullptr;
+    for (auto mesh : m_Target)
+    {
+        delete mesh;
+    }
+    m_Target.clear();
 }
