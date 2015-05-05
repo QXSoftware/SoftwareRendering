@@ -72,6 +72,6 @@ Color Texture2D::GetColor(int x, int y)
 Color Texture2D::GetColor(const Vector2& uv)
 {
     int x = uv.x * m_Width;
-    int y = (1 - uv.y) * m_Height;
+    int y = uv.y * m_Height;
     return GetColor(x, y);
 }
