@@ -23,8 +23,8 @@ Camera::Camera()
     m_ColorBuffer = new ColorBuffer(screenWidth, screenHeight);
 
     m_BackgroundColor = Color(49, 79, 126) / 255;
-    m_AmbientColor = Color(158, 106, 11) / 255;
-    m_DirectionalLight.Col = Color(38, 208, 40) / 255;
+    m_AmbientColor = Color(155, 155, 155) / 255;
+    m_DirectionalLight.Col = Color(186, 208, 80) / 255;
     m_DirectionalLight.Intensity = 0.9f;
     m_DirectionalLight.Direction = Vector3(-1, 1, 1).normalized();
 }

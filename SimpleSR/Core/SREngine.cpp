@@ -36,6 +36,7 @@ void SREngine::Init()
     m_Camera->SetFarClipPlane(50);
     g_StatusTool.SetColorBuffer(m_Camera->m_ColorBuffer);
 
+    m_Target.push_back(ModelFactory::GetQuad());
     m_Target.push_back(ModelFactory::GetCube());
     m_Target.push_back(ModelFactory::GetCylinder());
     m_Target.push_back(ModelFactory::GetCapsule());

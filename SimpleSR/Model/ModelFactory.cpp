@@ -22,9 +22,9 @@ Mesh* ModelFactory::GetTriangle()
 Mesh* ModelFactory::GetQuad()
 {
     auto mesh = ModelParser::Parse(GetBaseDir().append(_T("/FBX/Quad")));
-    mesh->m_Texture = Texture2D::Load(GetBaseDir().append(_T("/Texture/baby.bmp")));
-    mesh->Transform->SetPosition(-5, 0, 0);
-    mesh->Transform->SetRotation(0, -20, 0);
+    mesh->m_Texture = Texture2D::Load(GetBaseDir().append(_T("/Texture/quad.bmp")));
+    mesh->Transform->SetPosition(0, 0, 1);
+    mesh->Transform->SetRotation(0, -30, 0);
     return mesh;
 }
 
