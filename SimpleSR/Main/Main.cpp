@@ -10,7 +10,7 @@ HWND g_MainWindowHwnd;                    // Ö÷´°¿Ú¾ä±ú
 ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
-SREngine engine;
+SREngine g_Engine;
 
 int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
     _In_opt_ HINSTANCE hPrevInstance,
@@ -32,7 +32,7 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
         return FALSE;
     }
 
-    engine.Init();
+    g_Engine.Init();
 
     hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_SIMPLESR));
 
@@ -45,10 +45,10 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
             DispatchMessage(&msg);
         }
 
-        engine.Update();
+        g_Engine.Update();
     }
 
-    engine.ShutDown();
+    g_Engine.ShutDown();
 
     return (int)msg.wParam;
 }
@@ -105,67 +105,67 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             auto delta = 0.3f;
             if ((_TCHAR)wParam == 'W')
             {
-                auto target = engine.GetCamera()->Transform;
+                auto target = g_Engine.GetCamera()->Transform;
                 auto pos = target->GetPosition();
                 target->SetPosition(pos.x, pos.y + delta, pos.z);
             }
             else if ((_TCHAR)wParam == 'S')
             {
-                auto target = engine.GetCamera()->Transform;
+                auto target = g_Engine.GetCamera()->Transform;
                 auto pos = target->GetPosition();
                 target->SetPosition(pos.x, pos.y - delta, pos.z);
             }
             else if ((_TCHAR)wParam == 'A')
             {
-                auto target = engine.GetCamera()->Transform;
+                auto target = g_Engine.GetCamera()->Transform;
                 auto pos = target->GetPosition();
                 target->SetPosition(pos.x - delta, pos.y, pos.z);
             }
             else if ((_TCHAR)wParam == 'D')
             {
-                auto target = engine.GetCamera()->Transform;
+                auto target = g_Engine.GetCamera()->Transform;
                 auto pos = target->GetPosition();
                 target->SetPosition(pos.x + delta, pos.y, pos.z);
             }
             else if ((_TCHAR)wParam == 'E')
             {
-                auto target = engine.GetCamera()->Transform;
+                auto target = g_Engine.GetCamera()->Transform;
                 auto pos = target->GetPosition();
                 target->SetPosition(pos.x, pos.y, pos.z + delta);
             }
             else if ((_TCHAR)wParam == 'Q')
             {
-                auto target = engine.GetCamera()->Transform;
+                auto target = g_Engine.GetCamera()->Transform;
                 auto pos = target->GetPosition();
                 target->SetPosition(pos.x, pos.y, pos.z - delta);
             }
             else if ((_TCHAR)wParam == VK_LEFT)
             {
-                auto target = engine.GetCamera()->Transform;
+                auto target = g_Engine.GetCamera()->Transform;
                 auto rot = target->GetRotation();
                 target->SetRotation(rot.x, rot.y + delta * 10, rot.z);
             }
             else if ((_TCHAR)wParam == VK_RIGHT)
             {
-                auto target = engine.GetCamera()->Transform;
+                auto target = g_Engine.GetCamera()->Transform;
                 auto rot = target->GetRotation();
                 target->SetRotation(rot.x, rot.y - delta * 10, rot.z);
             }
             else if ((_TCHAR)wParam == VK_UP)
             {
-                auto target = engine.GetCamera()->Transform;
+                auto target = g_Engine.GetCamera()->Transform;
                 auto rot = target->GetRotation();
                 target->SetRotation(rot.x + delta * 10, rot.y, rot.z);
             }
             else if ((_TCHAR)wParam == VK_DOWN)
             {
-                auto target = engine.GetCamera()->Transform;
+                auto target = g_Engine.GetCamera()->Transform;
                 auto rot = target->GetRotation();
                 target->SetRotation(rot.x - delta * 10, rot.y, rot.z);
             }
             else if ((_TCHAR)wParam == VK_ESCAPE)
             {
-                auto target = engine.GetCamera()->Transform;
+                auto target = g_Engine.GetCamera()->Transform;
                 target->SetPosition(0, 0, -10);
             }
             break;
