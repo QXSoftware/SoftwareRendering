@@ -98,5 +98,6 @@ void Camera::Render(std::vector<Mesh*>& meshList)
     }
 
     g_StatusTool.DrawFPS();
+    g_StatusTool.DrawDebug(5, 30, _T("W、S、A、D 控制相机前后左右移动，Q 拉远镜头，E 拉近镜头，方向键控制相机旋转"));
     m_ColorBuffer->Flush();
 }

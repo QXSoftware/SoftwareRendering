@@ -14,7 +14,7 @@ void StatusTool::SetColorBuffer(ColorBuffer* cb)
 void StatusTool::DrawDebug(int x, int y, tstring s)
 {
     auto len = s.length();
-    RECT rect{ x, y, x + 300, y + 200 };
+    RECT rect{ x, y, x + 1000, y + 50 };
     DrawText(m_ColorBuffer->m_MemoryDC, s.c_str(), len, &rect, DT_LEFT);
 }
 
