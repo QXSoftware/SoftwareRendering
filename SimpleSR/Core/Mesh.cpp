@@ -66,11 +66,11 @@ Vertex Mesh::ConstructVertex(Vector4& v, Vector4& n, Vector2& uv, const Matrix4x
     vert.Pos = mvp * v;
     vert.W = 1.0f / (mv * v).z;
     vert.UV = uv;
-    // ¹âÕÕ¼ÆËã
+    // å…‰ç…§è®¡ç®—
     auto normal = Vector3(n * obj2wi).normalized();
     vert.DiffCol = Mathf::Max(0, Vector3::Dot(normal, m_DirectionalLight->Direction))
         * m_DirectionalLight->Intensity * m_DirectionalLight->Col;
-    // ¼ÆËãÇøÓòÂë
+    // è®¡ç®—åŒºåŸŸç 
     vert.Code = Mathf::Encode(vert.Pos);
     return vert;
 }
@@ -112,12 +112,12 @@ void Mesh::Clip(Vertex v0, Vertex v1, Vertex v2, ColorBuffer* cBuf, DepthBuffer*
         CVV_FAR,
     };
 
-    // ²Ã¼ô w Ğ¡ÓÚ W_CLIPPING_PLANE µÄÆë´Î×ø±ê
+    // è£å‰ª w å°äº W_CLIPPING_PLANE çš„é½æ¬¡åæ ‡
     auto output = PreClip(v0, v1, v2);
     if (output.size() < 3)
         return;
 
-    // cvv ²Ã¼ô
+    // cvv è£å‰ª
     for (RegionCode plane : clipPlanes)
     {
         std::vector<Vertex> input = output;
@@ -146,7 +146,7 @@ void Mesh::Clip(Vertex v0, Vertex v1, Vertex v2, ColorBuffer* cBuf, DepthBuffer*
     if (output.size() < 3)
         return;
 
-    // äÖÈ¾²Ã¼ôÍê±ÏµÄÈı½ÇĞÎ
+    // æ¸²æŸ“è£å‰ªå®Œæ¯•çš„ä¸‰è§’å½¢
     for (int i = 0, max = output.size() - 2; i < max; i++)
     {
         auto out0 = output[0];
