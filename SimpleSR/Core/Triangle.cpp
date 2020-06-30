@@ -146,8 +146,8 @@ void Triangle::DrawGouraud()
     auto w1 = m_V1->W;
     auto w2 = m_V2->W;
 
-    // Èý½ÇÐÎÈý¸öµãµÄ Lambert ¹âÕÕÖµ£¬uv ÒÔ¼°Éî¶ÈÖµ
-    // ÕâÈý¸öÖµ½«½øÐÐ Gouraud ²îÖµ
+    // ä¸‰è§’å½¢ä¸‰ä¸ªç‚¹çš„ Lambert å…‰ç…§å€¼ï¼Œuv ä»¥åŠæ·±åº¦å€¼
+    // è¿™ä¸‰ä¸ªå€¼å°†è¿›è¡Œ Gouraud å·®å€¼
     auto lit0 = m_V0->DiffCol; auto uvw0 = m_V0->UV * w0; auto depth0 = vcvv0.z;
     auto lit1 = m_V1->DiffCol; auto uvw1 = m_V1->UV * w1; auto depth1 = vcvv1.z;
     auto lit2 = m_V2->DiffCol; auto uvw2 = m_V2->UV * w2; auto depth2 = vcvv2.z;
